@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="#ff1424"
-    android:contextClickable="false"
-    android:orientation="vertical">
 
-</LinearLayout>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/containerStartup"
+    android:background="#ef0013"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="#353535">
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Login"
+                android:id="@+id/buttonLogin"
+                android:layout_toLeftOf="@+id/center"
+                android:background="#353535"
+                android:textSize="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:text="Register"
+                android:id="@+id/buttonRegister"
+                android:layout_alignParentRight="false"
+                android:layout_toRightOf="@+id/center"
+                android:background="#353535"
+                android:textSize="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/center"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </TableRow>
+
+</FrameLayout>
