@@ -1,6 +1,8 @@
 package de.szut.dqi12.texasholdem.connection;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 
 /**
@@ -12,12 +14,22 @@ public class Connection {
     public static String serverIP = "127.0.0.1";
     public static int serverPort = 12345;
     private Socket serverCon;
+    private InputStream input;
+    private OutputStream output;
     private static Connection instance;
 
     private Connection(){
         try {
             serverCon = new Socket(serverIP,serverPort);
         } catch (IOException e) {
+            //make Toast connection failed + print e. I have no Idea how to do this outside of the Main Activity tbh.
+            return;
+        }
+        try {
+            input = serverCon.getInputStream();
+            output = serverCon.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
             //make Toast connection failed + print e. I have no Idea how to do this outside of the Main Activity tbh.
         }
     }
@@ -42,6 +54,21 @@ public class Connection {
 
     public void disconnect(){
         Send.sendClientAction(ClientAction.DISCONNECT);
+        try {
+            serverCon.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        input = null;
+        output = null;
+    }
+
+    public OutputStream getOutput(){
+        return this.output;
+    }
+
+    public InputStream getInput(){
+        return this.input;
     }
 
 }
