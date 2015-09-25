@@ -20,10 +20,10 @@ public class Send {
                 return sendAllinAction();
 
             case BET:
-                return sendBetAction();
+                return sendBetAction(params);
 
             case RAISE:
-                return sendRaiseAction();
+                return sendRaiseAction(params);
 
             case CHAT:
                 return sendChatAction(params);
