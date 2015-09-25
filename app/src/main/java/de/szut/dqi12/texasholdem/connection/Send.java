@@ -1,86 +1,57 @@
 package de.szut.dqi12.texasholdem.connection;
 
+import java.sql.Timestamp;
+
 /**
  * Created by Jascha on 22.09.2015.
  */
 public class Send {
 
-    public static boolean sendGameAction(GameAction action, String params[]){
-        switch(action) {
-            case FOLD:
-                return sendFoldAction();
+    public String message;
 
-            case CALL:
-                return sendCallAction();
-
-            case CHECK:
-                return sendCheckAction();
-
-            case ALLIN:
-                return sendAllinAction();
-
-            case BET:
-                return sendBetAction(params);
-
-            case RAISE:
-                return sendRaiseAction(params);
-
-            case CHAT:
-                return sendChatAction(params);
-
+    public boolean sendAction(GameAction action, String params[]){
+        message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
+        if(params == null) {
+            return true;
+        } else {
+            message += ";";
+            for(String param : params) {
+                message += param + ":";
+            }
+            message = message.substring(0, message.length() - 2);
+            return true;
         }
-        return false;
+    }
+
+    public boolean sendAction(ClientAction action, String params[]) {
+        message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
+        if(params == null) {
+            return true;
+        } else {
+            message += ";";
+            for(String param : params) {
+                message += param + ":";
+            }
+            message = message.substring(0, message.length() - 2);
+            return true;
+        }
+    }
+
+    public boolean sendAction(ServerAction action, String params[]) {
+        message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
+        if(params == null) {
+            return true;
+        } else {
+            message += ";";
+            for(String param : params) {
+                message += param + ":";
+            }
+            message = message.substring(0, message.length() - 2);
+            return true;
+        }
     }
 
 
 
-    public static boolean sendClientAction(ClientAction action, String params[]){
-        return false;
-    }
 
-    public static boolean sendGameAction(GameAction action){
-        return false;
-    }
-
-    public static boolean sendClientAction(ClientAction action){
-        return false;
-    }
-
-
-
-    //Just add the params[] parameter whereever it is needed I don't quite remember which action was what
-    private static boolean sendFoldAction(){
-        //// TODO: 22.09.2015  function needs to be filled
-        return false;
-    }
-
-    private static boolean sendCheckAction() {
-        //// TODO: 22.09.2015  function needs to be filled
-        return false;
-    }
-
-    private static boolean sendAllinAction() {
-        //// TODO: 22.09.2015  function needs to be filled
-        return false;
-    }
-
-    private static boolean sendCallAction() {
-        //// TODO: 22.09.2015  function needs to be filled
-        return false;
-    }
-
-    private static boolean sendBetAction() {
-        //// TODO: 22.09.2015  function needs to be filled
-        return false;
-    }
-
-    private static boolean sendRaiseAction() {
-        //// TODO: 22.09.2015  function needs to be filled
-        return false;
-    }
-
-    private static boolean sendChatAction(String params[]) {
-        //// TODO: 22.09.2015  function needs to be filled
-        return false;
-    }
 }
