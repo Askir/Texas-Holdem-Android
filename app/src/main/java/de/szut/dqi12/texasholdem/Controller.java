@@ -31,18 +31,9 @@ public class Controller {
         receive = new Receive();
     }
 
-    public boolean sendAction(ClientAction action, String[] params) {
+    public boolean sendAction(String action, String[] params) {
         return send.sendAction(action, params);
     }
-
-    public boolean sendAction(GameAction action, String[] params) {
-        return send.sendAction(action, params);
-    }
-
-    public boolean sendAction(ServerAction action, String[] params) {
-        return send.sendAction(action, params);
-    }
-
     public Connection getConnection() {
         return connection;
     }

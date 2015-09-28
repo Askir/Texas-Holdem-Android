@@ -18,8 +18,8 @@ public class Send {
         controller = Controller.getInstance();
     }
 
-    public boolean sendAction(GameAction action, String params[]) {
-        message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
+    public boolean sendAction(String action, String params[]) {
+        message = String.valueOf(System.currentTimeMillis()) + ";" + action;
         if(params != null) {
             message += ";";
             for(String param : params) {
@@ -29,35 +29,4 @@ public class Send {
         }
         controller.getConnection().getWriter().println(message);
         return true;
-    }
-
-    public boolean sendAction(ClientAction action, String params[]) {
-        message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
-        if(params != null) {
-            message += ";";
-            for(String param : params) {
-                message += param + ":";
-            }
-            message = message.substring(0, message.length() - 2);
-        }
-        controller.getConnection().getWriter().println(message);
-        return true;
-    }
-
-    public boolean sendAction(ServerAction action, String params[]) {
-        message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
-        if(params != null) {
-            message += ";";
-            for(String param : params) {
-                message += param + ":";
-            }
-            message = message.substring(0, message.length() - 2);
-        }
-        controller.getConnection().getWriter().println(message);
-        return true;
-    }
-
-
-
-
-}
+    }}
