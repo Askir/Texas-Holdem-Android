@@ -2,11 +2,13 @@ package de.szut.dqi12.texasholdem.connection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+
+import de.szut.dqi12.texasholdem.Controller;
+import de.szut.dqi12.texasholdem.action.ClientAction;
 
 /**
  * Created by Jascha on 22.09.2015.
@@ -22,6 +24,7 @@ public class Connection {
     private BufferedReader reader;
     private PrintWriter writer;
     private static Connection instance;
+    private Controller controller;
 
     private Connection(){
         try {
@@ -39,6 +42,7 @@ public class Connection {
         }
         reader = new BufferedReader(input);
         writer = new PrintWriter(output);
+        controller = Controller.getInstance();
     }
     public static Connection getInstance(){
         if(instance==null){
@@ -60,7 +64,7 @@ public class Connection {
     }
 
     public void disconnect(){
-        Send.sendClientAction(ClientAction.DISCONNECT);
+        controller.sendAction(ClientAction.DISCONNECT, null);
         try {
             serverCon.close();
         } catch (IOException e) {

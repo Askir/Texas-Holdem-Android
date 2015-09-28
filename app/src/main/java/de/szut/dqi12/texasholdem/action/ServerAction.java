@@ -1,4 +1,4 @@
-package de.szut.dqi12.texasholdem.connection;
+package de.szut.dqi12.texasholdem.action;
 
 /**
  * Created by Jascha on 22.09.2015.

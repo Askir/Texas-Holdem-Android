@@ -1,54 +1,60 @@
 package de.szut.dqi12.texasholdem.connection;
 
-import java.sql.Timestamp;
+import de.szut.dqi12.texasholdem.Controller;
+import de.szut.dqi12.texasholdem.action.ClientAction;
+import de.szut.dqi12.texasholdem.action.GameAction;
+import de.szut.dqi12.texasholdem.action.ServerAction;
 
 /**
  * Created by Jascha on 22.09.2015.
  */
 public class Send {
 
-    public String message;
+    private String message;
+    private Controller controller;
 
-    public boolean sendAction(GameAction action, String params[]){
+
+    public Send() {
+        controller = Controller.getInstance();
+    }
+
+    public boolean sendAction(GameAction action, String params[]) {
         message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
-        if(params == null) {
-            return true;
-        } else {
+        if(params != null) {
             message += ";";
             for(String param : params) {
                 message += param + ":";
             }
             message = message.substring(0, message.length() - 2);
-            return true;
         }
+        controller.getConnection().getWriter().println(message);
+        return true;
     }
 
     public boolean sendAction(ClientAction action, String params[]) {
         message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
-        if(params == null) {
-            return true;
-        } else {
+        if(params != null) {
             message += ";";
             for(String param : params) {
                 message += param + ":";
             }
             message = message.substring(0, message.length() - 2);
-            return true;
         }
+        controller.getConnection().getWriter().println(message);
+        return true;
     }
 
     public boolean sendAction(ServerAction action, String params[]) {
         message = String.valueOf(System.currentTimeMillis()) + ";" + action.name();
-        if(params == null) {
-            return true;
-        } else {
+        if(params != null) {
             message += ";";
             for(String param : params) {
                 message += param + ":";
             }
             message = message.substring(0, message.length() - 2);
-            return true;
         }
+        controller.getConnection().getWriter().println(message);
+        return true;
     }
 
 
