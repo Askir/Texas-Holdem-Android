@@ -1,9 +1,8 @@
 package de.szut.dqi12.texasholdem.connection;
 
+import android.util.Log;
+
 import de.szut.dqi12.texasholdem.Controller;
-import de.szut.dqi12.texasholdem.action.ClientAction;
-import de.szut.dqi12.texasholdem.action.GameAction;
-import de.szut.dqi12.texasholdem.action.ServerAction;
 
 /**
  * Created by Jascha on 22.09.2015.
@@ -27,6 +26,8 @@ public class Send {
             }
             message = message.substring(0, message.length() - 2);
         }
+        System.out.println("bugfix:" + message);
+        Log.d("bugfix", message);
         controller.getConnection().getWriter().println(message);
         return true;
     }}
