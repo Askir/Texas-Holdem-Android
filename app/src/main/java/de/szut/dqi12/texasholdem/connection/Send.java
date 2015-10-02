@@ -11,10 +11,11 @@ public class Send {
 
     private String message;
     private Controller controller;
-
+    private SendMessage sendMessage;
 
     public Send() {
         controller = Controller.getInstance();
+        sendMessage = new SendMessage();
     }
 
 
@@ -27,6 +28,6 @@ public class Send {
             }
             message = message.substring(0, message.length() - 2);
         }
-        controller.getConnection().getWriter().println(message);
+        sendMessage.execute(message);
         return true;
     }}

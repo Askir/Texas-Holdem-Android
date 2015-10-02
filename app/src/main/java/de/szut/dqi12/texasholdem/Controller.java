@@ -31,6 +31,7 @@ public class Controller {
     public void start() {
         send = new Send();
         receive = new Receive();
+        connection = Connection.getInstance();
     }
 
     public boolean sendAction(String action, String[] params) {
