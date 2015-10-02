@@ -17,6 +17,7 @@ public class Send {
         controller = Controller.getInstance();
     }
 
+
     public boolean sendAction(String action, String params[]) {
         message = String.valueOf(System.currentTimeMillis()) + ";" + action;
         if(params != null) {
@@ -26,8 +27,6 @@ public class Send {
             }
             message = message.substring(0, message.length() - 2);
         }
-        System.out.println("bugfix:" + message);
-        Log.d("bugfix", message);
         controller.getConnection().getWriter().println(message);
         return true;
     }}
