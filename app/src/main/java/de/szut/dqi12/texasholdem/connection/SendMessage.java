@@ -8,7 +8,7 @@ import de.szut.dqi12.texasholdem.Controller;
 /**
  * Created by Alex on 02.10.2015.
  */
-public class SendMessage extends AsyncTask<String, Void, Boolean> {
+public class SendMessage extends AsyncTask<String, Void, Void> {
 
     private Controller controller;
 
@@ -17,13 +17,12 @@ public class SendMessage extends AsyncTask<String, Void, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(String... strings) {
+    protected Void doInBackground(String... strings) {
         if(Connection.getInstance().getConnectionStatus()) {
             controller.getConnection().getWriter().println(strings[0]);
             controller.getConnection().getWriter().flush();
             Log.d("send", strings[0]);
-            return Boolean.TRUE;
         }
-        return Boolean.FALSE;
+        return null;
     }
 }
