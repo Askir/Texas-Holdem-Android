@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem;
 
 import de.szut.dqi12.texasholdem.action.*;
 import de.szut.dqi12.texasholdem.connection.Connection;
+import de.szut.dqi12.texasholdem.connection.Decryption;
 import de.szut.dqi12.texasholdem.connection.Receive;
 import de.szut.dqi12.texasholdem.connection.Send;
 
@@ -13,6 +14,7 @@ public class Controller {
     private Connection connection;
     private Send send;
     private Receive receive;
+    private Decryption decryption;
 
     public static Controller instance;
 
@@ -42,8 +44,11 @@ public class Controller {
         return receive;
     }
 
+    public Decryption getDecryption() {return decryption;}
+
     public Send getSend() {
         return send;
     }
+
 
 }

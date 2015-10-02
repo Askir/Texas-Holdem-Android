@@ -25,6 +25,10 @@ public class Connection {
     private PrintWriter writer;
     private static Connection instance;
     private Controller controller;
+    private boolean connectionStatus=false;
+    public boolean getConnectionStatus(){
+        return connectionStatus;
+    }
 
     private Connection(){
         try {
@@ -43,6 +47,7 @@ public class Connection {
         reader = new BufferedReader(input);
         writer = new PrintWriter(output);
         controller = Controller.getInstance();
+        connectionStatus=true;
     }
     public static Connection getInstance(){
         if(instance==null){
@@ -72,6 +77,7 @@ public class Connection {
         }
         input = null;
         output = null;
+        connectionStatus=false;
     }
 
     public OutputStream getOutput(){
