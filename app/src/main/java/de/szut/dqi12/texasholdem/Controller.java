@@ -15,8 +15,10 @@ public class Controller {
     private Send send;
     private Receive receive;
     private Decryption decryption;
+    private long ping;
 
     public static Controller instance;
+
 
     private Controller(){}
 
@@ -31,6 +33,7 @@ public class Controller {
     public void start() {
         send = new Send();
         receive = new Receive();
+        receive.execute();
         connection = Connection.getInstance();
     }
 
@@ -52,4 +55,11 @@ public class Controller {
     }
 
 
+    public void setPing(long ping) {
+        this.ping = ping;
+    }
+
+    public long getPing(){
+        return ping;
+    }
 }
