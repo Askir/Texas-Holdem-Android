@@ -16,15 +16,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Waiting for more Player..."
-                android:id="@+id/textView13"
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/listView2"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="#ffffff"
-                android:textSize="30dp" />
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </TableRow>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enough."
+        android:id="@+id/button6"
+        android:layout_below="@+id/tableRow12"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
