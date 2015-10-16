@@ -31,10 +31,11 @@ public class Controller {
     }
 
     public void start() {
+        connection = Connection.getInstance();
         send = new Send();
         receive = new Receive();
         receive.execute();
-        connection = Connection.getInstance();
+
     }
 
     public boolean sendAction(String action, String[] params) {

@@ -26,9 +26,7 @@ public class Connection {
     private static Connection instance;
     private Controller controller;
     private boolean connectionStatus=false;
-    public boolean getConnectionStatus(){
-        return connectionStatus;
-    }
+
 
     private Connection(){
         try {
@@ -80,9 +78,7 @@ public class Connection {
         connectionStatus=false;
     }
 
-    public OutputStream getOutput(){
-        return this.output;
-    }
+    public OutputStream getOutput(){return this.output;    }
 
     public InputStreamReader getInput(){
         return this.input;
@@ -94,5 +90,9 @@ public class Connection {
 
     public PrintWriter getWriter() {
         return this.writer;
+    }
+
+    public boolean getConnectionStatus(){
+        return connectionStatus;
     }
 }
