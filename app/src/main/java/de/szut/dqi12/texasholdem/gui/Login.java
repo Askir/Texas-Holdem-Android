@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.R;
@@ -22,7 +23,19 @@ public class Login extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        Button btnOk = (Button)findViewById(R.id.buttonLoginOk);
 
+        EditText etUsername = (EditText)findViewById(R.id.editTextLoginUsername);
+        EditText etPassword = (EditText)findViewById(R.id.editTextLoginPassword);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // open new activity
+
+            }
+        });
     }
 
 
