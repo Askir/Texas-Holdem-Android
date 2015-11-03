@@ -17,6 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".gui.Login"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.Register"
+            android:screenOrientation="landscape"
+            >
+        </activity>
     </application>
 
 </manifest>
