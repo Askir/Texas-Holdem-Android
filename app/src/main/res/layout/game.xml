@@ -25,95 +25,95 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewGameP6C2"
                 android:layout_marginLeft="10dp"
                 android:src="#ff0000" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView2"
-                android:layout_toRightOf="@+id/imageView"
+                android:id="@+id/imageViewGameP6C1"
+                android:layout_toRightOf="@+id/imageViewGameP6C2"
                 android:layout_marginLeft="10dp"
                 android:src="#ff0000" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView3"
+                android:id="@+id/imageViewGameP5C2"
                 android:layout_marginLeft="25dp"
                 android:src="#ff0000"
-                android:layout_toRightOf="@+id/imageView2" />
+                android:layout_toRightOf="@+id/imageViewGameP6C1" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView4"
-                android:layout_toRightOf="@+id/imageView3"
+                android:id="@+id/imageViewGameP5C1"
+                android:layout_toRightOf="@+id/imageViewGameP5C2"
                 android:layout_marginLeft="10dp"
                 android:src="#ff0000" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView5"
+                android:id="@+id/imageViewGameP4C2"
                 android:layout_marginLeft="25dp"
                 android:src="#ff0000"
-                android:layout_toRightOf="@+id/imageView4" />
+                android:layout_toRightOf="@+id/imageViewGameP5C1" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView6"
-                android:layout_toRightOf="@+id/imageView5"
+                android:id="@+id/imageViewGameP4C1"
+                android:layout_toRightOf="@+id/imageViewGameP4C2"
                 android:layout_marginLeft="10dp"
                 android:src="#ff0000" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView7"
+                android:id="@+id/imageViewGameP3C2"
                 android:layout_marginLeft="25dp"
                 android:src="#ff0000"
-                android:layout_toRightOf="@+id/imageView6" />
+                android:layout_toRightOf="@+id/imageViewGameP4C1" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView8"
-                android:layout_toRightOf="@+id/imageView7"
+                android:id="@+id/imageViewGameP3C1"
+                android:layout_toRightOf="@+id/imageViewGameP3C2"
                 android:layout_marginLeft="10dp"
                 android:src="#ff0000" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView9"
+                android:id="@+id/imageViewGameP2C2"
                 android:layout_marginLeft="25dp"
                 android:src="#ff0000"
-                android:layout_toRightOf="@+id/imageView8" />
+                android:layout_toRightOf="@+id/imageViewGameP3C1" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView10"
-                android:layout_toRightOf="@+id/imageView9"
+                android:id="@+id/imageViewGameP2C1"
+                android:layout_toRightOf="@+id/imageViewGameP2C2"
                 android:layout_marginLeft="10dp"
                 android:src="#ff0000" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView11"
+                android:id="@+id/imageViewGameP1C2"
                 android:layout_marginLeft="25dp"
                 android:src="#ff0000"
-                android:layout_toRightOf="@+id/imageView10" />
+                android:layout_toRightOf="@+id/imageViewGameP2C1" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView12"
-                android:layout_toRightOf="@+id/imageView11"
+                android:id="@+id/imageViewGameP1C1"
+                android:layout_toRightOf="@+id/imageViewGameP1C2"
                 android:layout_marginLeft="10dp"
                 android:src="#ff0000" />
         </RelativeLayout>
@@ -133,40 +133,40 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView15"
+                android:id="@+id/imageViewGameTC1"
                 android:src="#ff0000"
                 android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/imageView16" />
+                android:layout_toLeftOf="@+id/imageViewGameTC2" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView16"
+                android:id="@+id/imageViewGameTC2"
                 android:layout_marginLeft="0dp"
                 android:src="#ff0000"
-                android:layout_toLeftOf="@+id/imageView17"
+                android:layout_toLeftOf="@+id/imageViewGameTC3"
                 android:layout_marginRight="5dp" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView17"
+                android:id="@+id/imageViewGameTC3"
                 android:src="#ff0000"
                 android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/imageView18" />
+                android:layout_toLeftOf="@+id/imageViewGameTC4" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView18"
+                android:id="@+id/imageViewGameTC4"
                 android:src="#ff0000"
-                android:layout_toLeftOf="@+id/imageView19"
+                android:layout_toLeftOf="@+id/imageViewGameTC5"
                 android:layout_marginRight="5dp" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView19"
+                android:id="@+id/imageViewGameTC5"
                 android:layout_marginLeft="0dp"
                 android:src="#ff0000"
                 android:layout_centerHorizontal="true" />
@@ -178,9 +178,19 @@
                 android:text="Pot: "
                 android:id="@+id/textView13"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/imageView19"
+                android:layout_toRightOf="@+id/imageViewGameTC5"
                 android:textSize="40dp"
                 android:layout_marginLeft="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textViewGamePot"
+                android:textSize="40dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/textView13"
+                android:layout_toEndOf="@+id/textView13" />
 
         </RelativeLayout>
 
@@ -201,7 +211,7 @@
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="110dp"
-                android:id="@+id/imageView13"
+                android:id="@+id/imageViewGamePC1"
                 android:layout_marginLeft="0dp"
                 android:src="#ff0000"
                 android:layout_alignParentStart="false"
@@ -212,21 +222,21 @@
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="110dp"
-                android:id="@+id/imageView14"
+                android:id="@+id/imageViewGamePC2"
                 android:layout_marginLeft="10dp"
                 android:src="#ff0000"
                 android:layout_alignParentStart="false"
                 android:layout_alignParentEnd="false"
                 android:baselineAlignBottom="false"
                 android:clickable="false"
-                android:layout_toRightOf="@+id/imageView13" />
+                android:layout_toRightOf="@+id/imageViewGamePC1" />
 
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:id="@+id/imageButtonAllIn"
+                android:id="@+id/imageButtonGameAllIn"
                 android:layout_marginRight="30dp"
-                android:layout_toLeftOf="@+id/imageView13"
+                android:layout_toLeftOf="@+id/imageViewGamePC1"
                 android:layout_alignParentBottom="false"
                 android:layout_centerVertical="true"
                 android:background="#e0ffd500" />
@@ -234,9 +244,9 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:id="@+id/imageButtonFold"
+                android:id="@+id/imageButtonGameFold"
                 android:layout_marginRight="30dp"
-                android:layout_toLeftOf="@+id/imageButtonAllIn"
+                android:layout_toLeftOf="@+id/imageButtonGameAllIn"
                 android:layout_alignParentBottom="false"
                 android:layout_centerVertical="true"
                 android:background="#e0ffd500" />
@@ -244,21 +254,21 @@
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:id="@+id/imageButton6"
+                android:id="@+id/imageButtonGameCheckRaise"
                 android:layout_alignParentBottom="false"
                 android:layout_centerVertical="true"
                 android:background="#e0ffd500"
                 android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@+id/imageButton5" />
+                android:layout_toRightOf="@+id/imageButtonGameBetCall" />
 
             <ImageButton
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:id="@+id/imageButton5"
+                android:id="@+id/imageButtonGameBetCall"
                 android:layout_alignParentBottom="false"
                 android:layout_centerVertical="true"
                 android:background="#e0ffd500"
-                android:layout_toRightOf="@+id/imageView14"
+                android:layout_toRightOf="@+id/imageViewGamePC2"
                 android:layout_marginLeft="30dp" />
         </RelativeLayout>
     </TableRow>

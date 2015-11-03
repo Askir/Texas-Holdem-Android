@@ -19,7 +19,7 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/listView2"
+                android:id="@+id/listViewGameLobbyPlayer"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enough."
-        android:id="@+id/button6"
+        android:id="@+id/buttonGameLobbyEnough"
         android:layout_below="@+id/tableRow12"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

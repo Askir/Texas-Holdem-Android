@@ -23,7 +23,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="OK"
-                    android:id="@+id/button5"
+                    android:id="@+id/buttonCreateGameOK"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="false" />
@@ -47,7 +47,7 @@
                     <EditText
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText4"
+                        android:id="@+id/editTextCreateGameLobbyname"
                         android:layout_marginTop="10dp"
                         android:textColor="#000000"
                         android:inputType="text"
@@ -75,7 +75,7 @@
                     <EditText
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText6"
+                        android:id="@+id/editTextCreateGamePassword"
                         android:layout_marginTop="10dp"
                         android:textColor="#000000"
                         android:inputType="text|textPassword"

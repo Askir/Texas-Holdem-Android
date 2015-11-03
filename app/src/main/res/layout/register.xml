@@ -34,7 +34,7 @@
                 <EditText
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText"
+                    android:id="@+id/editTextRegisterUsername"
                     android:layout_marginTop="10dp"
                     android:textColor="#000000"
                     android:inputType="text"
@@ -62,7 +62,7 @@
                 <EditText
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText2"
+                    android:id="@+id/editTextRegisterPassword"
                     android:layout_marginTop="10dp"
                     android:textColor="#000000"
                     android:inputType="text|textPassword"
@@ -99,7 +99,7 @@
                 <EditText
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText3"
+                    android:id="@+id/editTextRegisterEmail"
                     android:layout_marginTop="10dp"
                     android:textColor="#000000"
                     android:inputType="text|textWebEmailAddress|textEmailAddress"
