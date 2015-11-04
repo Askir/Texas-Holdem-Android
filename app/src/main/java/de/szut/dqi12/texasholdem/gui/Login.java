@@ -25,14 +25,26 @@ public class Login extends Activity {
 
         Button btnOk = (Button)findViewById(R.id.buttonLoginOk);
 
-        EditText etUsername = (EditText)findViewById(R.id.editTextLoginUsername);
-        EditText etPassword = (EditText)findViewById(R.id.editTextLoginPassword);
+        final EditText etUsername = (EditText)findViewById(R.id.editTextLoginUsername);
+        final EditText etPassword = (EditText)findViewById(R.id.editTextLoginPassword);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // open new activity
+                /*ToDo
+                - Send Username and Password to Server
+                 */
+
+                if(!etUsername.getText().equals(null) && !etPassword.getText().equals(null)){
+
+                    Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_LONG);
+                    startActivity(new Intent(Login.this, MainMenu.class));
+
+                }else{
+
+                    Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG);
+                }
 
             }
         });

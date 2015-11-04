@@ -33,7 +33,10 @@ public class Register extends Activity {
 
                 if((!etUsername.getText().equals(null)) && !etEmail.getText().equals(null) && !etPassword.getText().equals(null)) {
 
-//                    SEND DATA TO SERVER FOR REGISTRATION
+                    /*ToDo
+                    - Send Username and Password to Server
+                    */
+
                     Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_LONG);
                     startActivity(new Intent(Register.this, Verification.class));
                 }
