@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ef0013">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/tableRow15"
+        android:layout_centerVertical="true"
+        android:background="#353535" >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Name:"
+                    android:id="@+id/textView18"
+                    android:textSize="30dp"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewSettingsCName"
+                    android:textSize="30dp"
+                    android:textColor="#000000"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="10dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Password:"
+                    android:id="@+id/textView20"
+                    android:textSize="30dp"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewSettingsCPassword"
+                    android:textSize="30dp"
+                    android:textColor="#000000"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="10dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change E-Mail:"
+                    android:id="@+id/textView22"
+                    android:textSize="30dp"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewSettingsCEmail"
+                    android:textSize="30dp"
+                    android:textColor="#000000"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="10dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Music on/off:"
+                    android:id="@+id/textView24"
+                    android:textSize="30dp"
+                    android:textColor="#ffffff" />
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/switch1"
+                    android:checked="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OK"
+                    android:id="@+id/button"
+                    android:layout_gravity="right"
+                    android:layout_column="69" />
+            </TableRow>
+
+        </TableLayout>
+    </TableRow>
+</RelativeLayout>
