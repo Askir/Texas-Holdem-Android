@@ -21,24 +21,26 @@ public class Register extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        Button btnVerifi = (Button)findViewById(R.id.buttonRegisterOk);
+        Button btnOk = (Button)findViewById(R.id.buttonRegisterOk);
 
         final EditText etUsername = (EditText)findViewById(R.id.editTextRegisterUsername);
         final EditText etPassword = (EditText)findViewById(R.id.editTextRegisterPassword);
         final EditText etEmail = (EditText)findViewById(R.id.editTextRegisterEmail);
 
-        btnVerifi.setOnClickListener(new View.OnClickListener() {
+        btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if((!etUsername.getText().equals(null)) && !etEmail.getText().equals(null) && !etPassword.getText().equals(null)) {
+                Toast.makeText(getBaseContext(), "Button clicked", Toast.LENGTH_SHORT);
+
+                if(etUsername.getText().toString().length() > 0 && etEmail.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0) {
+
+                    Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_SHORT);
+                    startActivity(new Intent(Register.this, Verification.class));
 
                     /*ToDo
                     - Send Username and Password to Server
                     */
-
-                    Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_LONG);
-                    startActivity(new Intent(Register.this, Verification.class));
                 }
                 else{
                     Toast.makeText(getBaseContext(), "Something went wrong", Toast.LENGTH_SHORT);

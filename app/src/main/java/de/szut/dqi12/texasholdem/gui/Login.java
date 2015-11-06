@@ -32,11 +32,13 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getBaseContext(), "Button clicked", Toast.LENGTH_SHORT);
+
                 /*ToDo
                 - Send Username and Password to Server
                  */
 
-                if(!etUsername.getText().equals(null) && !etPassword.getText().equals(null)){
+                if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
 
                     Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_LONG);
                     startActivity(new Intent(Login.this, MainMenu.class));
