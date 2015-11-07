@@ -32,7 +32,7 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getBaseContext(), "Button clicked", Toast.LENGTH_SHORT);
+                Toast.makeText(getBaseContext(), "Button clicked", Toast.LENGTH_SHORT).show();
 
                 /*ToDo
                 - Send Username and Password to Server
@@ -40,12 +40,12 @@ public class Login extends Activity {
 
                 if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
 
-                    Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_LONG);
-                    startActivity(new Intent(Login.this, MainMenu.class));
-
+                    Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    finish();
                 }else{
 
-                    Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG);
+                    Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG).show();
                 }
 
             }

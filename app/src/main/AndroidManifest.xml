@@ -27,6 +27,31 @@
             android:screenOrientation="landscape"
             >
         </activity>
+        <activity
+            android:name=".gui.Verification"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.MainMenu"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.Settings"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.StartGame"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.Statistics"
+            android:screenOrientation="landscape"
+            >
+        </activity>
     </application>
 
 </manifest>
