@@ -26,6 +26,8 @@ public class MainMenu extends Activity{
             ImageButton btnSettings = (ImageButton)findViewById(R.id.imageButtonMainMenueSettings);
             ImageButton btnLogout = (ImageButton)findViewById(R.id.imageButtonMainMenueLogout);
 
+            Toast.makeText(getBaseContext(), "Hello 'Username'", Toast.LENGTH_SHORT).show();
+
             btnStartGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

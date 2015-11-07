@@ -27,14 +27,15 @@
                     android:textSize="30dp"
                     android:textColor="#ffffff" />
 
-                <TextView
+                <EditText
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewSettingsCName"
-                    android:textSize="30dp"
-                    android:textColor="#000000"
+                    android:id="@+id/editTextSettingsCUsername"
+                    android:layout_marginLeft="10dp"
                     android:background="#ffffff"
-                    android:layout_marginLeft="10dp" />
+                    android:textColor="#000000"
+                    android:textSize="30dp" />
+
             </TableRow>
 
             <TableRow
@@ -49,14 +50,15 @@
                     android:textSize="30dp"
                     android:textColor="#ffffff" />
 
-                <TextView
+                <EditText
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewSettingsCPassword"
-                    android:textSize="30dp"
-                    android:textColor="#000000"
+                    android:id="@+id/editTextSettingsCPassword"
+                    android:layout_marginLeft="10dp"
                     android:background="#ffffff"
-                    android:layout_marginLeft="10dp" />
+                    android:textColor="#000000"
+                    android:textSize="30dp" />
+
             </TableRow>
 
             <TableRow
@@ -71,14 +73,15 @@
                     android:textSize="30dp"
                     android:textColor="#ffffff" />
 
-                <TextView
+                <EditText
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewSettingsCEmail"
-                    android:textSize="30dp"
-                    android:textColor="#000000"
+                    android:id="@+id/editTextSettingsCEmail"
+                    android:layout_marginLeft="10dp"
                     android:background="#ffffff"
-                    android:layout_marginLeft="10dp" />
+                    android:textColor="#000000"
+                    android:textSize="30dp" />
+
             </TableRow>
 
             <TableRow
@@ -89,7 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Music on/off:"
+                    android:text="Music off/on:"
                     android:id="@+id/textView24"
                     android:textSize="30dp"
                     android:textColor="#ffffff" />
@@ -100,7 +103,7 @@
                     android:id="@+id/switchSettingsMusicOnOff"
                     android:layout_marginLeft="10dp"
                     android:checked="true"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="center|left" />
 
             </TableRow>
 
@@ -113,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="OK"
-                    android:id="@+id/button"
+                    android:id="@+id/buttonSettingsOk"
                     android:layout_gravity="right"
                     android:layout_column="69" />
             </TableRow>
