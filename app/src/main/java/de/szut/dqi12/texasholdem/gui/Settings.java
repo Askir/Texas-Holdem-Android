@@ -37,7 +37,7 @@ public class Settings extends Activity {
                 if(!etNewUsername.getText().toString().equals("")){
                     // TODO: 07.11.2015 get username from database and edit it
                     Toast.makeText(getBaseContext(), "Username changed", Toast.LENGTH_SHORT).show();
-                    UserData.username = etNewUsername.getText().toString();
+                    //UserData.username = etNewUsername.getText().toString();
                 }
 
                 // TODO: 07.11.2015 open verification with information about what must be changed
@@ -45,7 +45,7 @@ public class Settings extends Activity {
 
                     Toast.makeText(getBaseContext(), "Open Verification to change password.", Toast.LENGTH_SHORT).show();
 
-                    UserData.wantToChangeEmail = true;
+                    //UserData.wantToChangeEmail = true;
 
                     startActivity(new Intent(Settings.this, Verification.class));
 

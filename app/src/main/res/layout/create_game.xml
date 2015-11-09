@@ -78,7 +78,7 @@
                         android:id="@+id/editTextCreateGamePassword"
                         android:layout_marginTop="10dp"
                         android:textColor="#000000"
-                        android:inputType="text|textPassword"
+                        android:inputType="textPassword"
                         android:background="#ffffff"
                         android:textSize="30dp" />
                 </TableRow>

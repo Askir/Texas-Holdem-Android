@@ -30,21 +30,27 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getBaseContext(), "Button clicked", Toast.LENGTH_SHORT).show();
-
                 /*ToDo
                 - Send Username and Password to Server
                  */
 
                 if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
 
+                    Intent login = new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
                     Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_LONG).show();
 
-                    // TODO: 07.11.2015 check login data whether email or username
-                    UserData.Username = etUsername.getText().toString();
-                    UserData.Password = etPassword.getText().toString();
+                    /*
+                         TODO: 07.11.2015 check login data whether email or username are correct
+                         ToDo: get username for welcome massage
+                     */
 
-                    startActivity(new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    // key then value
+                    //login.putExtra("username", "name");
+                    //login.putExtra("email", "address");
+                    //login.putExtra("password", "password");
+
+                    startActivity(login);
                     finish();
                 }else{
 

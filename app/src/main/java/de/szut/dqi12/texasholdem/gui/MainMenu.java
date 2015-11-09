@@ -26,6 +26,10 @@ public class MainMenu extends Activity{
             ImageButton btnSettings = (ImageButton)findViewById(R.id.imageButtonMainMenueSettings);
             ImageButton btnLogout = (ImageButton)findViewById(R.id.imageButtonMainMenueLogout);
 
+//            String user = getIntent().getStringExtra("username");
+//            String email = getIntent().getStringExtra("email");
+//            String password = getIntent().getStringExtra("password");
+
             Toast.makeText(getBaseContext(), "Hello 'Username'", Toast.LENGTH_SHORT).show();
 
             btnStartGame.setOnClickListener(new View.OnClickListener() {
