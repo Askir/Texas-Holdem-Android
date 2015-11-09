@@ -23,6 +23,7 @@ public class CreateGameLobby extends Activity {
             @Override
             public void onClick(View v) {
 
+                // TODO: 09.11.2015 check listViewGameLobbyPlayer whether player are available. when no player there send toast 
             }
         });
     }

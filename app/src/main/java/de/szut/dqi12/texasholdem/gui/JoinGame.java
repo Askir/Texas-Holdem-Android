@@ -15,6 +15,7 @@ public class JoinGame extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_game);
 
-
+        // TODO: 09.11.2015 when child of listview gets tapped join lobby
+        // TODO: 09.11.2015 must implement password query
     }
 }
