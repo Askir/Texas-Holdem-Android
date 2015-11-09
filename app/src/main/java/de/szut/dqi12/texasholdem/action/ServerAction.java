@@ -9,5 +9,5 @@ public class ServerAction {
     public static final String NEEDVALIDATION = "NEEDVALIDATION";
     public static final String GAMELIST = "GAMELIST";
     public static final String LOBBYUPDATE= "LOBBYUPDATE";
-    public static final String LOGGEDIN = "LOGGEDIN";
+    public static final String SESSION = "SESSION";
 }

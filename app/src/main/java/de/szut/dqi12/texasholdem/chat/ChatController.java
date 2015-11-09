@@ -19,7 +19,6 @@ public class ChatController {
     private static ChatController instance;
 
 
-
     private ChatController(){
         messages = new ArrayList<String>();
     }
