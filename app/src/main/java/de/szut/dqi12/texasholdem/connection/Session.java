@@ -39,7 +39,7 @@ public class Session implements Recallable {
     }
 
     public void logout(){
-        expectedAction = ServerAction.
+        expectedAction = ServerAction.SESSION;
     }
 
     @Override
@@ -47,6 +47,19 @@ public class Session implements Recallable {
         switch(action) {
             case ServerAction.SESSION:
                 switch (params[0]){
+                    case "FAILEDLOGIN":
+                        connected = false;
+                        //TODO inform GUI about failed login attempt
+                        switch(params[1]){
+                            case "PW":
+                                //wrong username password combination
+                                break;
+                            default:
+                                //something else went wrong maybe server overload
+                                break;
+                        }
+
+                        break;
                     case "LOGGEDIN":
                         connected = true;
                         //TODO inform GUI and send necessary info to the server etc.
