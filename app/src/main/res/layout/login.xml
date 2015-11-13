@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/containerLogin"
+    android:background="#ef0013">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:background="#353535"
+        android:layout_centerVertical="true"
+        android:id="@+id/TableRow">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TableRowUsername">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Username/Email:"
+                    android:id="@+id/textViewLoginUsername"
+                    android:textSize="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="#ffffff" />
+
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextLoginUsername"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#000000"
+                    android:inputType="text"
+                    android:background="#ffffff"
+                    android:textSize="30dp"
+                    android:layout_gravity="bottom" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TableRowPassword"
+                android:layout_below="@+id/TableRowUsername">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Password: "
+                    android:id="@+id/textViewLoginPassword"
+                    android:textSize="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="#ffffff" />
+
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextLoginPassword"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#000000"
+                    android:inputType="text|textPassword"
+                    android:background="#ffffff"
+                    android:textSize="30dp" />
+            </TableRow>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OK"
+                android:id="@+id/buttonLoginOk"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="false" />
+        </RelativeLayout>
+    </TableRow>
+</RelativeLayout>
