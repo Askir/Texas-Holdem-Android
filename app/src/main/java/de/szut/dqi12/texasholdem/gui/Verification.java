@@ -45,9 +45,7 @@ public class Verification extends Activity{
 
                     Boolean codeCorrect = true;
 
-                    /*ToDo
-                    - Send Code to Server and check whether ok
-                    */
+                    // ToDo Send Code to Server and check whether ok
 
                     if (codeCorrect) {
 

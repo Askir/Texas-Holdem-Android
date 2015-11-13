@@ -37,9 +37,8 @@ public class Register extends Activity {
                     Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Register.this, Verification.class));
 
-                    /*ToDo
-                    - Send Username and Password to Server
-                    */
+                    // ToDo Send Username and Password to Server
+
                 }
                 else{
                     Toast.makeText(getBaseContext(), "Something went wrong", Toast.LENGTH_SHORT).show();

@@ -21,6 +21,8 @@ public class Login extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        final Boolean userdataCorrect = true;
+
         Button btnOk = (Button)findViewById(R.id.buttonLoginOk);
 
         final EditText etUsername = (EditText)findViewById(R.id.editTextLoginUsername);
@@ -45,13 +47,11 @@ public class Login extends Activity {
                          ToDo: get username for welcome massage
                      */
 
-                    // key then value
-                    //login.putExtra("username", "name");
-                    //login.putExtra("email", "address");
-                    //login.putExtra("password", "password");
-
-                    startActivity(login);
-                    finish();
+                    // TODO: 13.11.2015 check whether userdata is correct or not
+                    if(userdataCorrect){
+                        startActivity(login);
+                        finish();
+                    }
                 }else{
 
                     Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG).show();
