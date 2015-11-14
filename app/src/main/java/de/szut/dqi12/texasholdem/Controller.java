@@ -5,6 +5,7 @@ import de.szut.dqi12.texasholdem.connection.Connection;
 import de.szut.dqi12.texasholdem.connection.Decryption;
 import de.szut.dqi12.texasholdem.connection.Receive;
 import de.szut.dqi12.texasholdem.connection.Send;
+import de.szut.dqi12.texasholdem.connection.Session;
 
 /**
  * Created by Alex on 28.09.2015.
@@ -16,6 +17,7 @@ public class Controller {
     private Receive receive;
     private Decryption decryption;
     private long ping;
+    private Session session;
 
     public static Controller instance;
 
@@ -34,8 +36,12 @@ public class Controller {
         connection = Connection.getInstance();
         send = new Send();
         receive = new Receive();
+        session = new Session();
         receive.execute();
 
+    }
+    public Session getCurrentSession(){
+        return this.session;
     }
 
     public boolean sendAction(String action, String[] params) {

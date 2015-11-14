@@ -16,6 +16,11 @@ public class Session implements Recallable {
     private Controller con;
     private boolean connected = false;
 
+    public boolean getConnectionStatus(){
+        return connected;
+    }
+
+
     public Session(){
         con = Controller.getInstance();
         expectedAction = null;
@@ -23,6 +28,7 @@ public class Session implements Recallable {
     }
     
     public void login(String username, String password){
+        //password is being hashed for transmittion
         MessageDigest messageDigest = null;
         try {
             messageDigest = MessageDigest.getInstance("SHA-256");
@@ -32,6 +38,8 @@ public class Session implements Recallable {
         messageDigest.update(password.getBytes());
         String encryptedPassword = new String(messageDigest.digest());
         String[] login = {username,encryptedPassword};
+
+        //sending the login request to the server and waiting for an answer
         con.getSend().sendAction(ClientAction.LOGIN,login);
         expectedAction = ServerAction.SESSION;
         con.getDecryption().addExpectation(this);
@@ -52,6 +60,7 @@ public class Session implements Recallable {
                         //TODO inform GUI about failed login attempt
                         switch(params[1]){
                             case "PW":
+
                                 //wrong username password combination
                                 break;
                             default:
