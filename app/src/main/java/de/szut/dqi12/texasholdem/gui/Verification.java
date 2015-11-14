@@ -10,16 +10,27 @@ import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.MainActivity;
 import de.szut.dqi12.texasholdem.R;
+import de.szut.dqi12.texasholdem.connection.UserData;
 
 /**
  * Created by Marcel on 03.11.2015.
  */
 public class Verification extends Activity{
 
+    // TODO: 07.11.2015 implement fragment layout
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registration_verification);
+        setContentView(R.layout.verification);
+
+//        switch (UserData.wantToChangeSomething){
+//            case():
+//                openFragmentWhatever();
+//                break;
+//
+//        }
+
 
         Button btnOk = (Button)findViewById(R.id.buttonRegisterVerificationOk);
 
@@ -30,15 +41,13 @@ public class Verification extends Activity{
             @Override
             public void onClick(View v) {
 
-                if(!etVeri.getText().equals(null)){
+                if (!etVeri.getText().equals(null)) {
 
                     Boolean codeCorrect = true;
 
-                    /*ToDo
-                    - Send Code to Server and check whether ok
-                    */
+                    // ToDo Send Code to Server and check whether ok
 
-                    if (codeCorrect){
+                    if (codeCorrect) {
 
                         Intent restart = new Intent(Verification.this, MainActivity.class);
 
@@ -47,11 +56,11 @@ public class Verification extends Activity{
                         startActivity(restart);
                         finish();
 
-                    }else{
-                        Toast.makeText(getBaseContext(), "Wrong Code", Toast.LENGTH_SHORT);
+                    } else {
+                        Toast.makeText(getBaseContext(), "Wrong Code", Toast.LENGTH_SHORT).show();
                     }
-                }else{
-                    Toast.makeText(getBaseContext(), "Please insert code for verification", Toast.LENGTH_SHORT);
+                } else {
+                    Toast.makeText(getBaseContext(), "Please insert code for verification", Toast.LENGTH_SHORT).show();
                 }
 
             }

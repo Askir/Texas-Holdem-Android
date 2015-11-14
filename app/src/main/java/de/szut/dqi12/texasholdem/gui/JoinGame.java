@@ -6,14 +6,16 @@ import android.os.Bundle;
 import de.szut.dqi12.texasholdem.R;
 
 /**
- * Created by Marcel on 06.11.2015.
+ * Created by Marcel on 09.11.2015.
  */
-public class StartGame extends Activity {
+public class JoinGame extends Activity{
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_game);
+        setContentView(R.layout.join_game);
 
+        // TODO: 09.11.2015 when child of listview gets tapped join lobby
+        // TODO: 09.11.2015 must implement password query
     }
 }

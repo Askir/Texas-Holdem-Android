@@ -26,6 +26,12 @@ public class MainMenu extends Activity{
             ImageButton btnSettings = (ImageButton)findViewById(R.id.imageButtonMainMenueSettings);
             ImageButton btnLogout = (ImageButton)findViewById(R.id.imageButtonMainMenueLogout);
 
+//            String user = getIntent().getStringExtra("username");
+//            String email = getIntent().getStringExtra("email");
+//            String password = getIntent().getStringExtra("password");
+
+            Toast.makeText(getBaseContext(), "Hello 'Username'", Toast.LENGTH_SHORT).show();
+
             btnStartGame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,7 +68,7 @@ public class MainMenu extends Activity{
                     restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     startActivity(restart);
-                    Toast.makeText(getBaseContext(), "Logging out.", Toast.LENGTH_SHORT);
+                    Toast.makeText(getBaseContext(), "Logging out.", Toast.LENGTH_SHORT).show();
                     finish();
 
                 }
