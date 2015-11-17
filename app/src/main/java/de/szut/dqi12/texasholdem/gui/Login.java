@@ -8,11 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 import de.szut.dqi12.texasholdem.connection.session.LoginProcess;
 import de.szut.dqi12.texasholdem.connection.LoginResult;
-import de.szut.dqi12.texasholdem.connection.UserData;
 
 /**
  * Created by Marcel on 03.11.2015.
