@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.MainActivity;
 import de.szut.dqi12.texasholdem.R;
-import de.szut.dqi12.texasholdem.connection.UserData;
 
 /**
  * Created by Marcel on 03.11.2015.
@@ -24,12 +23,6 @@ public class Verification extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verification);
 
-//        switch (UserData.wantToChangeSomething){
-//            case():
-//                openFragmentWhatever();
-//                break;
-//
-//        }
 
 
         Button btnOk = (Button)findViewById(R.id.buttonRegisterVerificationOk);

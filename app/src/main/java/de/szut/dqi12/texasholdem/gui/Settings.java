@@ -10,9 +10,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
-import de.szut.dqi12.texasholdem.connection.UserData;
 
 /**
  * Created by Marcel on 06.11.2015.
