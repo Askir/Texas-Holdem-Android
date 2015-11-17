@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
-import de.szut.dqi12.texasholdem.connection.LoginProcess;
+import de.szut.dqi12.texasholdem.connection.session.LoginProcess;
 import de.szut.dqi12.texasholdem.connection.LoginResult;
 import de.szut.dqi12.texasholdem.connection.UserData;
 

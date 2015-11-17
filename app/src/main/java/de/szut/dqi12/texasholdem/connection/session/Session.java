@@ -1,8 +1,10 @@
-package de.szut.dqi12.texasholdem.connection;
+package de.szut.dqi12.texasholdem.connection.session;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
 import de.szut.dqi12.texasholdem.action.ServerAction;
+import de.szut.dqi12.texasholdem.connection.Recallable;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -14,9 +16,9 @@ public class Session implements Recallable {
     private String expectedAction;
     private String[] expectedParams;
     private Controller con;
-    private boolean connected = false;
+    private ConnectionStatus connected = ConnectionStatus.DISCONNECTED;
 
-    public boolean getConnectionStatus(){
+    public ConnectionStatus getConnectionStatus(){
         return connected;
     }
 
@@ -56,7 +58,7 @@ public class Session implements Recallable {
             case ServerAction.SESSION:
                 switch (params[0]){
                     case "FAILEDLOGIN":
-                        connected = false;
+                        connected = ConnectionStatus.FAILEDLOGIN;
                         //TODO inform GUI about failed login attempt
                         switch(params[1]){
                             case "PW":
@@ -70,11 +72,11 @@ public class Session implements Recallable {
 
                         break;
                     case "LOGGEDIN":
-                        connected = true;
+                        connected = ConnectionStatus.CONNECTED;
                         //TODO inform GUI and send necessary info to the server etc.
                         break;
                     case "LOGGEDOUT":
-                        connected = false;
+                        connected = ConnectionStatus.DISCONNECTED;
                         //TODO inform GUI and the whole programm about the successful disconnect
                         break;
             }
