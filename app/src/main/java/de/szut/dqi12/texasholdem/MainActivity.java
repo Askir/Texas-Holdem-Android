@@ -2,11 +2,9 @@ package de.szut.dqi12.texasholdem;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.gui.Login;
 import de.szut.dqi12.texasholdem.gui.Register;

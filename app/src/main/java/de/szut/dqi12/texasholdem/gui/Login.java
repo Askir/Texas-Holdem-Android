@@ -8,7 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
+import de.szut.dqi12.texasholdem.connection.LoginProcess;
+import de.szut.dqi12.texasholdem.connection.LoginResult;
 import de.szut.dqi12.texasholdem.connection.UserData;
 
 /**
@@ -16,42 +19,34 @@ import de.szut.dqi12.texasholdem.connection.UserData;
  */
 public class Login extends Activity {
 
+    private EditText etUsername;
+    private EditText etPassword;
+    private Button btnOk;
+
+    private LoginProcess lp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        final Boolean userdataCorrect = true;
+        btnOk = (Button)findViewById(R.id.buttonLoginOk);
 
-        Button btnOk = (Button)findViewById(R.id.buttonLoginOk);
+        etUsername = (EditText)findViewById(R.id.editTextLoginUsername);
+        etPassword = (EditText)findViewById(R.id.editTextLoginPassword);
 
-        final EditText etUsername = (EditText)findViewById(R.id.editTextLoginUsername);
-        final EditText etPassword = (EditText)findViewById(R.id.editTextLoginPassword);
+        lp = new LoginProcess(this);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                /*ToDo
-                - Send Username and Password to Server
-                 */
 
                 if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
+                    String[] userdata = {etUsername.getText().toString(), etPassword.getText().toString()};
 
-                    Intent login = new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    lp.execute(userdata);
 
-                    Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_LONG).show();
-
-                    /*
-                         TODO: 07.11.2015 check login data whether email or username are correct
-                         ToDo: get username for welcome massage
-                     */
-
-                    // TODO: 13.11.2015 check whether userdata is correct or not
-                    if(userdataCorrect){
-                        startActivity(login);
-                        finish();
-                    }
                 }else{
 
                     Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG).show();
@@ -61,5 +56,24 @@ public class Login extends Activity {
         });
     }
 
+    public void loginstatus(LoginResult lr){
+        switch(lr){
+            case USERDATACORRECT:
+                // falgs without finish unnecessary
+                Intent login = new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("username", etUsername.getText().toString());
+                startActivity(login);
+                // finish not good
+                // finish();
+                break;
+            case USERDATAINCORRECT:
+                Toast.makeText(Login.this, "Userdata incorrect.", Toast.LENGTH_SHORT).show();
+                etUsername.setText("");
+                break;
+            case TIMEOUT:
+                Toast.makeText(Login.this, "Login Timeout.", Toast.LENGTH_SHORT).show();
+                etUsername.setText("");
+                break;
+        }
+    }
 
 }
