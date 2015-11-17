@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.R;
-import de.szut.dqi12.texasholdem.connection.LoginProcess;
+import de.szut.dqi12.texasholdem.connection.session.LoginProcess;
 import de.szut.dqi12.texasholdem.connection.LoginResult;
 
 /**

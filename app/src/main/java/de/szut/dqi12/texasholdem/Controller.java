@@ -1,11 +1,10 @@
 package de.szut.dqi12.texasholdem;
 
-import de.szut.dqi12.texasholdem.action.*;
 import de.szut.dqi12.texasholdem.connection.Connection;
 import de.szut.dqi12.texasholdem.connection.Decryption;
 import de.szut.dqi12.texasholdem.connection.Receive;
 import de.szut.dqi12.texasholdem.connection.Send;
-import de.szut.dqi12.texasholdem.connection.Session;
+import de.szut.dqi12.texasholdem.connection.session.Session;
 
 /**
  * Created by Alex on 28.09.2015.
@@ -33,6 +32,7 @@ public class Controller {
     }
 
     public void start() {
+        decryption = new Decryption();
         connection = Connection.getInstance();
         send = new Send();
         receive = new Receive();
