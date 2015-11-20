@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem.gui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,9 +31,13 @@ public class JoinGameLobby extends Activity{
         setContentView(R.layout.join_game_lobby);
 
         // TODO: 17.11.2015 remove default listview fill
-        fillGamesList("DefaultLobby", false, "4");
+        fillGamesList("DefaultGame", false, "4");
+        fillGamesList("DefaultGame2", true, "2");
+        fillGamesList("DefaultGame3", true, "3");
 
         lvJoinGame = (ListView)findViewById(R.id.listViewJoinGame);
+        // TODO: 17.11.2015 check if colorstatement is correct
+        lvJoinGame.getChildAt(gamePositioner).setBackgroundColor(Color.WHITE);
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, gamesList);
         lvJoinGame.setAdapter(adapter);
 
@@ -60,12 +65,17 @@ public class JoinGameLobby extends Activity{
 
     }
 
-    public void fillGamesList(String Lobbyname, Boolean passwordSet, String numberOfPlayer){
+    public void fillGamesList(String Gamename, Boolean passwordSet, String numberOfPlayer){
 
-        gamesList.add(gamePositioner, "Lobbyname: " + Lobbyname + ", Password required: " + passwordSet.toString() + ", Number of Player" + numberOfPlayer);
+        gamesList.add(gamePositioner, "Gamename: " + Gamename + ", Password required: " + passwordSet.toString() + ", Number of Player: " + numberOfPlayer);
         gamesListContext.put(gamePositioner.toString(), passwordSet);
         gamePositioner++;
 
-        lvJoinGame.refreshDrawableState();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void registerForContextMenu(View view) {
+        super.registerForContextMenu(view);
     }
 }

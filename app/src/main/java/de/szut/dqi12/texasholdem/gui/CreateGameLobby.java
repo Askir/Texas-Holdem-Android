@@ -29,7 +29,7 @@ public class CreateGameLobby extends Activity {
 
                 // TODO: 09.11.2015 check listViewGameLobbyPlayer whether player are available. when no player there send toast
                 if(enoughPlayer){
-                    startActivity(new Intent(CreateGameLobby.this, Game.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    startActivity(new Intent(CreateGameLobby.this, Game.class));
                 }else{
                     Toast.makeText(getBaseContext(),"Wait for more Player", Toast.LENGTH_SHORT).show();
                 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.R;
 
@@ -27,16 +28,14 @@ public class CreateGame extends Activity {
 
             @Override
             public void onClick(View v) {
-                Intent startLobby = new Intent(CreateGame.this, CreateGameLobby.class);
 
-                // TODO: 09.11.2015 send lobbyname to server, so game searching user can see lobbyname
+                // TODO: 09.11.2015 send lobbyname to server, so for game searching user can see lobbyname
+
 
                 // TODO: 09.11.2015 if pw set status, send to server
-                if(etPassword.getText().toString().length() > 1){
-                     //true
-                }else{
-                    //false
-                }
+                Toast.makeText(getBaseContext(), "Need to send lobbyname and pw status.", Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(CreateGame.this, CreateGameLobby.class));
 
             }
         });

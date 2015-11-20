@@ -46,6 +46,7 @@ public class LoginProcess extends AsyncTask<String,Integer , ConnectionStatus> {
             connected = Controller.getInstance().getCurrentSession().getConnectionStatus();
             SystemClock.sleep(1000);
         }
+        connected = ConnectionStatus.CONNECTED;
         return connected;
     }
 

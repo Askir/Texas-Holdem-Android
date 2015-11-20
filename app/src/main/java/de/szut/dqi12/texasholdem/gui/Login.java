@@ -42,7 +42,7 @@ public class Login extends Activity {
 
                 if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
                     String[] userdata = {etUsername.getText().toString(), etPassword.getText().toString()};
-
+                    Toast.makeText(getBaseContext(), "Looging in.", Toast.LENGTH_SHORT).show();
                     lp.execute(userdata);
 
                 }else{
