@@ -42,7 +42,8 @@ public class Login extends Activity {
 
                 if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
                     String[] userdata = {etUsername.getText().toString(), etPassword.getText().toString()};
-                    Toast.makeText(getBaseContext(), "Looging in.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Looging in...", Toast.LENGTH_SHORT).show();
+                    // TODO: 27.11.2015 still no real login, implement login
                     lp.execute(userdata);
 
                 }else{
@@ -58,7 +59,7 @@ public class Login extends Activity {
         switch(lr){
             case USERDATACORRECT:
                 // falgs without finish unnecessary
-                Intent login = new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("username", etUsername.getText().toString());
+                Intent login = new Intent(Login.this, MainMenu.class).putExtra("username", etUsername.getText().toString());
                 startActivity(login);
                 // finish not good
                 // finish();

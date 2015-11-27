@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import de.szut.dqi12.texasholdem.R;
 
@@ -21,8 +23,8 @@ public class JoinGameLobby extends Activity{
 
     Integer gamePositioner = 0;
     ArrayAdapter adapter;
-    ArrayList<String> gamesList = new ArrayList<String>();
-    HashMap<String, Boolean> gamesListContext=new HashMap<>();
+    ArrayList<String> gamesList = new ArrayList<>();
+    LinkedHashMap<String, Boolean> gamesListContext = new LinkedHashMap<>();
     ListView lvJoinGame;
 
     @Override
@@ -30,14 +32,16 @@ public class JoinGameLobby extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_game_lobby);
 
+        lvJoinGame = (ListView)findViewById(R.id.listViewJoinGame);
+
         // TODO: 17.11.2015 remove default listview fill
         fillGamesList("DefaultGame", false, "4");
         fillGamesList("DefaultGame2", true, "2");
         fillGamesList("DefaultGame3", true, "3");
 
-        lvJoinGame = (ListView)findViewById(R.id.listViewJoinGame);
-        // TODO: 17.11.2015 check if colorstatement is correct
-        lvJoinGame.getChildAt(gamePositioner).setBackgroundColor(Color.WHITE);
+        // TODO: 20.11.2015 change color of list children
+
+
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, gamesList);
         lvJoinGame.setAdapter(adapter);
 
@@ -48,14 +52,15 @@ public class JoinGameLobby extends Activity{
 
                 // TODO: 17.11.2015 send which lobby was selected
 
+                String listPos = "" + position + "";
 
-                // TODO: 09.11.2015 must implement password query
+                if(gamesListContext.get(listPos).compareTo(true) == 0){
 
-                if(gamesListContext.get(gamePositioner -1).toString().equals("true")){
-                    // TODO: 17.11.2015 open activity that querys the password of joining game
+//                    // TODO: 17.11.2015 open activity that querys the password of joining game
+                    Toast.makeText(JoinGameLobby.this, "Open Verification", Toast.LENGTH_SHORT).show();
 
-                    // not right!!
                     startActivity(new Intent(JoinGameLobby.this, Game.class));
+
                 }else{
                     startActivity(new Intent(JoinGameLobby.this, Game.class));
                 }
@@ -71,7 +76,7 @@ public class JoinGameLobby extends Activity{
         gamesListContext.put(gamePositioner.toString(), passwordSet);
         gamePositioner++;
 
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 
     @Override

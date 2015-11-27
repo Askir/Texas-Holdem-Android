@@ -26,7 +26,7 @@ public class MainMenu extends Activity{
             ImageButton btnSettings = (ImageButton)findViewById(R.id.imageButtonMainMenueSettings);
             ImageButton btnLogout = (ImageButton)findViewById(R.id.imageButtonMainMenueLogout);
 
-            Intent iUsername = getIntent();
+            final Intent iUsername = getIntent();
 
             Toast.makeText(getBaseContext(), "Hello " + iUsername.getExtras().getString("username"), Toast.LENGTH_SHORT).show();
 
@@ -52,7 +52,8 @@ public class MainMenu extends Activity{
                 @Override
                 public void onClick(View v) {
 
-                    startActivity(new Intent(MainMenu.this, Settings.class));
+                    // TODO: 27.11.2015 userinformation handover not completely implemented
+                    startActivity(new Intent(MainMenu.this, Settings.class).putExtra("Username", iUsername.getExtras().getString("username")));
 
                 }
             });
