@@ -67,6 +67,10 @@
             android:screenOrientation="landscape"
             >
         </activity>
+        <activity
+            android:name=".gui.CreateGameLobby"
+            android:screenOrientation="landscape"
+            >
+        </activity>
     </application>
-
 </manifest>

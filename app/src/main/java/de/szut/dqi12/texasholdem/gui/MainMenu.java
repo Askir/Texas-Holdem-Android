@@ -62,11 +62,7 @@ public class MainMenu extends Activity{
                 @Override
                 public void onClick(View v) {
 
-                    Intent restart = new Intent(MainMenu.this, MainActivity.class);
-
-                    restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                    startActivity(restart);
+                    startActivity(new Intent(MainMenu.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                     Toast.makeText(getBaseContext(), "Logging out.", Toast.LENGTH_SHORT).show();
                     finish();
 

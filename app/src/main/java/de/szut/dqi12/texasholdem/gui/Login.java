@@ -58,11 +58,10 @@ public class Login extends Activity {
     public void loginstatus(LoginResult lr){
         switch(lr){
             case USERDATACORRECT:
-                // falgs without finish unnecessary
-                Intent login = new Intent(Login.this, MainMenu.class).putExtra("username", etUsername.getText().toString());
+                // TODO: 01.12.2015 look for a better solution, better with no addflags() and finish()
+                Intent login = new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK).putExtra("username", etUsername.getText().toString());
                 startActivity(login);
-                // finish not good
-                // finish();
+                finish();
                 break;
             case USERDATAINCORRECT:
                 Toast.makeText(Login.this, "Userdata incorrect.", Toast.LENGTH_SHORT).show();

@@ -54,15 +54,25 @@ public class JoinGameLobby extends Activity{
 
                 String listPos = "" + position + "";
 
+                // query whether selected lobby requires password and open corresponding activity
                 if(gamesListContext.get(listPos).compareTo(true) == 0){
-
-//                    // TODO: 17.11.2015 open activity that querys the password of joining game
+                    // password is required
+                    // TODO: 17.11.2015 open activity that querys the password of joining game
                     Toast.makeText(JoinGameLobby.this, "Open Verification", Toast.LENGTH_SHORT).show();
 
                     startActivity(new Intent(JoinGameLobby.this, Game.class));
 
                 }else{
-                    startActivity(new Intent(JoinGameLobby.this, Game.class));
+                    //password is not required
+
+                    /*
+                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                     finish();
+                     deletes the stack, so user cant go back after opening the game
+                     */
+                    // TODO: 01.12.2015 look for a better solution , better with no addflags() and finsih()
+                    startActivity(new Intent(JoinGameLobby.this, Game.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    finish();
                 }
 
             }
