@@ -1,4 +1,4 @@
-package de.szut.dqi12.texasholdem.menu.options;
+package de.szut.dqi12.texasholdem.guibackbone;
 
 /**
  * Created by Jascha on 09.10.2015.

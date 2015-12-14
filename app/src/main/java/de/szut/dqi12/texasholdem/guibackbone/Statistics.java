@@ -1,4 +1,4 @@
-package de.szut.dqi12.texasholdem.menu.options;
+package de.szut.dqi12.texasholdem.guibackbone;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
@@ -26,6 +26,7 @@ public class Statistics implements Recallable{
     public void inform(String action, String[] params) {
         for(int i = 0; i < params.length; i++){
             statistics[i] = params[i];
+            //maybe update GUI tbd with Marcel
         }
         return;
     }

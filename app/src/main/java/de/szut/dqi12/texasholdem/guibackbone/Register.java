@@ -1,8 +1,7 @@
-package de.szut.dqi12.texasholdem.menu.options;
+package de.szut.dqi12.texasholdem.guibackbone;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
