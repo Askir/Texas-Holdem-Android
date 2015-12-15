@@ -27,7 +27,8 @@
                 android:layout_height="0dp"
                 android:id="@+id/imageViewGameP6C2"
                 android:layout_marginLeft="0dp"
-                android:src="#ff0000" />
+                android:src="#ff0000"
+                android:visibility="visible" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -35,7 +36,8 @@
                 android:id="@+id/imageViewGameP6C1"
                 android:layout_toRightOf="@+id/imageViewGameP6C2"
                 android:layout_marginLeft="0dp"
-                android:src="#ff0000" />
+                android:src="#ff0000"
+                android:visibility="visible" />
 
             <ImageView
                 android:layout_width="0dp"

@@ -46,6 +46,7 @@ public class Register extends Activity {
             }
         });
 
+        // TODO: 11.12.2015 write function for register response from server, server sends boolean success and string with errormassage
 
     }
 }

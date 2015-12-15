@@ -39,6 +39,7 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
 
+                btnOk.setClickable(false);
 
                 if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
                     String[] userdata = {etUsername.getText().toString(), etPassword.getText().toString()};
@@ -50,7 +51,6 @@ public class Login extends Activity {
 
                     Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
     }
@@ -66,10 +66,12 @@ public class Login extends Activity {
             case USERDATAINCORRECT:
                 Toast.makeText(Login.this, "Userdata incorrect.", Toast.LENGTH_SHORT).show();
                 etUsername.setText("");
+                btnOk.setClickable(true);
                 break;
             case TIMEOUT:
                 Toast.makeText(Login.this, "Login Timeout.", Toast.LENGTH_SHORT).show();
                 etUsername.setText("");
+                btnOk.setClickable(true);
                 break;
         }
     }
