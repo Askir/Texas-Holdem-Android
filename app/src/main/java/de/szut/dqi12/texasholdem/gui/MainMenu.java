@@ -62,7 +62,7 @@ public class MainMenu extends Activity{
                 @Override
                 public void onClick(View v) {
 
-                    startActivity(new Intent(MainMenu.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    startActivity(new Intent(MainMenu.this, MainActivity.class));
                     Toast.makeText(getBaseContext(), "Logging out.", Toast.LENGTH_SHORT).show();
                     finish();
 
@@ -70,4 +70,7 @@ public class MainMenu extends Activity{
             });
 
         }
+    @Override
+    public void onBackPressed() {
+    }
 }

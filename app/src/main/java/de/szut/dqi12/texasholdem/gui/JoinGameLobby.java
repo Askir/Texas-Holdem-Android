@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem.gui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,6 @@ public class JoinGameLobby extends Activity{
         fillGamesList("DefaultGame3", true, "3");
 
         // TODO: 20.11.2015 change color of list children
-
 
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, gamesList);
         lvJoinGame.setAdapter(adapter);
