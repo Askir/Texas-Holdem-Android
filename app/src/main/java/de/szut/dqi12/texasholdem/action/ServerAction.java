@@ -12,4 +12,6 @@ public class ServerAction {
     public static final String SESSION = "SESSION";
     public static final String STATS = "STATS";
     public static final String VALIDATION = "VALIDATION";
+    public static final String CREATEGAMEACK = "CREATEGAMEACK";
+    public static final String LOBBYACK = "LOBBYACK";
 }
