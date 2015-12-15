@@ -1,10 +1,8 @@
-package de.szut.dqi12.texasholdem.menu.options;
+package de.szut.dqi12.texasholdem.guibackbone;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import static android.content.Context.MODE_PRIVATE;
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 /**

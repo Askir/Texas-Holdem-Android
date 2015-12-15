@@ -1,4 +1,4 @@
-package de.szut.dqi12.texasholdem.menu.options;
+package de.szut.dqi12.texasholdem.guibackbone;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
