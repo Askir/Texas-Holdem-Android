@@ -17,8 +17,8 @@ public class Lobby implements Recallable{
     private boolean[] states;
     private String lobbyName;
 
-    public Lobby(int maxPlayers, boolean userState, String lobbyName){
-        String[] params = {Integer.toString(maxPlayers),Integer.toString(ID),lobbyName};
+    public Lobby(int maxPlayers, boolean userState, String lobbyName, String password){
+        String[] params = {Integer.toString(maxPlayers),Integer.toString(ID),lobbyName, password};
         Controller.getInstance().getSend().sendAction(ClientAction.LOBBY,params);
         this.maxPlayers=maxPlayers;
         this.ID = 0;

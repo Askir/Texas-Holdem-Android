@@ -17,4 +17,5 @@ public class ClientAction {
     public static final String VALIDATION = "VALIDATION";
     public static final String DISCONNECT = "DISCONNECT";
     public static final String LOBBY = "LOBBY";
+    public static final String JOINGAME = "JOINGAME";
 }
