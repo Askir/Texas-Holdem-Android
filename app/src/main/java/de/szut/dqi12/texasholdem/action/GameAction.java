@@ -10,5 +10,4 @@ public class GameAction {
     public static final String ALLIN= "ALLIN";
     public static final String BET= "BET";
     public static final String RAISE= "RAISE";
-    public static final String CHAT= "CHAT";
 }
