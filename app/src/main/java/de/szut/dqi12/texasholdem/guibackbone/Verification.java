@@ -29,14 +29,14 @@ public class Verification implements Recallable{
         Controller.getInstance().getDecryption().addExpectation(this);
     }
     @Override
-    public void inform(String action, String[] params) {
+    public void inform(String action, final String[] params) {
         if(action.equals(ServerAction.VALIDATION)){
             //TODO: communicate with Marcel about the inform function and add corrected code
             if (params[0].equals("correct")){
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        //verificationActivity.inform(params[0],params[1]);
+                        verificationActivity.inform(params[0],params[1]);
                     }
                 });
             }
@@ -44,7 +44,7 @@ public class Verification implements Recallable{
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        //verificationActivity.inform(params[0],params[1]);
+                        verificationActivity.inform(params[0],params[1]);
                     }
                 });
             }
@@ -52,7 +52,7 @@ public class Verification implements Recallable{
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        //verificationActivity.inform(params[0],params[1]);
+                        verificationActivity.inform(params[0],params[1]);
                     }
                 });
 
