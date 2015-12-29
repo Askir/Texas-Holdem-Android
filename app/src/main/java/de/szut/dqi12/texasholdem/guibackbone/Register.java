@@ -15,9 +15,9 @@ public class Register implements Recallable {
     //Handler to call functions in the register activity on the UI thread
     private Handler mHandler;
     //reference to the register activity to callback the function through the Handler thread after the Registration has been completed
-    private Register registerActivity;
+    private de.szut.dqi12.texasholdem.gui.Register registerActivity;
 
-    Register(Register registerActivity){
+    public Register(de.szut.dqi12.texasholdem.gui.Register registerActivity){
         //linking the Handler with the UI Thread
         mHandler = new Handler(Looper.getMainLooper());
         this.registerActivity = registerActivity;

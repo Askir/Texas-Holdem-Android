@@ -5,6 +5,10 @@ package de.szut.dqi12.texasholdem.connection;
  */
 public interface Recallable {
 
+    public abstract int getMaxWaitTIme();
+
+    public abstract int getTimeStamp();
+
     public abstract void inform(String action, String params[]);
 
     public abstract String Action(); // this method should return the Action at which inform should be called.

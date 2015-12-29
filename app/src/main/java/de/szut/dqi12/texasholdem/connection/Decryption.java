@@ -22,6 +22,20 @@ public class Decryption {
 
 
     }
+    public void startDecryption(){
+        final Decrypt dec = new Decrypt();
+        Thread decryptionThread = new Thread () {
+            @Override
+            public void run(){
+                while(true){
+                    dec.execute();
+                }
+            }
+        };
+        decryptionThread.start();
+
+
+    }
 
     public void addExpectation(Recallable callObj){
         callObjects.add(callObj);
@@ -37,7 +51,6 @@ public class Decryption {
 
         @Override
         protected Void doInBackground(List<String>... params) {
-            List<String> newMessages = params[0];
 
             for(String s : newMessages){
                 //splitting the messages into useful information
@@ -76,6 +89,7 @@ public class Decryption {
                         lobbyUpdate(parameters);
                         break;
                 }
+                newMessages.remove(s);
             }
             return null;
         }
