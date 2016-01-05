@@ -38,6 +38,7 @@ public class Controller {
         receive = new Receive();
         session = new Session();
         receive.execute();
+        decryption.startDecryption();
 
     }
     public Session getCurrentSession(){

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.szut.dqi12.texasholdem.Controller;
+import de.szut.dqi12.texasholdem.action.ServerAction;
 import de.szut.dqi12.texasholdem.chat.ChatController;
 
 /**
@@ -69,6 +70,9 @@ public class Decryption {
                         if(i.Params()==parameters){
                             i.inform(splits[0],parameters);
                         }
+                    }
+                    else if(i.getTimeStamp()+i.getMaxWaitTIme()>System.currentTimeMillis()){
+                        i.inform(ServerAction.NORESPONSE,null);
                     }
                 }
                 //Calling the correct function for every executed command

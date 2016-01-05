@@ -10,16 +10,29 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
  */
 public class Statistics implements Recallable{
 
-
+    //TODO: update inform function with timeout content and revisit class to update this comment
     private String[] statistics = new String[5];
+    private long timeout = 5000;
+    private long timestamp = 0;
 
     public void updateStatistics(){
         Controller.getInstance().getSend().sendAction(ClientAction.STATS, null);
+        timestamp = System.currentTimeMillis();
         Controller.getInstance().getDecryption().addExpectation(this);
     }
 
     public String[] getStatistics(){
         return statistics;
+    }
+
+    @Override
+    public long getMaxWaitTIme() {
+        return timeout;
+    }
+
+    @Override
+    public long getTimeStamp() {
+        return timestamp;
     }
 
     @Override

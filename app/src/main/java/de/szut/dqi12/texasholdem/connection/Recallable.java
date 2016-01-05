@@ -5,9 +5,9 @@ package de.szut.dqi12.texasholdem.connection;
  */
 public interface Recallable {
 
-    public abstract int getMaxWaitTIme();
+    public abstract long getMaxWaitTIme();
 
-    public abstract int getTimeStamp();
+    public abstract long getTimeStamp();
 
     public abstract void inform(String action, String params[]);
 

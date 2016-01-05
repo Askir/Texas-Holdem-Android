@@ -14,10 +14,23 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
 public class CreateGame implements Recallable{
     private de.szut.dqi12.texasholdem.gui.CreateGame createGameActivity;
     private Handler mHandler;
+    private long timeout = 5000;
+    private long timestamp = 0;
     public CreateGame(de.szut.dqi12.texasholdem.gui.CreateGame createGameActivity){
         this.mHandler=new Handler(Looper.getMainLooper());
         this.createGameActivity = createGameActivity;
     }
+
+    @Override
+    public long getMaxWaitTIme() {
+        return timeout;
+    }
+
+    @Override
+    public long getTimeStamp() {
+        return timestamp;
+    }
+
     @Override
     public void inform(String action, String[] params) {
         if(action.equals(ServerAction.CREATEGAMEACK)){
@@ -39,6 +52,7 @@ public class CreateGame implements Recallable{
         String[] params = {gameName,Integer.toString(maxPlayers),password};
         Controller.getInstance().getSend().sendAction(ClientAction.CREATEGAME, params);
         Controller.getInstance().getDecryption().addExpectation(this);
+        timestamp = System.currentTimeMillis();
     }
     @Override
     public String Action() {

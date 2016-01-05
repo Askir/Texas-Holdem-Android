@@ -16,6 +16,10 @@ public class Lobby implements Recallable{
     private String[] userNames;
     private boolean[] states;
     private String lobbyName;
+    private long timeout = 5000;
+    private long timestamp = 0;
+
+    //TODO: implement server ACK and a lot of other stuff please revisit and uptade this comment
 
     public Lobby(int maxPlayers, boolean userState, String lobbyName, String password){
         String[] params = {Integer.toString(maxPlayers),Integer.toString(ID),lobbyName, password};
@@ -55,6 +59,16 @@ public class Lobby implements Recallable{
     public void changeUserState(int nr, boolean state){
         states[nr] = state;
         return;
+    }
+
+    @Override
+    public long getMaxWaitTIme() {
+        return timeout;
+    }
+
+    @Override
+    public long getTimeStamp() {
+        return timestamp;
     }
 
     @Override

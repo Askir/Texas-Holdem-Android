@@ -52,7 +52,7 @@ public class Register extends Activity {
 
     public void inform(String result, String message){
         if(result.equals("accpeted")){
-            startActivity(new Intent(Register.this, Verification.class));
+            startActivity(new Intent(Register.this, RegisterVerification.class));
             Toast.makeText(getBaseContext(),"successful register attempt please verify your email", Toast.LENGTH_LONG).show();
         }
         else if(result.equals("denied")){
