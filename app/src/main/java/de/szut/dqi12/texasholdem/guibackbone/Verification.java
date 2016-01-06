@@ -48,33 +48,19 @@ public class Verification implements Recallable{
     @Override
     public void inform(String action, final String[] params) {
         if(action.equals(ServerAction.VALIDATION)){
-
-            if (params[0].equals("correct")){
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        verificationActivity.inform(params[0],params[1]);
-                    }
-                });
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                verificationActivity.inform(params[0],params[1]);
             }
-            if (params[0].equals("wrong")){
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        verificationActivity.inform(params[0],params[1]);
-                    }
-                });
-            }
-            else{
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        verificationActivity.inform(params[0],params[1]);
-                    }
-                });
-
-            }
-        }
+        });}
+        else if(action.equals(ServerAction.NORESPONSE)){
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    verificationActivity.servertimeout();
+                }
+            });}
     }
 
     @Override

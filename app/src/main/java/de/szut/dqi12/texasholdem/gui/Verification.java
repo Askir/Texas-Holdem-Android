@@ -51,6 +51,9 @@ public abstract class Verification extends Activity{
         });
 
     }
+    public void servertimeout(){
+        Toast.makeText(getBaseContext(),"Server did not response please check your internet connection", Toast.LENGTH_LONG).show();
+    }
     public abstract void inform(String status, String params);
 
     /** public void inform(String status, String params){
