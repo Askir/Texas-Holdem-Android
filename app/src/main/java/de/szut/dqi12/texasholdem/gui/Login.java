@@ -44,7 +44,6 @@ public class Login extends Activity {
                 if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
                     String[] userdata = {etUsername.getText().toString(), etPassword.getText().toString()};
                     Toast.makeText(getBaseContext(), "Looging in...", Toast.LENGTH_SHORT).show();
-                    // TODO: 27.11.2015 still no real login, implement login
                     lp.execute(userdata);
 
                 }else{
