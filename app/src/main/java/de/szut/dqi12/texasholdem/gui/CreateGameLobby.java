@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.R;
+import de.szut.dqi12.texasholdem.guibackbone.Lobby;
 
 /**
  * Created by Marcel on 09.11.2015.
@@ -15,28 +17,38 @@ import de.szut.dqi12.texasholdem.R;
 public class CreateGameLobby extends Activity {
 
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_game_lobby);
-
+        Lobby.getInstance().registerActivity(this);
         final Boolean enoughPlayer = true;
 
-        Button btnEnough = (Button)findViewById(R.id.buttonGameLobbyEnough);
+        ListView playerView = (ListView) findViewById(R.id.listViewGameLobbyPlayer);
+        playerView.setAdapter(new playerListAdapter(this));
+        final Button btnReady = (Button) findViewById(R.id.buttonGameLobbyReady);
 
-        btnEnough.setOnClickListener(new View.OnClickListener() {
+        btnReady.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // TODO: 09.11.2015 check listViewGameLobbyPlayer whether player are available. when no player there send toast
-                if(enoughPlayer){
-                    // TODO: 01.12.2015 look for a better solution, better with no addflags() and finsih()
-                    startActivity(new Intent(CreateGameLobby.this, Game.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                    finish();
-                }else{
-                    Toast.makeText(getBaseContext(),"Wait for more Player", Toast.LENGTH_SHORT).show();
+                if(btnReady.getText()=="not Ready"){
+                    Lobby.getInstance().setState(false);
+                    btnReady.setText("Ready");
+                }
+                else if(btnReady.getText()=="Ready"){
+                    Lobby.getInstance().setState(true);
+                    btnReady.setText("not Ready");
                 }
 
             }
         });
+    }
+
+
+    public void lobbyIsReady() {
+        startActivity(new Intent(CreateGameLobby.this, Game.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        finish();
+    }
+    public void playerChanged(int nr, boolean state){
+        //change ListView item somehow #magicYouNeedToLearn
     }
 }

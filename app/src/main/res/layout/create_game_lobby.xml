@@ -6,7 +6,7 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="240dp"
         android:layout_gravity="center"
         android:background="#353535"
         android:layout_centerVertical="true"
@@ -28,8 +28,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enough."
-        android:id="@+id/buttonGameLobbyEnough"
+        android:text="Ready"
+        android:id="@+id/buttonGameLobbyReady"
         android:layout_below="@+id/tableRow12"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
