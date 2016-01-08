@@ -39,7 +39,7 @@ public class ChatController {
         //IF MODE == CLIENT
         Controller.getInstance().getSend().sendAction(ClientAction.CHAT,params);
         //IF MODE == INGAME
-        Controller.getInstance().getSend().sendAction(GameAction.CHAT,params);
+        Controller.getInstance().getSend().sendAction(ClientAction.CHAT,params);
         //TODO where do we safe information like username etc.? should I just put that in the Controller class aswell?
 
     }

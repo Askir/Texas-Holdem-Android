@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.szut.dqi12.texasholdem.Controller;
+import de.szut.dqi12.texasholdem.action.ServerAction;
 import de.szut.dqi12.texasholdem.chat.ChatController;
 
 /**
@@ -19,6 +20,20 @@ public class Decryption {
     public Decryption() {
         newMessages = Collections.synchronizedList(new ArrayList<String>());
         callObjects = Collections.synchronizedList(new ArrayList<Recallable>());
+
+
+    }
+    public void startDecryption(){
+        final Decrypt dec = new Decrypt();
+        Thread decryptionThread = new Thread () {
+            @Override
+            public void run(){
+                while(true){
+                    dec.execute();
+                }
+            }
+        };
+        decryptionThread.start();
 
 
     }
@@ -37,7 +52,6 @@ public class Decryption {
 
         @Override
         protected Void doInBackground(List<String>... params) {
-            List<String> newMessages = params[0];
 
             for(String s : newMessages){
                 //splitting the messages into useful information
@@ -56,6 +70,9 @@ public class Decryption {
                         if(i.Params()==parameters){
                             i.inform(splits[0],parameters);
                         }
+                    }
+                    else if(i.getTimeStamp()+i.getMaxWaitTIme()>System.currentTimeMillis()){
+                        i.inform(ServerAction.NORESPONSE,null);
                     }
                 }
                 //Calling the correct function for every executed command
@@ -76,6 +93,7 @@ public class Decryption {
                         lobbyUpdate(parameters);
                         break;
                 }
+                newMessages.remove(s);
             }
             return null;
         }

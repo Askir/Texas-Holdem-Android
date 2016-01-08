@@ -15,6 +15,10 @@ public class GameList implements Recallable{
     public GameList(){
         games = new ArrayList<Game>();
     }
+    private long timeout=5000;
+    private long timestamp=0;
+
+    //TODO: add retrieving the gamelist from the server
 
     public void updateList(String[] games){
         for(String i:games){
@@ -39,6 +43,16 @@ public class GameList implements Recallable{
        Controller.getInstance().getSend().sendAction(ClientAction.JOINGAME, params);
        return;
    }
+
+    @Override
+    public long getMaxWaitTIme() {
+        return timeout;
+    }
+
+    @Override
+    public long getTimeStamp() {
+        return timestamp;
+    }
 
     @Override
     public void inform(String action, String[] params) {

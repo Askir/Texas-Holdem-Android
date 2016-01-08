@@ -14,14 +14,17 @@ import de.szut.dqi12.texasholdem.R;
 /**
  * Created by Marcel on 03.11.2015.
  */
-public class Verification extends Activity{
+public abstract class Verification extends Activity{
 
+    private de.szut.dqi12.texasholdem.guibackbone.Verification veri;
     // TODO: 07.11.2015 implement fragment layout
+    // TODO: add other Verification types for password reset etc.
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verification);
+        veri = new de.szut.dqi12.texasholdem.guibackbone.Verification(this);
 
 
 
@@ -37,21 +40,9 @@ public class Verification extends Activity{
                 if (!etVeri.getText().equals(null)) {
 
                     Boolean codeCorrect = true;
+                    veri.sendVerification(etVeri.getText().toString());
 
-                    // ToDo Send Code to Server and check whether ok
 
-                    if (codeCorrect) {
-
-                        Intent restart = new Intent(Verification.this, MainActivity.class);
-
-                        restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                        startActivity(restart);
-                        finish();
-
-                    } else {
-                        Toast.makeText(getBaseContext(), "Wrong Code", Toast.LENGTH_SHORT).show();
-                    }
                 } else {
                     Toast.makeText(getBaseContext(), "Please insert code for verification", Toast.LENGTH_SHORT).show();
                 }
@@ -60,4 +51,24 @@ public class Verification extends Activity{
         });
 
     }
+    public void servertimeout(){
+        Toast.makeText(getBaseContext(),"Server did not response please check your internet connection", Toast.LENGTH_LONG).show();
+    }
+    public abstract void inform(String status, String params);
+
+    /** public void inform(String status, String params){
+        Toast.makeText(getBaseContext(), params,Toast.LENGTH_LONG);
+        if(status.equals("correct")){
+            Intent restart = new Intent(Verification.this, MainActivity.class);
+
+            restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(restart);
+            finish();
+        }
+        else if(status.equals("wrong")){
+
+        }
+        return;
+    } **/
 }

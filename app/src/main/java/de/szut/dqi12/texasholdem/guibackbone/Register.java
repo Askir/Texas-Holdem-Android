@@ -12,12 +12,16 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
  * Created by Jascha Beste on 11.11.2015.
  */
 public class Register implements Recallable {
+
+    //TODO: add to inform() what happens if you don't get any server response (timeout)
     //Handler to call functions in the register activity on the UI thread
     private Handler mHandler;
     //reference to the register activity to callback the function through the Handler thread after the Registration has been completed
-    private Register registerActivity;
+    private de.szut.dqi12.texasholdem.gui.Register registerActivity;
+    private long timeout = 5000;
+    private long timestamp = 0;
 
-    Register(Register registerActivity){
+    public Register(de.szut.dqi12.texasholdem.gui.Register registerActivity){
         //linking the Handler with the UI Thread
         mHandler = new Handler(Looper.getMainLooper());
         this.registerActivity = registerActivity;
@@ -36,6 +40,7 @@ public class Register implements Recallable {
             String[] registerContent = {username,password,email};
             Controller.getInstance().getSend().sendAction(ClientAction.REGISTER, registerContent);
             Controller.getInstance().getDecryption().addExpectation(this);
+            timestamp = System.currentTimeMillis();
 
             return true;
         }
@@ -45,12 +50,22 @@ public class Register implements Recallable {
 }
 
     @Override
-    public void inform(String action, String[] params) {
+    public long getMaxWaitTIme() {
+        return timeout;
+    }
+
+    @Override
+    public long getTimeStamp() {
+        return timestamp;
+    }
+
+    @Override
+    public void inform(String action, final String[] params) {
         if (action.equals(ServerAction.REGISTERACK)) {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    //registerActivity.inform(params[0],parmas[1]);
+                    registerActivity.inform(params[0],params[1]);
                 }
             });
         }

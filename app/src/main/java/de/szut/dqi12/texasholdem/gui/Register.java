@@ -15,8 +15,10 @@ import de.szut.dqi12.texasholdem.R;
  */
 public class Register extends Activity {
 
+    private de.szut.dqi12.texasholdem.guibackbone.Register register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        register = new de.szut.dqi12.texasholdem.guibackbone.Register(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
@@ -34,9 +36,8 @@ public class Register extends Activity {
                 if(!etUsername.getText().toString().equals("") && !etEmail.getText().toString().equals("") && !etPassword.getText().toString().equals("") && etReEnterPassword.getText().toString().equals(etPassword.getText().toString())) {
 
                     Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Register.this, Verification.class));
+                    register.executeRegister(etUsername.getText().toString(),etPassword.getText().toString(),etReEnterPassword.getText().toString(),etEmail.getText().toString());
 
-                    // ToDo Send Username and Password to Server
 
                 }
                 else{
@@ -46,7 +47,20 @@ public class Register extends Activity {
             }
         });
 
-        // TODO: 11.12.2015 write function for register response from server, server sends boolean success and string with errormassage
+
+    }
+
+    public void inform(String result, String message){
+        if(result.equals("accpeted")){
+            startActivity(new Intent(Register.this, RegisterVerification.class));
+            Toast.makeText(getBaseContext(),"successful register attempt please verify your email", Toast.LENGTH_LONG).show();
+        }
+        else if(result.equals("denied")){
+            Toast.makeText(getBaseContext(),message,Toast.LENGTH_SHORT);
+        }
+        else{
+            Toast.makeText(getBaseContext(),"serverside error: " + message,Toast.LENGTH_SHORT);
+        }
 
     }
 }
