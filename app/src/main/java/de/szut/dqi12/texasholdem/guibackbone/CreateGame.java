@@ -19,10 +19,18 @@ public class CreateGame implements Recallable{
         this.createGameActivity = createGameActivity;
     }
     @Override
-    public void inform(String action, String[] params) {
+    public void inform(String action, final String[] params) {
         if(action.equals(ServerAction.CREATEGAMEACK)){
             switch(params[0]){
                 case "confirmed":
+                    final int lobbyID = Integer.parseInt(params[1]);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            //createGameActivity.gameCreationSuccessful();
+                        }
+                    });
+
                     //inform GUI and Create Lobby
                     break;
                 case "failed":
