@@ -15,7 +15,7 @@ import de.szut.dqi12.texasholdem.guibackbone.Lobby;
  */
 public class CreateGameLobby extends Activity {
 
-    private playerListAdaptertemptemp plA;
+    private PlayerListAdapter plA;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +23,7 @@ public class CreateGameLobby extends Activity {
         Lobby.getInstance().registerActivity(this);
 
         ListView playerView = (ListView) findViewById(R.id.listViewGameLobbyPlayer);
-        plA = new playerListAdaptertemptemp(this);
+        plA = new PlayerListAdapter(this);
         playerView.setAdapter(plA);
         final Button btnReady = (Button) findViewById(R.id.buttonGameLobbyReady);
 
