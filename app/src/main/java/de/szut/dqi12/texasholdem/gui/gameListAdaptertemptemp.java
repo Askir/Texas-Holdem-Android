@@ -16,10 +16,10 @@ import de.szut.dqi12.texasholdem.guibackbone.*;
 /**
  * Created by Jascha on 09.01.2016.
  */
-public class GameListAdaptertemp extends BaseAdapter {
+public class gameListAdaptertemptemp extends BaseAdapter {
     private final LayoutInflater mLayoutInflator;
 
-    public GameListAdaptertemp(Context context){
+    public gameListAdaptertemptemp(Context context){
         super();
         mLayoutInflator = (LayoutInflater)
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
