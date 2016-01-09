@@ -22,7 +22,6 @@ public class Lobby implements Recallable{
     private static Lobby instance;
     private CreateGameLobby lobbyActivity;
 
-    //TODO: implement server ACK and a lot of other stuff please revisit and uptade this comment
     public static Lobby getInstance(){
         if (instance== null){
             instance = new Lobby();
@@ -57,6 +56,7 @@ public class Lobby implements Recallable{
         this.userState=userState;
         String[] params = {Boolean.toString(userState)};
         Controller.getInstance().getSend().sendAction(ClientAction.LOBBY,params);
+        lobbyActivity.playerChanged();
     }
 
     public boolean getState(){
@@ -67,23 +67,23 @@ public class Lobby implements Recallable{
         return userNames;
     }
 
-    public void addUser(int nr, String userName, boolean state){
+    public void changeUser(int nr, String userName, boolean state){
         userNames[nr] = userName;
         states[nr] = state;
-        return;
+        lobbyActivity.playerChanged();
     }
 
     public void gameStart(){
-        //inform GUI
-        //and Create new Game after 5 seconds
-        return;
+        lobbyActivity.gameStart();
     }
 
     public void changeUserState(int nr, boolean state){
         states[nr] = state;
-        return;
+        lobbyActivity.playerChanged();
     }
 
+    //the interface is probably not needed anymore since CreateGame and joinGame overtake these actions
+    //code stays here for clarity but will be removed once the gui is finalized
     @Override
     public long getMaxWaitTIme() {
         return timeout;

@@ -8,4 +8,6 @@ public class Game {
     public boolean password;
     public String host;
     public int lobbyID;
+    public int maxPlayers;
+    public int currentPlayers;
 }

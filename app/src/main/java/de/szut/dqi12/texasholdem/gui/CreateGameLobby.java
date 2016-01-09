@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.R;
 import de.szut.dqi12.texasholdem.guibackbone.Lobby;
@@ -16,15 +15,16 @@ import de.szut.dqi12.texasholdem.guibackbone.Lobby;
  */
 public class CreateGameLobby extends Activity {
 
+    private PlayerListAdaptertemp plA;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_game_lobby);
         Lobby.getInstance().registerActivity(this);
-        final Boolean enoughPlayer = true;
 
         ListView playerView = (ListView) findViewById(R.id.listViewGameLobbyPlayer);
-        playerView.setAdapter(new playerListAdapter(this));
+        plA = new PlayerListAdaptertemp(this);
+        playerView.setAdapter(plA);
         final Button btnReady = (Button) findViewById(R.id.buttonGameLobbyReady);
 
         btnReady.setOnClickListener(new View.OnClickListener() {
@@ -44,11 +44,11 @@ public class CreateGameLobby extends Activity {
     }
 
 
-    public void lobbyIsReady() {
+    public void gameStart() {
         startActivity(new Intent(CreateGameLobby.this, Game.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         finish();
     }
-    public void playerChanged(int nr, boolean state){
-        //change ListView item somehow #magicYouNeedToLearn
+    public void playerChanged(){
+        plA.notifyDataSetChanged();
     }
 }

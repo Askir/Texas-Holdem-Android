@@ -15,10 +15,10 @@ import de.szut.dqi12.texasholdem.guibackbone.Lobby;
  */
 
 
-public class playerListAdapter extends BaseAdapter {
+public class PlayerListAdaptertemp extends BaseAdapter {
     private final LayoutInflater mLayoutInflator;
 
-    public playerListAdapter(Context context){
+    public PlayerListAdaptertemp(Context context){
         super();
         mLayoutInflator = (LayoutInflater)
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
