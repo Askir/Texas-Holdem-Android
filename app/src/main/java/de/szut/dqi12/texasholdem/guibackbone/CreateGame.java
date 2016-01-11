@@ -32,17 +32,31 @@ public class CreateGame implements Recallable{
     }
 
     @Override
-    public void inform(String action, String[] params) {
+    public void inform(String action, final String[] params) {
         if(action.equals(ServerAction.CREATEGAMEACK)){
             switch(params[0]){
                 case "confirmed":
+                    final int lobbyID = Integer.parseInt(params[1]);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            createGameActivity.gameCreationSuccessful();
+                        }
+                    });
+
                     //inform GUI and Create Lobby
                     break;
                 case "failed":
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            createGameActivity.gameCreationFailed(params[1]);
+                        }
+                    });
                     //inform GUI with error parameters params[1]
                     break;
                 default:
-                    //inform GUI
+                    //Serverside error do nothing for now
                     break;
             }
         }
@@ -52,6 +66,7 @@ public class CreateGame implements Recallable{
         String[] params = {gameName,Integer.toString(maxPlayers),password};
         Controller.getInstance().getSend().sendAction(ClientAction.CREATEGAME, params);
         Controller.getInstance().getDecryption().addExpectation(this);
+        Lobby.getInstance().newLobby(maxPlayers,false,gameName,password);
         timestamp = System.currentTimeMillis();
     }
     @Override

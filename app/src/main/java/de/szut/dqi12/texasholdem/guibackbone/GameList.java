@@ -12,18 +12,28 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
  */
 public class GameList implements Recallable{
     private ArrayList<Game> games;
-    public GameList(){
-        games = new ArrayList<Game>();
-    }
+    private static GameList instance;
     private long timeout=5000;
     private long timestamp=0;
 
-    //TODO: add retrieving the gamelist from the server
+    private GameList(){
+        games = new ArrayList<Game>();
+    }
 
+    public static GameList getInstance(){
+        if(instance==null){
+            instance = new GameList();
+        }
+        return instance;
+    }
+    //TODO: add retrieving the gamelist from the server
+    public ArrayList<Game> getGames(){
+        return games;
+    }
     public void updateList(String[] games){
         for(String i:games){
             Game game = new Game();
-            String[]params=i.split("#");
+            String[] params=i.split("#");
             game.host = params[0];
             game.name = params[1];
             if(params[2].equals("true")){
@@ -33,15 +43,15 @@ public class GameList implements Recallable{
                 game.password = false;
             }
             game.lobbyID = Integer.parseInt(params[3]);
+            game.maxPlayers = Integer.parseInt(params[4]);
+            game.currentPlayers = Integer.parseInt(params[5]);
             this.games.add(game);
         }
-        return;
     }
 
    public void joinGame(int gameID,String password) {
-       String[] params = {password};
+       String[] params = {Integer.toString(gameID),password};
        Controller.getInstance().getSend().sendAction(ClientAction.JOINGAME, params);
-       return;
    }
 
     @Override

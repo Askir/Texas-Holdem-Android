@@ -35,11 +35,17 @@ public class CreateGame extends Activity {
                 // TODO: 09.11.2015 if pw set status, send to server
                 Toast.makeText(getBaseContext(), "Need to send lobbyname and pw status.", Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(CreateGame.this, CreateGameLobby.class));
-
             }
         });
 
+    }
+
+    public void gameCreationSuccessful(){
+        startActivity(new Intent(CreateGame.this, CreateGameLobby.class));
+    }
+
+    public void gameCreationFailed(String error){
+        Toast.makeText(getBaseContext(),error,Toast.LENGTH_SHORT).show();
     }
 
 }
