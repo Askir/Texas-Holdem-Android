@@ -55,12 +55,12 @@ public class Session implements Recallable {
     }
 
 
-    public int getMaxWaitTIme() {
+    public long getMaxWaitTIme() {
         return 5000;
     }
 
 
-    public int getTimeStamp() {
+    public long getTimeStamp() {
         return 0;
     }
 
