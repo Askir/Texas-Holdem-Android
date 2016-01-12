@@ -8,12 +8,12 @@ import de.szut.dqi12.texasholdem.action.ClientAction;
  */
 public class Options {
 
-    private int volume = 0; //Database
-    private String email; // Serverside only
-    private String username; // Database and Serverside (update on programm start)7
-    private DatabaseConnection dbCon;
+    private static int volume = 0; //Database
+    private static String email; // Serverside only
+    private static String username; // Database and Serverside (update on programm start)7
+    private static DatabaseConnection dbCon;
 
-    public Options (){
+    static {
         dbCon = new DatabaseConnection();
 
         volume = dbCon.getVolume();
@@ -21,39 +21,39 @@ public class Options {
 
     }
 
-    public void onLogin(String email){
-        this.email = email;
+    public static void onLogin(String email){
+        Options.email = email;
     }
 
-    public void changePassword(String oldPassword, String newPassword){
+    public static void changePassword(String oldPassword, String newPassword){
         String[] params = {oldPassword,newPassword};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEPASSWORD, params );
         return;
     }
 
-    public boolean forgotPassword(){
+    public static boolean forgotPassword(){
         //TODO fill function
         return true;
     }
 
-    public void setVolume(int value){
-        this.volume=value;
+    public static void setVolume(int value){
+        Options.volume=value;
     }
 
-    public void changeUsername(String username){
-        this.username=username;
+    public static void changeUsername(String username){
+        Options.username = username;
         String[] params = {username};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEUSERNAME, params);
         return;
     }
 
-    public void changeEmail(String email){
+    public static void changeEmail(String email){
         String[] params = {email};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEEMAILADDRESS,params);
         return;
     }
 
-    public void onClose(){
+    public static void onClose(){
         dbCon.setVolume(volume);
         dbCon.setUsername(username);
     }

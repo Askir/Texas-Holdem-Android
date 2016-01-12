@@ -26,7 +26,7 @@ public class JoinGamePassword extends Activity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameList.getInstance().joinGame(GameList.getInstance().selectedLobbyID, password.getText().toString());
+                GameList.getInstance().joinGame(GameList.getInstance().selectedLobby.lobbyID, password.getText().toString());
 
             }
         });
