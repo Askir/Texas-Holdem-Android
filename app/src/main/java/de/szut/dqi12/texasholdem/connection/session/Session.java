@@ -17,7 +17,8 @@ public class Session implements Recallable {
     private String[] expectedParams;
     private Controller con;
     private ConnectionStatus connected = ConnectionStatus.DISCONNECTED;
-    private long timestamp;
+    private long timestamp = 0;
+    private long timeout = 5000;
 
     public ConnectionStatus getConnectionStatus(){
         return connected;
@@ -43,6 +44,7 @@ public class Session implements Recallable {
         String[] login = {username,encryptedPassword};
 
         //sending the login request to the server and waiting for an answer
+        timestamp = System.currentTimeMillis();
         con.getSend().sendAction(ClientAction.LOGIN,login);
         expectedAction = ServerAction.SESSION;
         con.getDecryption().addExpectation(this);
@@ -55,13 +57,13 @@ public class Session implements Recallable {
     }
 
 
-    public int getMaxWaitTIme() {
-        return 5000;
+    public long getMaxWaitTIme() {
+        return timeout;
     }
 
 
-    public int getTimeStamp() {
-        return 0;
+    public long getTimeStamp() {
+        return timestamp;
     }
 
     @Override

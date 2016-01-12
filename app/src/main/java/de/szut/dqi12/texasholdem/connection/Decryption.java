@@ -23,6 +23,8 @@ public class Decryption {
 
 
     }
+
+    //TODO rework the threading part
     public void startDecryption(){
         final Decrypt dec = new Decrypt();
         Thread decryptionThread = new Thread () {
