@@ -16,4 +16,5 @@ public class ServerAction {
     public static final String LOBBYACK = "LOBBYACK";
     public static final String JOINGAMEACK = "JOINGAMEACK";
     public static final String NORESPONSE = "NORESPONSE";
+    public static final String CHANGE = "CHANGE";
 }
