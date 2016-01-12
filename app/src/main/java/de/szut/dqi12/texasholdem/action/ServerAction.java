@@ -14,6 +14,6 @@ public class ServerAction {
     public static final String VALIDATION = "VALIDATION";
     public static final String CREATEGAMEACK = "CREATEGAMEACK";
     public static final String LOBBYACK = "LOBBYACK";
-    public static final String JOINGGAMEACK = "JOINGAMEACK";
+    public static final String JOINGAMEACK = "JOINGAMEACK";
     public static final String NORESPONSE = "NORESPONSE";
 }

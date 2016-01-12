@@ -6,15 +6,20 @@ import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
 import de.szut.dqi12.texasholdem.action.ServerAction;
 import de.szut.dqi12.texasholdem.connection.Recallable;
+import de.szut.dqi12.texasholdem.gui.JoinGameLobby;
+import de.szut.dqi12.texasholdem.gui.JoinGamePassword;
 
 /**
  * Created by Jascha on 15.12.2015.
  */
 public class GameList implements Recallable{
+    private JoinGameLobby JGL;
+    private JoinGamePassword JGP;
     private ArrayList<Game> games;
     private static GameList instance;
     private long timeout=5000;
     private long timestamp=0;
+    public int selectedLobbyID;
 
     private GameList(){
         games = new ArrayList<Game>();
@@ -25,6 +30,12 @@ public class GameList implements Recallable{
             instance = new GameList();
         }
         return instance;
+    }
+    public void registerJGL(JoinGameLobby jgl){
+        this.JGL = jgl;
+    }
+    public void registerJGP(JoinGamePassword jgp){
+        this.JGP =jgp;
     }
     //TODO: add retrieving the gamelist from the server
     public ArrayList<Game> getGames(){
@@ -67,19 +78,35 @@ public class GameList implements Recallable{
     @Override
     public void inform(String action, String[] params) {
         if(params[0].equals("success")){
-            //inform GUI and create Lobby
+            //Lobby.getInstance().newLobby(); TODO change selected lobbyID to gameobject so you can create the real lobby here!
+            if(games.get(selectedLobbyID).password==true){
+                JGP.joinGameSuccessfull();
+            }
+            else{
+                JGL.joinGameSuccessfull();
+            }
         }
         if(params[0].equals("denied")){
-            //inform GUI with params (probably wrong password)
+            if(games.get(selectedLobbyID).password==true){
+                JGP.joinGameFailed(params[1]);
+            }
+            else{
+                JGL.joinGameFailed(params[1]);
+            }
         }
         else{
-            //inform gui with params[]
+            if(games.get(selectedLobbyID).password==true){
+                JGP.joinGameFailed("unknown error");
+            }
+            else{
+                JGL.joinGameFailed("unknown error");
+            }
         }
     }
 
     @Override
     public String Action() {
-        return ServerAction.JOINGGAMEACK;
+        return ServerAction.JOINGAMEACK;
     }
 
     @Override
