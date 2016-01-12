@@ -19,7 +19,7 @@ import de.szut.dqi12.texasholdem.R;
 public class JoinGameLobby extends Activity{
 
     Integer gamePositioner = 0;
-    GameListAdapterTemp adapter;
+    GameListAdapter adapter;
     ArrayList<String> gamesList = new ArrayList<>();
     LinkedHashMap<String, Boolean> gamesListContext = new LinkedHashMap<>();
     ListView lvJoinGame;
@@ -31,7 +31,7 @@ public class JoinGameLobby extends Activity{
 
         lvJoinGame = (ListView)findViewById(R.id.listViewJoinGame);
 
-        adapter = new GameListAdapterTemp(this);
+        adapter = new GameListAdapter(this);
         lvJoinGame.setAdapter(adapter);
 
 
