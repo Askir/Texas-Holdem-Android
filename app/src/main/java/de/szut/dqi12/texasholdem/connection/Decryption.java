@@ -23,15 +23,20 @@ public class Decryption {
 
 
     }
-
-    //TODO rework the threading part
+    //complex threading stuff probably will clean this up later on
     public void startDecryption(){
         final Decrypt dec = new Decrypt();
         Thread decryptionThread = new Thread () {
             @Override
             public void run(){
                 while(true){
-                    dec.execute();
+                    if(dec.getStatus() == AsyncTask.Status.FINISHED){
+                    dec.execute();}
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         };
