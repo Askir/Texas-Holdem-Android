@@ -30,12 +30,12 @@ public class Options {
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEPASSWORD, params );
         return;
     }
-    /**
+
     public boolean forgotPassword(){
         //TODO fill function
         return true;
     }
-    **/
+
     public void setVolume(int value){
         this.volume=value;
     }

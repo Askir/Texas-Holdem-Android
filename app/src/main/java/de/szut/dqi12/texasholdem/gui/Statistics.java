@@ -23,6 +23,7 @@ public class Statistics extends Activity {
     }
 
     public void writeStats(){
+        TextView currentCupys = (TextView) findViewById(R.id.textViewCurrentCupys);
         TextView gamesPlayed = (TextView) findViewById(R.id.textViewStatisticsGamesPlayed);
         TextView gamesWon = (TextView) findViewById(R.id.textViewStatisticsGemsWon);
         TextView gainedCupys = (TextView) findViewById(R.id.textViewStatisticsGainedCupys);
@@ -32,13 +33,14 @@ public class Statistics extends Activity {
         TextView dateOfRegistration = (TextView) findViewById(R.id.textViewStatisticsDateOfReg);
 
         String[] statistics = stats.getStatistics();
-        gamesPlayed.setText(statistics[0]);
-        gamesWon.setText(statistics[1]);
-        gainedCupys.setText(statistics[2]);
-        highestProfit.setText(statistics[3]);
-        highestLoss.setText(statistics[4]);
-        playtime.setText(statistics[5]);
-        dateOfRegistration.setText(statistics[6]);
+        currentCupys.setText(statistics[0]);
+        gamesPlayed.setText(statistics[1]);
+        gamesWon.setText(statistics[2]);
+        gainedCupys.setText(statistics[3]);
+        highestProfit.setText(statistics[4]);
+        highestLoss.setText(statistics[5]);
+        playtime.setText(statistics[6]);
+        dateOfRegistration.setText(statistics[7]);
     }
 }
 

@@ -44,7 +44,7 @@ public class JoinGameLobby extends Activity{
                 String listPos = "" + position + "";
                 de.szut.dqi12.texasholdem.guibackbone.Game selectedGame = GameList.getInstance().getGames().get(position);
                 if(selectedGame.password == true){
-                    GameList.getInstance().selectedLobbyID = selectedGame.lobbyID;
+                    GameList.getInstance().selectedLobby = selectedGame;
 
 
                 }
@@ -70,9 +70,11 @@ public class JoinGameLobby extends Activity{
 
     }
     public void joinGameSuccessfull(){
+        Intent lobby = new Intent(JoinGameLobby.this, CreateGameLobby.class);
+        startActivity(lobby);
 
     }
     public void joinGameFailed(String params){
-
+        Toast.makeText(getBaseContext(),params,Toast.LENGTH_SHORT).show();
     }
 }

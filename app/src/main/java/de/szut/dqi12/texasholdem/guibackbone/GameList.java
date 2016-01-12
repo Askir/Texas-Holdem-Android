@@ -19,7 +19,7 @@ public class GameList implements Recallable{
     private static GameList instance;
     private long timeout=5000;
     private long timestamp=0;
-    public int selectedLobbyID;
+    public Game selectedLobby;
 
     private GameList(){
         games = new ArrayList<Game>();
@@ -75,11 +75,17 @@ public class GameList implements Recallable{
         return timestamp;
     }
 
+    /**
+     *
+     * @param action the called Action
+     * @param params
+     */
     @Override
     public void inform(String action, String[] params) {
         if(params[0].equals("success")){
-            //Lobby.getInstance().newLobby(); TODO change selected lobbyID to gameobject so you can create the real lobby here!
-            if(games.get(selectedLobbyID).password==true){
+            Lobby.getInstance().newLobby(selectedLobby.maxPlayers,false,selectedLobby.name);
+            Lobby.getInstance().setID(selectedLobby.lobbyID);
+            if(selectedLobby.password==true){
                 JGP.joinGameSuccessfull();
             }
             else{
@@ -87,7 +93,7 @@ public class GameList implements Recallable{
             }
         }
         if(params[0].equals("denied")){
-            if(games.get(selectedLobbyID).password==true){
+            if(selectedLobby.password==true){
                 JGP.joinGameFailed(params[1]);
             }
             else{
@@ -95,7 +101,7 @@ public class GameList implements Recallable{
             }
         }
         else{
-            if(games.get(selectedLobbyID).password==true){
+            if(selectedLobby.password==true){
                 JGP.joinGameFailed("unknown error");
             }
             else{

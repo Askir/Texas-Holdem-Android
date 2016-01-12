@@ -11,17 +11,18 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.R;
+import de.szut.dqi12.texasholdem.guibackbone.Options;
 
 /**
  * Created by Marcel on 06.11.2015.
  */
 public class Settings extends Activity {
-
+    private Options options;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-
+        options = new Options();
         final EditText etNewUsername = (EditText)findViewById(R.id.editTextSettingsCUsername);
         final EditText etNewPassword = (EditText)findViewById(R.id.editTextSettingsCPassword);
         final EditText etNewEmail = (EditText)findViewById(R.id.editTextSettingsCEmail);
@@ -34,6 +35,7 @@ public class Settings extends Activity {
             public void onClick(View v) {
 
                 if(!etNewUsername.getText().toString().equals("")){
+                    options.changeUsername(etNewUsername.getText().toString());
                     // TODO: 07.11.2015 get username from database and edit it
                     Toast.makeText(getBaseContext(), "Username changed", Toast.LENGTH_SHORT).show();
 
@@ -44,7 +46,7 @@ public class Settings extends Activity {
 
                     Toast.makeText(getBaseContext(), "Open Verification to change password.", Toast.LENGTH_SHORT).show();
 
-                    startActivity(new Intent(Settings.this, Verification.class));
+                    startActivity(new Intent(Settings.this, ChangeEmailVerification.class));
 
                     //email
                 }else if (etNewPassword.getText().toString().equals("") && !etNewEmail.getText().toString().equals("")){

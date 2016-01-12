@@ -64,10 +64,11 @@ public class CreateGame implements Recallable{
 
     public void requestGameCreation(String gameName, int maxPlayers, String password){
         String[] params = {gameName,Integer.toString(maxPlayers),password};
+        timestamp = System.currentTimeMillis();
         Controller.getInstance().getSend().sendAction(ClientAction.CREATEGAME, params);
         Controller.getInstance().getDecryption().addExpectation(this);
-        Lobby.getInstance().newLobby(maxPlayers,false,gameName,password);
-        timestamp = System.currentTimeMillis();
+        Lobby.getInstance().newLobby(maxPlayers,false,gameName);
+
     }
     @Override
     public String Action() {
