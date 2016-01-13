@@ -291,135 +291,133 @@ public class Game  extends Activity {
                         break;
                 }
                 break;
-//            case "s":
-//                // TODO: 12.01.2016 import spade images
-//                switch (number) {
-//                    case 2:
-//                        iv.setImageResource(R.mipmap.ic_s2);
-//                        break;
-//                    case 3:
-//                        iv.setImageResource(R.mipmap.ic_s3);
-//                        break;
-//                    case 4:
-//                        iv.setImageResource(R.mipmap.ic_s4);
-//                        break;
-//                    case 5:
-//                        iv.setImageResource(R.mipmap.ic_s5);
-//                        break;
-//                    case 6:
-//                        iv.setImageResource(R.mipmap.ic_s6);
-//                        break;
-//                    case 7:
-//                        iv.setImageResource(R.mipmap.ic_s7);
-//                        break;
-//                    case 8:
-//                        iv.setImageResource(R.mipmap.ic_s8);
-//                        break;
-//                    case 9:
-//                        iv.setImageResource(R.mipmap.ic_s9);
-//                        break;
-//                    case 10:
-//                        iv.setImageResource(R.mipmap.ic_s10);
-//                        break;
-//                    case 11:
-//                        iv.setImageResource(R.mipmap.ic_s11);
-//                        break;
-//                    case 12:
-//                        iv.setImageResource(R.mipmap.ic_s12);
-//                        break;
-//                    case 13:
-//                        iv.setImageResource(R.mipmap.ic_s13);
-//                        break;
-//                    case 14:
-//                        iv.setImageResource(R.mipmap.ic_s14);
-//                        break;
-//                }
-//            case "h":
-//                // TODO: 12.01.2016 import heart images
-//                switch (number) {
-//                    case 2:
-//                        iv.setImageResource(R.mipmap.ic_h2);
-//                        break;
-//                    case 3:
-//                        iv.setImageResource(R.mipmap.ic_h3);
-//                        break;
-//                    case 4:
-//                        iv.setImageResource(R.mipmap.ic_h4);
-//                        break;
-//                    case 5:
-//                        iv.setImageResource(R.mipmap.ic_h5);
-//                        break;
-//                    case 6:
-//                        iv.setImageResource(R.mipmap.ic_h6);
-//                        break;
-//                    case 7:
-//                        iv.setImageResource(R.mipmap.ic_h7);
-//                        break;
-//                    case 8:
-//                        iv.setImageResource(R.mipmap.ic_h8);
-//                        break;
-//                    case 9:
-//                        iv.setImageResource(R.mipmap.ic_h9);
-//                        break;
-//                    case 10:
-//                        iv.setImageResource(R.mipmap.ic_h10);
-//                        break;
-//                    case 11:
-//                        iv.setImageResource(R.mipmap.ic_h11);
-//                        break;
-//                    case 12:
-//                        iv.setImageResource(R.mipmap.ic_h12);
-//                        break;
-//                    case 13:
-//                        iv.setImageResource(R.mipmap.ic_h13);
-//                        break;
-//                    case 14:
-//                        iv.setImageResource(R.mipmap.ic_h14);
-//                        break;
-//                }
-//            case "d":
-//                // TODO: 12.01.2016 import diamond images
-//                switch (number) {
-//                    case 2:
-//                        iv.setImageResource(R.mipmap.ic_d2);
-//                        break;
-//                    case 3:
-//                        iv.setImageResource(R.mipmap.ic_d3);
-//                        break;
-//                    case 4:
-//                        iv.setImageResource(R.mipmap.ic_d4);
-//                        break;
-//                    case 5:
-//                        iv.setImageResource(R.mipmap.ic_d5);
-//                        break;
-//                    case 6:
-//                        iv.setImageResource(R.mipmap.ic_d6);
-//                        break;
-//                    case 7:
-//                        iv.setImageResource(R.mipmap.ic_d7);
-//                        break;
-//                    case 8:
-//                        iv.setImageResource(R.mipmap.ic_d8);
-//                        break;
-//                    case 9:
-//                        iv.setImageResource(R.mipmap.ic_d9);
-//                        break;
-//                    case 10:
-//                        iv.setImageResource(R.mipmap.ic_d10);
-//                        break;
-//                    case 11:
-//                        iv.setImageResource(R.mipmap.ic_d11);
-//                        break;
-//                    case 12:
-//                        iv.setImageResource(R.mipmap.ic_d12);
-//                        break;
-//                    case 13:
-//                        iv.setImageResource(R.mipmap.ic_d13);
-//                        break;
-//                    case 14:
-//                        iv.setImageResource(R.mipmap.ic_d4);
-//                        break;
-//                }
+            case "s":
+                switch (number) {
+                    case 2:
+                        iv.setImageResource(R.mipmap.ic_s2);
+                        break;
+                    case 3:
+                        iv.setImageResource(R.mipmap.ic_s3);
+                        break;
+                    case 4:
+                        iv.setImageResource(R.mipmap.ic_s4);
+                        break;
+                    case 5:
+                        iv.setImageResource(R.mipmap.ic_s5);
+                        break;
+                    case 6:
+                        iv.setImageResource(R.mipmap.ic_s6);
+                        break;
+                    case 7:
+                        iv.setImageResource(R.mipmap.ic_s7);
+                        break;
+                    case 8:
+                        iv.setImageResource(R.mipmap.ic_s8);
+                        break;
+                    case 9:
+                        iv.setImageResource(R.mipmap.ic_s9);
+                        break;
+                    case 10:
+                        iv.setImageResource(R.mipmap.ic_s10);
+                        break;
+                    case 11:
+                        iv.setImageResource(R.mipmap.ic_s11);
+                        break;
+                    case 12:
+                        iv.setImageResource(R.mipmap.ic_s12);
+                        break;
+                    case 13:
+                        iv.setImageResource(R.mipmap.ic_s13);
+                        break;
+                    case 14:
+                        iv.setImageResource(R.mipmap.ic_s14);
+                        break;
+                }
+            case "h":
+                switch (number) {
+                    case 2:
+                        iv.setImageResource(R.mipmap.ic_h2);
+                        break;
+                    case 3:
+                        iv.setImageResource(R.mipmap.ic_h3);
+                        break;
+                    case 4:
+                        iv.setImageResource(R.mipmap.ic_h4);
+                        break;
+                    case 5:
+                        iv.setImageResource(R.mipmap.ic_h5);
+                        break;
+                    case 6:
+                        iv.setImageResource(R.mipmap.ic_h6);
+                        break;
+                    case 7:
+                        iv.setImageResource(R.mipmap.ic_h7);
+                        break;
+                    case 8:
+                        iv.setImageResource(R.mipmap.ic_h8);
+                        break;
+                    case 9:
+                        iv.setImageResource(R.mipmap.ic_h9);
+                        break;
+                    case 10:
+                        iv.setImageResource(R.mipmap.ic_h10);
+                        break;
+                    case 11:
+                        iv.setImageResource(R.mipmap.ic_h11);
+                        break;
+                    case 12:
+                        iv.setImageResource(R.mipmap.ic_h12);
+                        break;
+                    case 13:
+                        iv.setImageResource(R.mipmap.ic_h13);
+                        break;
+                    case 14:
+                        iv.setImageResource(R.mipmap.ic_h14);
+                        break;
+                }
+            case "d":
+                // TODO: 12.01.2016 import diamond images
+                switch (number) {
+                    case 2:
+                        iv.setImageResource(R.mipmap.ic_d2);
+                        break;
+                    case 3:
+                        iv.setImageResource(R.mipmap.ic_d3);
+                        break;
+                    case 4:
+                        iv.setImageResource(R.mipmap.ic_d4);
+                        break;
+                    case 5:
+                        iv.setImageResource(R.mipmap.ic_d5);
+                        break;
+                    case 6:
+                        iv.setImageResource(R.mipmap.ic_d6);
+                        break;
+                    case 7:
+                        iv.setImageResource(R.mipmap.ic_d7);
+                        break;
+                    case 8:
+                        iv.setImageResource(R.mipmap.ic_d8);
+                        break;
+                    case 9:
+                        iv.setImageResource(R.mipmap.ic_d9);
+                        break;
+                    case 10:
+                        iv.setImageResource(R.mipmap.ic_d10);
+                        break;
+                    case 11:
+                        iv.setImageResource(R.mipmap.ic_d11);
+                        break;
+                    case 12:
+                        iv.setImageResource(R.mipmap.ic_d12);
+                        break;
+                    case 13:
+                        iv.setImageResource(R.mipmap.ic_d13);
+                        break;
+                    case 14:
+                        iv.setImageResource(R.mipmap.ic_d4);
+                        break;
+                }
         }
     }
 
