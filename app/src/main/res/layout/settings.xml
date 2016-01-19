@@ -39,7 +39,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OK"
+                    android:text="@string/Ok"
                     android:id="@+id/buttonChangeName"
                     android:layout_gravity="right" />
 
@@ -65,7 +65,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OK"
+                    android:text="@string/Ok"
                     android:id="@+id/buttonChangeEmail"
                     android:layout_gravity="right" />
             </TableRow>
