@@ -5,6 +5,7 @@ import de.szut.dqi12.texasholdem.connection.Decryption;
 import de.szut.dqi12.texasholdem.connection.Receive;
 import de.szut.dqi12.texasholdem.connection.Send;
 import de.szut.dqi12.texasholdem.connection.session.Session;
+import de.szut.dqi12.texasholdem.guibackbone.Options;
 
 /**
  * Created by Alex on 28.09.2015.
@@ -17,6 +18,7 @@ public class Controller {
     private Decryption decryption;
     private long ping;
     private Session session;
+    private Options options;
 
     public static Controller instance;
 
@@ -39,7 +41,11 @@ public class Controller {
         session = new Session();
         receive.execute();
         decryption.startDecryption();
+        options = new Options();
 
+    }
+    public Options getOptions(){
+        return options;
     }
     public Session getCurrentSession(){
         return this.session;
@@ -61,7 +67,6 @@ public class Controller {
     public Send getSend() {
         return send;
     }
-
 
     public void setPing(long ping) {
         this.ping = ping;

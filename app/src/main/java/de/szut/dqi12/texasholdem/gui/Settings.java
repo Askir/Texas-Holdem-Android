@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 import de.szut.dqi12.texasholdem.guibackbone.Options;
 
@@ -22,47 +23,37 @@ public class Settings extends Activity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        options = new Options();
-        final EditText etNewUsername = (EditText)findViewById(R.id.editTextSettingsCUsername);
-        final EditText etNewPassword = (EditText)findViewById(R.id.editTextSettingsCPassword);
-        final EditText etNewEmail = (EditText)findViewById(R.id.editTextSettingsCEmail);
+        options = Controller.getInstance().getOptions();
         final Switch swMusic = (Switch)findViewById(R.id.switchSettingsMusicOnOff);
-        Button btnOk = (Button)findViewById(R.id.buttonSettingsOk);
+        final EditText newEmail = (EditText) findViewById(R.id.editTextSettingsNewEmail);
+        final EditText newUsername = (EditText) findViewById(R.id.editTextSettingsNewName);
+        Button changeEmail = (Button) findViewById(R.id.buttonChangeEmail);
+        Button changeUsername = (Button) findViewById(R.id.buttonChangeName);
+        Button changePassword = (Button) findViewById(R.id.buttonChangePassword);
 
-
-        btnOk.setOnClickListener(new View.OnClickListener() {
+        changeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(!etNewUsername.getText().toString().equals("")){
-                    options.changeUsername(etNewUsername.getText().toString());
-                    // TODO: 07.11.2015 get username from database and edit it
-                    Toast.makeText(getBaseContext(), "Username changed", Toast.LENGTH_SHORT).show();
-
-                }
-
-                // TODO: 07.11.2015 open verification with information about what must be changed
-                if(!etNewPassword.getText().toString().equals("") && etNewEmail.getText().toString().equals("")){
-
-                    Toast.makeText(getBaseContext(), "Open Verification to change password.", Toast.LENGTH_SHORT).show();
-
-                    startActivity(new Intent(Settings.this, ChangeEmailVerification.class));
-
-                    //email
-                }else if (etNewPassword.getText().toString().equals("") && !etNewEmail.getText().toString().equals("")){
-
-                    Toast.makeText(getBaseContext(), "Open Verification to change email.", Toast.LENGTH_SHORT).show();
-
-
-                    //both
-                }else if(!etNewPassword.getText().toString().equals("") && !etNewEmail.getText().toString().equals("")){
-
-                    Toast.makeText(getBaseContext(), "Open Verification to change passwordand email.", Toast.LENGTH_SHORT).show();
-
-                }
-
+                options.changeEmail(newEmail.getText().toString());
             }
         });
+
+        changeUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                options.changeUsername(newUsername.getText().toString());
+            }
+        });
+
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent changePassword = new Intent(Settings.this, ChangePassword.class);
+
+                startActivity(changePassword);
+            }
+        });
+
 
         swMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
