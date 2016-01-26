@@ -44,7 +44,7 @@ public class Settings extends Activity {
                 options.changeUsername(newUsername.getText().toString());
             }
         });
-
+        
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

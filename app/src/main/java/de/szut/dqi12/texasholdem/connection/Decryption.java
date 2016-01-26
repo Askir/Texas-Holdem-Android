@@ -99,6 +99,9 @@ public class Decryption {
                     case "LOBBYUPDATE":
                         lobbyUpdate(parameters);
                         break;
+                    case ServerAction.CHANGE:
+
+
                 }
                 newMessages.remove(s);
             }
