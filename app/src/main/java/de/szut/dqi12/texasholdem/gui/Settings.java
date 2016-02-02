@@ -67,4 +67,12 @@ public class Settings extends Activity {
             }
         });
     }
+
+    public void emailChange(boolean correct){
+        if(correct){
+            Intent emailVerification = new Intent(Settings.this, ChangeEmailVerification.class);
+            startActivity(emailVerification);
+        }
+    }
 }
+
