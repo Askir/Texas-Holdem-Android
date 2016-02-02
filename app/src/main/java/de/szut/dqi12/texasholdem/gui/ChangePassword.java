@@ -31,8 +31,8 @@ public class ChangePassword extends Activity {
 
     }
 
-    public void passwordChange(boolean correct){
-        if(correct){
+    public void passwordChange(boolean valid){
+        if(valid){
             Intent verificication = new Intent(ChangePassword.this,ChangePasswordVerification.class);
             startActivity(verificication);
         }
