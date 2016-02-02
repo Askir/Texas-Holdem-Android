@@ -1,6 +1,9 @@
 package de.szut.dqi12.texasholdem.connection;
 
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,11 +21,11 @@ public class Decryption {
     private boolean stop = false;
     private List<String> newMessages;
     private List<Recallable> callObjects;
+    private Handler mHandler;
     public Decryption() {
         newMessages = Collections.synchronizedList(new ArrayList<String>());
         callObjects = Collections.synchronizedList(new ArrayList<Recallable>());
-
-
+        mHandler = new Handler(Looper.getMainLooper());
     }
     //complex threading stuff probably will clean this up later on
     public void stopDecryption(){
@@ -121,6 +124,38 @@ public class Decryption {
 
 
     private void gameupdate(String[] parameters){
+        switch(parameters[0]){
+            case "ALLPLAYERS":
+                break;
+            case "BLINDS":
+                break;
+            case "MONEYUPDATE":
+                break;
+            case "BIDUPDATE":
+                break;
+            case "CURRENTPLAYER":
+                break;
+            case "BOARDCARDS":
+                break;
+            case "POTMONEY":
+                break;
+            case "PLAYERCARDS":
+                break;
+            case "PLAYERLEFT":
+                break;
+            case "HANDCARDS":
+                break;
+            case "WINNNER" :
+                break;
+            default:
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(Controller.getInstance().getActiveActivity(),"If this toast is shown Frederick was drunk",Toast.LENGTH_LONG);
+                    }
+                });
+                break;
+        }
 
     }
 

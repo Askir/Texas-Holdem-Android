@@ -1,5 +1,7 @@
 package de.szut.dqi12.texasholdem;
 
+import android.app.Activity;
+
 import de.szut.dqi12.texasholdem.connection.Connection;
 import de.szut.dqi12.texasholdem.connection.Decryption;
 import de.szut.dqi12.texasholdem.connection.Receive;
@@ -19,6 +21,17 @@ public class Controller {
     private long ping;
     private Session session;
     private Options options;
+
+    public Activity getActiveActivity() {
+        return activeActivity;
+    }
+
+    public void setActiveActivity(Activity activeActivity) {
+        this.activeActivity = activeActivity;
+    }
+
+    private Activity activeActivity;
+
 
     public static Controller instance;
 
