@@ -20,8 +20,7 @@ import de.szut.dqi12.texasholdem.R;
 public class Game  extends Activity {
 
     ImageView ivP1C1, ivP1C2, ivP2C1, ivP2C2, ivP3C1, ivP3C2, ivP4C1, ivP4C2, ivP5C1, ivP5C2,
-            ivP6C1, ivP6C2, tc1, tc2, tc3, tc4, tc5, ivPC1, ivPC2, ivBR1, ivBR2, ivBR3, ivBR4,
-            ivBR5, ivBR6, ivBP;
+            tc1, tc2, tc3, tc4, tc5, ivPC1, ivPC2, ivBR1, ivBR2, ivBR3, ivBR4, ivBR5, ivBR6, ivBP;
     Button btnFold, btnAllIn, btnCheckCall, btnBetRaise;
     TextView tvPot, tvBudget, tvMinBet;
     EditText etBet;
@@ -30,7 +29,7 @@ public class Game  extends Activity {
 
     // nor = number of rivals, just a default value.
     // TODO: 06.01.2016 get real nor
-    int nor = 6;
+    int nor = 5;
 
     Boolean firstRound = false;
 
@@ -66,10 +65,6 @@ public class Game  extends Activity {
         // rival Player 5 Cards
         ivP5C1 = (ImageView)findViewById(R.id.imageViewGameP5C1);
         ivP5C2 = (ImageView)findViewById(R.id.imageViewGameP5C2);
-
-        // rival Player 6 Cards
-        ivP6C1 = (ImageView)findViewById(R.id.imageViewGameP6C1);
-        ivP6C2 = (ImageView)findViewById(R.id.imageViewGameP6C2);
 
         // load table cards
         tc1 = (ImageView)findViewById(R.id.imageViewGameTC1);
@@ -110,7 +105,6 @@ public class Game  extends Activity {
         ivBR3 = (ImageView)findViewById(R.id.ivGameBlindR3);
         ivBR4 = (ImageView)findViewById(R.id.ivGameBlindR4);
         ivBR5 = (ImageView)findViewById(R.id.ivGameBlindR5);
-        ivBR6 = (ImageView)findViewById(R.id.ivGameBlindR6);
     }
 
     /**
@@ -181,31 +175,26 @@ public class Game  extends Activity {
      */
     private void setRivalsReady(){
 
-        if(nor < 6){
-            ivP6C1.setImageResource(R.color.gray);
-            ivP6C2.setImageResource(R.color.gray);
+        if(nor < 5){
 
-            if(nor < 5){
+            ivP5C1.setImageResource(R.color.gray);
+            ivP5C2.setImageResource(R.color.gray);
 
-                ivP5C1.setImageResource(R.color.gray);
-                ivP5C2.setImageResource(R.color.gray);
+            if(nor < 4){
 
-                if(nor < 4){
+                ivP4C1.setImageResource(R.color.gray);
+                ivP4C2.setImageResource(R.color.gray);
 
-                    ivP4C1.setImageResource(R.color.gray);
-                    ivP4C2.setImageResource(R.color.gray);
+                if(nor < 3){
 
-                    if(nor < 3){
+                    ivP3C1.setImageResource(R.color.gray);
+                    ivP3C2.setImageResource(R.color.gray);
 
-                        ivP3C1.setImageResource(R.color.gray);
-                        ivP3C2.setImageResource(R.color.gray);
+                    if(nor < 2){
 
-                        if(nor < 2){
+                        ivP2C1.setImageResource(R.color.gray);
+                        ivP2C2.setImageResource(R.color.gray);
 
-                            ivP2C1.setImageResource(R.color.gray);
-                            ivP2C2.setImageResource(R.color.gray);
-
-                        }
                     }
                 }
             }
@@ -245,6 +234,7 @@ public class Game  extends Activity {
      * @param number    the number or picture ('2' = 2; '3' = 3 ... '11' = Jack, \n
      *                  '12' = Queen, '13' = King, '14' = Ace).
      */
+    // TODO: 02.02.2016 maybe rewrite?
     public void changeCardStatus(ImageView iv, String color, int number) {
 
         switch (color) {
@@ -474,37 +464,33 @@ public class Game  extends Activity {
      * Sets the blinds. 'R' is for rival and the following number is for the explicit rival. \n
      * 'P' is for player.
      *
-     * @param sb Small blind. E.g. sb = 'R2' -> Rival 2 gets small blind and Rival 3 gets big blind.
+     * @param sb Small blind. E.g. sb = 'R2' -> Rival 2 gets small blind and Rival 1 gets big blind.
      */
     public void setBlinds(String sb){
         switch(sb){
             case "P":
-                ivBP.setImageResource(R.mipmap.ic_sb);
-                ivBR1.setImageResource(R.mipmap.ic_bb);
+                ivBP.setImageResource(R.mipmap.ic_bb);
+                ivBR1.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R1":
-                ivBR1.setImageResource(R.mipmap.ic_sb);
-                ivBR2.setImageResource(R.mipmap.ic_bb);
+                ivBR1.setImageResource(R.mipmap.ic_bb);
+                ivBR2.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R2":
-                ivBR2.setImageResource(R.mipmap.ic_sb);
-                ivBR3.setImageResource(R.mipmap.ic_bb);
+                ivBR2.setImageResource(R.mipmap.ic_bb);
+                ivBR3.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R3":
-                ivBR3.setImageResource(R.mipmap.ic_sb);
-                ivBR4.setImageResource(R.mipmap.ic_bb);
+                ivBR3.setImageResource(R.mipmap.ic_bb);
+                ivBR4.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R4":
-                ivBR4.setImageResource(R.mipmap.ic_sb);
-                ivBR5.setImageResource(R.mipmap.ic_bb);
+                ivBR4.setImageResource(R.mipmap.ic_bb);
+                ivBR5.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R5":
-                ivBR5.setImageResource(R.mipmap.ic_sb);
-                ivBR6.setImageResource(R.mipmap.ic_bb);
-                break;
-            case "R6":
+                ivBR5.setImageResource(R.mipmap.ic_bb);
                 ivBR6.setImageResource(R.mipmap.ic_sb);
-                ivBP.setImageResource(R.mipmap.ic_bb);
                 break;
         }
     }

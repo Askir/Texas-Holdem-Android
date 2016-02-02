@@ -46,7 +46,8 @@ public class Login extends Activity {
                     Toast.makeText(getBaseContext(), "Looging in...", Toast.LENGTH_SHORT).show();
                     lp.execute(userdata);
 
-                }else{
+                }
+                else{
 
                     Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG).show();
                 }

@@ -1,5 +1,7 @@
 package de.szut.dqi12.texasholdem.game;
 
+import java.security.BasicPermission;
+
 /**
  * Created by Jascha on 02.02.2016.
  */
@@ -7,6 +9,9 @@ public class Player {
 
     private String name;
     private int money;
+    private Boolean smallB = false;
+    private Boolean bigB = false;
+    private Boolean isCurrentPlayer = false;
 
     Player(String name){
         this.name = name;
@@ -21,11 +26,35 @@ public class Player {
         this.money = money;
     }
 
+    public void setSmallB(Boolean smallB) {
+        this.smallB = smallB;
+    }
+
+    public void setBigB(Boolean bigB) {
+        this.bigB = bigB;
+    }
+
+    public void setIsCurrentPlayer(Boolean isCurrentPlayer) {
+        this.isCurrentPlayer = isCurrentPlayer;
+    }
+
     public String getName() {
         return name;
     }
 
     public int getMoney() {
         return money;
+    }
+
+    public Boolean getBigB() {
+        return bigB;
+    }
+
+    public Boolean getSmallB() {
+        return smallB;
+    }
+
+    public Boolean getIsCurrentPlayer() {
+        return isCurrentPlayer;
     }
 }
