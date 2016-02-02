@@ -17,7 +17,7 @@ import de.szut.dqi12.texasholdem.action.ClientAction;
 public class Connection {
 
     public static String serverIP = "127.0.0.1";
-    public static int serverPort = 12345;
+    public static int serverPort = 12346;
     private Socket serverCon;
     private InputStreamReader input;
     private OutputStream output;
