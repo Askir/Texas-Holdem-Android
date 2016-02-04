@@ -20,7 +20,7 @@ public class GameController {
     private Player user;
     private ArrayList<Player> player;
     private ArrayList<Card> board;
-    private LinkedHashSet<String> boardCards;
+    private ArrayList<String> boardCards;
 
     private de.szut.dqi12.texasholdem.gui.Game game;
     private Handler mHandler;
@@ -52,15 +52,15 @@ public class GameController {
             @Override
             public void run() {
                 game.setNor(player.size()-1);
-                game.displayPot(potmoney);
-                game.displayTvBudget(user.getMoney());
-                setSmallBlind(smallBlindPlayer);
+                setPotmoney(potmoney);
+
+                setBlinds(smallBlindPlayer);
 
             }
         });
     }
 
-    public void refreshGameState(){
+    public void restartGame(){
         turn = 0;
         for(Player p : player){
             if(p.getMoney()<=0){
@@ -75,12 +75,19 @@ public class GameController {
         }
     }
 
-    private void setBoardCards(String boardCard){
-        // TODO: 02.02.2016 fill
+    /**
+     *
+     * @param boardCard 1-5
+     * @param color
+     * @param number
+     */
+    private void setBoardCard(int boardCard, String color, int number){
+        boardCards.add(boardCard-1, color + "" + number + "");
+        game.setBoardCard(boardCard, color, number);
     }
 
     private void setPotmoney(int pm){
-        // TODO: 02.02.2016 fill
+        game.displayTvBudget(pm);
     }
 
     public void setSmallBlindPlayer(int smallBlindPlayer) {
@@ -88,16 +95,16 @@ public class GameController {
     }
 
     public void update(GameAction action, String[] params){
-
+        // TODO: 04.02.2016 dono for what needed
     }
 
     /**
-     * sets small and big blind in game view.
+     * sets small game view, big blind will appear automatically.
      *
      * @param player just numbers from 0 - 5 allowed. delivered number is the number of client that
      *               gets the small blind.0 = Player, 1 = Rival 1, 2 = Rival 2 etc.
      */
-    public void setSmallBlind(int player){
+    public void setBlinds(int player){
         if(player <= 5){
             switch (player){
                 case 0:
