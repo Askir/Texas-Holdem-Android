@@ -15,7 +15,6 @@ public class Session implements Recallable {
 
     private String expectedAction;
     private String[] expectedParams;
-    private Controller con;
     private ConnectionStatus connected = ConnectionStatus.DISCONNECTED;
     private long timestamp = 0;
     private long timeout = 5000;
@@ -26,7 +25,6 @@ public class Session implements Recallable {
 
 
     public Session(){
-        con = Controller.getInstance();
         expectedAction = null;
         expectedParams = null;
     }
@@ -45,9 +43,9 @@ public class Session implements Recallable {
 
         //sending the login request to the server and waiting for an answer
         timestamp = System.currentTimeMillis();
-        con.getSend().sendAction(ClientAction.LOGIN,login);
+        Controller.getInstance().getSend().sendAction(ClientAction.LOGIN,login);
         expectedAction = ServerAction.SESSION;
-        con.getDecryption().addExpectation(this);
+        Controller.getInstance().getDecryption().addExpectation(this);
         this.timestamp = System.currentTimeMillis();
 
     }

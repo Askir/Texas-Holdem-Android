@@ -1,6 +1,7 @@
 package de.szut.dqi12.texasholdem;
 
 import android.app.Activity;
+import android.util.Log;
 
 import de.szut.dqi12.texasholdem.connection.Connection;
 import de.szut.dqi12.texasholdem.connection.Decryption;
@@ -48,13 +49,14 @@ public class Controller {
 
     public void start() {
         decryption = new Decryption();
-        connection = Connection.getInstance();
+        connection = new Connection();
         send = new Send();
         receive = new Receive();
         session = new Session();
         receive.execute();
         decryption.startDecryption();
         options = new Options();
+        Log.d("controller", "start finished");
 
     }
     public Options getOptions(){

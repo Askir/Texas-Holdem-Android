@@ -10,16 +10,15 @@ import de.szut.dqi12.texasholdem.Controller;
 public class Send {
 
     private String message;
-    private Controller controller;
     private SendMessage sendMessage;
 
     public Send() {
-        controller = Controller.getInstance();
         sendMessage = new SendMessage();
     }
 
 
     public boolean sendAction(String action, String params[]) {
+        Log.d("send","sending message action: "+action);
         message = String.valueOf(System.currentTimeMillis()) + ";" + action;
         if(params != null) {
             message += ";";

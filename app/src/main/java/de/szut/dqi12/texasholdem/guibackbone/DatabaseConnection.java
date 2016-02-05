@@ -12,8 +12,8 @@ public class DatabaseConnection {
     SQLiteDatabase db;
 
     public DatabaseConnection(){
-        db = openOrCreateDatabase("TexasHoldem", null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS OPTIONS(volume INT, username VARCHAR(20))");
+        //db = openOrCreateDatabase("TexasHoldem", null);
+        //db.execSQL("CREATE TABLE IF NOT EXISTS OPTIONS(volume INT, username VARCHAR(20))");
     }
 
     public void setUsername(String username) {
@@ -25,18 +25,18 @@ public class DatabaseConnection {
     }
 
     public String getUsername() {
-        Cursor cursor= db.rawQuery("SELECT username FROM OPTIONS", null);
-        if(cursor.moveToFirst()){
-            return cursor.getString(0);
-        }
+        //Cursor cursor= db.rawQuery("SELECT username FROM OPTIONS", null);
+        //if(cursor.moveToFirst()){
+        //    return cursor.getString(0);
+        //}
         return null;
     }
 
     public int getVolume() {
-        Cursor cursor = db.rawQuery("SELECT volume FROM OPTIONS", null);
-        if(cursor.moveToFirst()) {
-            return cursor.getInt(0);
-        }
+        // Cursor cursor = db.rawQuery("SELECT volume FROM OPTIONS", null);
+        // if(cursor.moveToFirst()) {
+        //     return cursor.getInt(0);
+        // }
         return 50;
     }
 }

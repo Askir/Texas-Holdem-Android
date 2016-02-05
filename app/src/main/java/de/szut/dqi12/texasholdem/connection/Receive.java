@@ -15,18 +15,14 @@ import de.szut.dqi12.texasholdem.Controller;
  */
 public class Receive extends AsyncTask< Void, Void, Integer> {
 
-    private Controller con;
-
-
     public Receive(){
-        con = Controller.getInstance();
 
     }
 
     @Override
     protected Integer doInBackground(Void... params) {
-        while(Connection.getInstance().getConnectionStatus()){
-            con.getDecryption().addNewMessage(getMessage());
+        while(Controller.getInstance().getConnection().getConnectionStatus()){
+            Controller.getInstance().getDecryption().addNewMessage(getMessage());
         }
         return 0;
     }
@@ -34,8 +30,8 @@ public class Receive extends AsyncTask< Void, Void, Integer> {
 
 
     public String getMessage(){
-        BufferedReader reader = Connection.getInstance().getReader();
-        InputStreamReader input = Connection.getInstance().getInput();
+        BufferedReader reader = Controller.getInstance().getConnection().getReader();
+        InputStreamReader input = Controller.getInstance().getConnection().getInput();
         String message = null;
         try {
             message = reader.readLine();

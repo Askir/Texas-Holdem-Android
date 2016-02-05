@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 import de.szut.dqi12.texasholdem.connection.session.LoginProcess;
 import de.szut.dqi12.texasholdem.connection.LoginResult;
@@ -26,6 +27,7 @@ public class Login extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Controller controller = Controller.getInstance();
         setContentView(R.layout.login);
 
         btnOk = (Button)findViewById(R.id.buttonLoginOk);
@@ -51,6 +53,7 @@ public class Login extends Activity {
 
                     Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG).show();
                 }
+                btnOk.setClickable(true);
             }
         });
     }

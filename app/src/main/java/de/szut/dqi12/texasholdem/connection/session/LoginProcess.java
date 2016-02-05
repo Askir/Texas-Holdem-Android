@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem.connection.session;
 
 import android.os.AsyncTask;
 import android.os.SystemClock;
+import android.util.Log;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.connection.LoginResult;
@@ -33,6 +34,7 @@ public class LoginProcess extends AsyncTask<String,Integer , ConnectionStatus> {
      */
     @Override
     protected ConnectionStatus doInBackground(String... loginArray) {
+        Log.d("login process", "starting login process");
         String username;
         String password;
         username = loginArray[0];
@@ -42,6 +44,7 @@ public class LoginProcess extends AsyncTask<String,Integer , ConnectionStatus> {
         ConnectionStatus connected = ConnectionStatus.DISCONNECTED;
         int i = 0;
         while(i<=timeout && connected==ConnectionStatus.DISCONNECTED){
+            Log.d("login process","waiting for response");
             i++;
             connected = Controller.getInstance().getCurrentSession().getConnectionStatus();
             SystemClock.sleep(1000);
