@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
-import de.szut.dqi12.texasholdem.connection.session.LoginProcess;
-import de.szut.dqi12.texasholdem.connection.LoginResult;
 
 /**
  * Created by Marcel on 03.11.2015.
@@ -22,20 +20,20 @@ public class Login extends Activity {
     private EditText etPassword;
     private Button btnOk;
 
-    private LoginProcess lp;
+    private de.szut.dqi12.texasholdem.guibackbone.Login login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //starting the controller we need to rewrite this later on
+        Controller con = Controller.getInstance();
         super.onCreate(savedInstanceState);
-        Controller controller = Controller.getInstance();
         setContentView(R.layout.login);
 
         btnOk = (Button)findViewById(R.id.buttonLoginOk);
 
         etUsername = (EditText)findViewById(R.id.editTextLoginUsername);
         etPassword = (EditText)findViewById(R.id.editTextLoginPassword);
-
-        lp = new LoginProcess(this);
+        login = new de.szut.dqi12.texasholdem.guibackbone.Login(this);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,34 +42,31 @@ public class Login extends Activity {
                 btnOk.setClickable(false);
 
                 if(etUsername.getText().toString().length() > 0 && etPassword.getText().toString().length() > 0){
-                    String[] userdata = {etUsername.getText().toString(), etPassword.getText().toString()};
                     Toast.makeText(getBaseContext(), "Looging in...", Toast.LENGTH_SHORT).show();
-                    lp.execute(userdata);
-
+                    login.sendLoginRequest(etUsername.getText().toString(), etPassword.getText().toString());
                 }
                 else{
 
                     Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG).show();
                 }
-                btnOk.setClickable(true);
             }
         });
     }
 
-    public void loginstatus(LoginResult lr){
-        switch(lr){
-            case USERDATACORRECT:
+    public void loginresult(int i){
+        switch(i){
+            case 0: //userdata correct
                 // TODO: 01.12.2015 look for a better solution, better with no addflags() and finish()
                 Intent login = new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK).putExtra("username", etUsername.getText().toString());
                 startActivity(login);
                 finish();
                 break;
-            case USERDATAINCORRECT:
+            case 1: //userdata incorrect
                 Toast.makeText(Login.this, "Userdata incorrect.", Toast.LENGTH_SHORT).show();
                 etUsername.setText("");
                 btnOk.setClickable(true);
                 break;
-            case TIMEOUT:
+            case 2: //timeout
                 Toast.makeText(Login.this, "Login Timeout.", Toast.LENGTH_SHORT).show();
                 etUsername.setText("");
                 btnOk.setClickable(true);

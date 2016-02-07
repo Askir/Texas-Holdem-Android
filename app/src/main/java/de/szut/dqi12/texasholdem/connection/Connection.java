@@ -32,6 +32,7 @@ public class Connection {
     private Controller controller;
     private boolean connectionStatus=false;
     private Handler mHandler;
+    private String TAG = "connection";
 
 
     private class openConnection extends AsyncTask<String,Integer , String>{
@@ -39,7 +40,7 @@ public class Connection {
             try {
                 serverCon = new Socket(serverIP,serverPort);
             } catch (IOException e) {
-                Log.d("connection", "connection failed");
+                Log.d(TAG, "connection failed");
                 e.printStackTrace();
                 //make Toast connection failed + print e. I have no Idea how to do this outside of the Main Activity tbh.
                 return null;
@@ -51,9 +52,11 @@ public class Connection {
                 e.printStackTrace();
                 //make Toast connection failed + print e. I have no Idea how to do this outside of the Main Activity tbh.
             }
+            Log.d(TAG,"connected");
             reader = new BufferedReader(input);
             writer = new PrintWriter(output);
             connectionStatus=true;
+            Controller.getInstance().startReceive();
 
             return null;
         }

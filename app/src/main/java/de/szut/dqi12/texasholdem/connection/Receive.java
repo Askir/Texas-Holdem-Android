@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem.connection;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,23 +14,42 @@ import de.szut.dqi12.texasholdem.Controller;
 /**
  * Created by Jascha on 22.09.2015.
  */
-public class Receive extends AsyncTask< Void, Void, Integer> {
+public class Receive {
 
-    public Receive(){
+    private Thread receiveThread;
+    private String TAG = "Receive";
 
+    public Receive() {
+        receiveThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    Controller.getInstance().getDecryption().addNewMessage(getMessage());
+                    try {
+                        Thread.sleep(100,0);
+                    } catch (InterruptedException e) {
+                        Log.d(TAG,"interrupted in sleep");
+                        return;
+                    }
+                    if (Thread.interrupted()) {
+                        Log.d(TAG,"interrupted");
+                        return;
+                    }
+                }
+            }
+        });
     }
 
-    @Override
-    protected Integer doInBackground(Void... params) {
-        while(Controller.getInstance().getConnection().getConnectionStatus()){
-            Controller.getInstance().getDecryption().addNewMessage(getMessage());
-        }
-        return 0;
+    public void startReceive() {
+        receiveThread.start();
+    }
+
+    public void stopReceive() {
+        receiveThread.interrupt();
     }
 
 
-
-    public String getMessage(){
+    public String getMessage() {
         BufferedReader reader = Controller.getInstance().getConnection().getReader();
         InputStreamReader input = Controller.getInstance().getConnection().getInput();
         String message = null;
@@ -38,6 +58,7 @@ public class Receive extends AsyncTask< Void, Void, Integer> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Log.d(TAG, "new message : " + message);
         return message;
 
     }

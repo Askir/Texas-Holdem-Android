@@ -7,7 +7,6 @@ import de.szut.dqi12.texasholdem.connection.Connection;
 import de.szut.dqi12.texasholdem.connection.Decryption;
 import de.szut.dqi12.texasholdem.connection.Receive;
 import de.szut.dqi12.texasholdem.connection.Send;
-import de.szut.dqi12.texasholdem.connection.session.Session;
 import de.szut.dqi12.texasholdem.guibackbone.Options;
 
 /**
@@ -20,7 +19,6 @@ public class Controller {
     private Receive receive;
     private Decryption decryption;
     private long ping;
-    private Session session;
     private Options options;
 
     public Activity getActiveActivity() {
@@ -48,22 +46,24 @@ public class Controller {
     }
 
     public void start() {
+        Log.d("controller", "start started");
         decryption = new Decryption();
         connection = new Connection();
         send = new Send();
         receive = new Receive();
-        session = new Session();
-        receive.execute();
-        decryption.startDecryption();
         options = new Options();
         Log.d("controller", "start finished");
 
     }
+    public void startReceive(){
+        receive.startReceive();
+        decryption.startDecryption();
+    }
+    public void stop(){
+        receive.stopReceive();
+    }
     public Options getOptions(){
         return options;
-    }
-    public Session getCurrentSession(){
-        return this.session;
     }
 
     public boolean sendAction(String action, String[] params) {
