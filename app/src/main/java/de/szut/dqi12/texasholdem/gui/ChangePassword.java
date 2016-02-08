@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 import de.szut.dqi12.texasholdem.guibackbone.Options;
 
@@ -19,6 +20,7 @@ public class ChangePassword extends Activity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.change_password);
 
         confirmButton = (Button) findViewById(R.id.buttonChangePasswordConfirm);

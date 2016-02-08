@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.MainActivity;
 import de.szut.dqi12.texasholdem.R;
 
@@ -23,6 +24,7 @@ public abstract class Verification extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.verification);
         veri = new de.szut.dqi12.texasholdem.guibackbone.Verification(this);
 
@@ -54,7 +56,7 @@ public abstract class Verification extends Activity{
     public void servertimeout(){
         Toast.makeText(getBaseContext(),"Server did not response please check your internet connection", Toast.LENGTH_LONG).show();
     }
-    public abstract void inform(String status, String params);
+    public abstract void inform(String[] params);
 
     /** public void inform(String status, String params){
         Toast.makeText(getBaseContext(), params,Toast.LENGTH_LONG);

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 import de.szut.dqi12.texasholdem.guibackbone.GameList;
 
@@ -26,6 +27,7 @@ public class JoinGameLobby extends Activity{
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.join_game_lobby);
 
         lvJoinGame = (ListView)findViewById(R.id.listViewJoinGame);

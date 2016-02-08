@@ -56,7 +56,7 @@ public class Connection {
             reader = new BufferedReader(input);
             writer = new PrintWriter(output);
             connectionStatus=true;
-            Controller.getInstance().startReceive();
+            Controller.getInstance().connectionEstablished();
 
             return null;
         }

@@ -62,10 +62,11 @@ public class Register implements Recallable {
     @Override
     public void inform(String action, final String[] params) {
         if (action.equals(ServerAction.REGISTERACK)) {
+
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    registerActivity.inform(params[0],params[1]);
+                    registerActivity.inform(params[0]);
                 }
             });
         }

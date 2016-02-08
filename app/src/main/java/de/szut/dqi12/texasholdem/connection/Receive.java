@@ -24,7 +24,9 @@ public class Receive {
             @Override
             public void run() {
                 while (true) {
-                    Controller.getInstance().getDecryption().addNewMessage(getMessage());
+                    String message = getMessage();
+                    if(message != null){
+                    Controller.getInstance().getDecryption().addNewMessage(message);}
                     try {
                         Thread.sleep(100,0);
                     } catch (InterruptedException e) {
@@ -56,6 +58,7 @@ public class Receive {
         try {
             message = reader.readLine();
         } catch (IOException e) {
+            Controller.getInstance().connectionClosed();
             e.printStackTrace();
         }
         Log.d(TAG, "new message : " + message);

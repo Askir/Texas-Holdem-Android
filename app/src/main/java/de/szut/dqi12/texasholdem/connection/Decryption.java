@@ -37,7 +37,7 @@ public class Decryption {
     }
 
     public void startDecryption() {
-
+        stop = false;
         Thread decryptionThread = new Thread() {
             @Override
             public void run() {

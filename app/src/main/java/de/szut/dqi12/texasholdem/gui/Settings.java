@@ -24,6 +24,7 @@ public class Settings extends Activity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.settings);
         options = Controller.getInstance().getOptions();
         final Switch swMusic = (Switch)findViewById(R.id.switchSettingsMusicOnOff);

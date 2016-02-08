@@ -1,7 +1,10 @@
 package de.szut.dqi12.texasholdem;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.connection.Connection;
 import de.szut.dqi12.texasholdem.connection.Decryption;
@@ -20,6 +23,9 @@ public class Controller {
     private Decryption decryption;
     private long ping;
     private Options options;
+    private Activity activeActivity;
+    private Handler mHandler;
+
 
     public Activity getActiveActivity() {
         return activeActivity;
@@ -29,7 +35,6 @@ public class Controller {
         this.activeActivity = activeActivity;
     }
 
-    private Activity activeActivity;
 
 
     public static Controller instance;
@@ -45,19 +50,29 @@ public class Controller {
         return instance;
     }
 
-    public void start() {
+    private void start() {
         Log.d("controller", "start started");
         decryption = new Decryption();
         connection = new Connection();
         send = new Send();
         receive = new Receive();
         options = new Options();
-        Log.d("controller", "start finished");
-
-    }
-    public void startReceive(){
-        receive.startReceive();
         decryption.startDecryption();
+        Log.d("controller", "start finished");
+    }
+    public void connectionEstablished(){
+        receive.startReceive();
+    }
+    public void connectionClosed(){
+        receive.stopReceive();
+        mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(activeActivity, "Connection lost", Toast.LENGTH_SHORT);
+            }
+        });
+
     }
     public void stop(){
         receive.stopReceive();

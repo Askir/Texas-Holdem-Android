@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 
 /**
@@ -16,6 +17,7 @@ public class StartGame extends Activity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.start_game);
 
         Button btnJoin = (Button)findViewById(R.id.buttonStartGameJoin);

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 import de.szut.dqi12.texasholdem.guibackbone.Lobby;
 
@@ -19,6 +20,7 @@ public class CreateGameLobby extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.create_game_lobby);
         Lobby.getInstance().registerActivity(this);
 

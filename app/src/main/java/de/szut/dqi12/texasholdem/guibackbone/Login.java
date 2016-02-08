@@ -68,6 +68,7 @@ public class Login implements Recallable {
                     break;
                 case "LOGGEDOUT":
                     break;
+
             }
         }
         else if(action.equals(ServerAction.NORESPONSE)){

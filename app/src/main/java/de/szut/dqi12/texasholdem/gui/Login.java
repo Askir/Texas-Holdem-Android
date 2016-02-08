@@ -27,6 +27,7 @@ public class Login extends Activity {
         //starting the controller we need to rewrite this later on
         Controller con = Controller.getInstance();
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.login);
 
         btnOk = (Button)findViewById(R.id.buttonLoginOk);
@@ -64,12 +65,10 @@ public class Login extends Activity {
                 break;
             case 1: //userdata incorrect
                 Toast.makeText(Login.this, "Userdata incorrect.", Toast.LENGTH_SHORT).show();
-                etUsername.setText("");
                 btnOk.setClickable(true);
                 break;
             case 2: //timeout
-                Toast.makeText(Login.this, "Login Timeout.", Toast.LENGTH_SHORT).show();
-                etUsername.setText("");
+                Toast.makeText(Login.this, "Login Timeout", Toast.LENGTH_SHORT).show();
                 btnOk.setClickable(true);
                 break;
         }

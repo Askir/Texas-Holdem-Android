@@ -9,9 +9,9 @@ import de.szut.dqi12.texasholdem.MainActivity;
 
 public class RegisterVerification extends Verification {
     @Override
-    public void inform(String status, String params) {
-        Toast.makeText(getBaseContext(), params,Toast.LENGTH_LONG);
-        if(status.equals("CORRECT")){
+    public void inform(String[] params) {
+        Toast.makeText(getBaseContext(), params[1],Toast.LENGTH_LONG);
+        if(params[0].equals("CORRECT")){
             Intent restart = new Intent(RegisterVerification.this, MainActivity.class);
 
             restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -19,7 +19,7 @@ public class RegisterVerification extends Verification {
             startActivity(restart);
             finish();
         }
-        else if(status.equals("WRONG")){
+        else if(params[0].equals("WRONG")){
 
         }
         return;
