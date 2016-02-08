@@ -48,6 +48,7 @@ public class Login extends Activity {
                 else{
 
                     Toast.makeText(getBaseContext(), "Please type your Username and Password.", Toast.LENGTH_LONG).show();
+                    btnOk.setClickable(true);
                 }
             }
         });

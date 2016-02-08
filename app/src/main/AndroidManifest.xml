@@ -29,11 +29,6 @@
             >
         </activity>
         <activity
-            android:name=".gui.Verification"
-            android:screenOrientation="landscape"
-            >
-        </activity>
-        <activity
             android:name=".gui.MainMenu"
             android:screenOrientation="landscape"
             >
@@ -70,6 +65,26 @@
         </activity>
         <activity
             android:name=".gui.CreateGameLobby"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.ChangePassword"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.ChangePasswordVerification"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.ChangeEmailVerification"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name=".gui.RegisterVerification"
             android:screenOrientation="landscape"
             >
         </activity>

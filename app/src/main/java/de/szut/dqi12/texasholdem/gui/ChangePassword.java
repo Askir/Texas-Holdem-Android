@@ -15,16 +15,19 @@ import de.szut.dqi12.texasholdem.guibackbone.Options;
  * Created by Jascha Beste on 12.01.2016.
  */
 public class ChangePassword extends Activity {
+    private Button confirmButton;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.change_password);
 
-        Button confirmButton = (Button) findViewById(R.id.buttonChangePasswordConfirm);
+        confirmButton = (Button) findViewById(R.id.buttonChangePasswordConfirm);
         final EditText oldPassword = (EditText) findViewById(R.id.editTextSettingsOldPassword);
         final EditText newPassword = (EditText) findViewById(R.id.editTextSettingsNewPassword);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                confirmButton.setClickable(false);
                 Options.changePassword(oldPassword.getText().toString(),newPassword.getText().toString());
             }
         });
@@ -39,6 +42,7 @@ public class ChangePassword extends Activity {
         else{
             Toast.makeText(getBaseContext(),"unsuccesful Password Change", Toast.LENGTH_SHORT);
         }
+        confirmButton.setClickable(true);
     }
 
 }

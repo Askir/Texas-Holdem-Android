@@ -116,7 +116,7 @@ public class GameList implements Recallable{
     }
 
     @Override
-    public String[] Params() {
-        return new String[0];
+    public String Params() {
+        return null;
     }
 }

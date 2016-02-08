@@ -3,6 +3,7 @@ package de.szut.dqi12.texasholdem.gui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -19,6 +20,7 @@ import de.szut.dqi12.texasholdem.guibackbone.Options;
  */
 public class Settings extends Activity {
     private Options options;
+    private String TAG = "Settings activity";
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class Settings extends Activity {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "change password started");
                 Intent changePassword = new Intent(Settings.this, ChangePassword.class);
 
                 startActivity(changePassword);

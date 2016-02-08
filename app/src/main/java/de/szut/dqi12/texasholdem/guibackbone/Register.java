@@ -77,7 +77,7 @@ public class Register implements Recallable {
     }
 
     @Override
-    public String[] Params() {
+    public String Params() {
         return null;
     }
 }

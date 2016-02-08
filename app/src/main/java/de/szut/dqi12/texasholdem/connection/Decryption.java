@@ -3,6 +3,7 @@ package de.szut.dqi12.texasholdem.connection;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Decryption {
     private List<String> newMessages;
     private List<Recallable> callObjects;
     private Handler mHandler;
+    private String TAG = "decryption";
 
     public Decryption() {
         newMessages = Collections.synchronizedList(new ArrayList<String>());
@@ -66,6 +68,7 @@ public class Decryption {
     public void decryptProgress() {
         while (!stop) {
             for (String s : newMessages) {
+                Log.d(TAG, "analyzing message: " + s);
 
                 //splitting the messages into useful information
                 String[] splits = s.split(";");
@@ -76,15 +79,17 @@ public class Decryption {
 
                 //calling the callObjects that expect a specific action
                 for (Recallable i : callObjects) {
-                    if (i.Action() == splits[0]) {
+                    Log.d(TAG,"checking object:" + i.getClass().getName());
+                    if (i.Action().equals(splits[1])) {
                         if (i.Params() == null) {
-                            i.inform(splits[0], parameters);
+                            Log.d(TAG,"informing");
+                            i.inform(splits[1], parameters);
+                            callObjects.remove(i);
                         }
-                        if (i.Params() == parameters) {
-                            i.inform(splits[0], parameters);
+                        if (i.Params() == splits[2]) {
+                            i.inform(splits[1], parameters);
+                            callObjects.remove(i);
                         }
-                    } else if (i.getTimeStamp() + i.getMaxWaitTIme() > System.currentTimeMillis()) { //good intent but wrong implementation need to rewrite
-                        i.inform(ServerAction.NORESPONSE, null);
                     }
                 }
                 //Calling the correct function for every executed command
@@ -109,6 +114,12 @@ public class Decryption {
 
                 }
                 newMessages.remove(s);
+            }
+            for(Recallable i : callObjects){
+                if (i.getTimeStamp() + i.getMaxWaitTIme() < System.currentTimeMillis()) { //good intent but wrong implementation need to rewrite
+                    i.inform(ServerAction.NORESPONSE, null);
+                    callObjects.remove(i);
+                }
             }
         }
         return;

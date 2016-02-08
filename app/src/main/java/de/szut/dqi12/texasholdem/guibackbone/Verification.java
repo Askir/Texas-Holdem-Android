@@ -69,7 +69,7 @@ public class Verification implements Recallable{
     }
 
     @Override
-    public String[] Params() {
+    public String Params() {
         return null;
     }
 }
