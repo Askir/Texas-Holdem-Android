@@ -16,7 +16,7 @@ public class Statistics implements Recallable{
 
     //TODO: update inform function with timeout content and revisit class to update this comment
     private de.szut.dqi12.texasholdem.gui.Statistics statsActivity;
-    private String[] statistics = new String[5];
+    private String[] statistics = new String[8];
     private long timeout = 5000;
     private long timestamp = 0;
     private Handler mHandler;
@@ -49,6 +49,7 @@ public class Statistics implements Recallable{
 
     @Override
     public void inform(String action, String[] params) {
+        if(action.equals(ServerAction.STATS)){
         for(int i = 0; i < params.length; i++){
             statistics[i] = params[i];
             mHandler.post(new Runnable() {
@@ -58,7 +59,15 @@ public class Statistics implements Recallable{
                 }
             });
         }
-        return;
+        return;}
+        else{
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    statsActivity.serverTimeout();
+                }
+            });
+        }
     }
 
     @Override

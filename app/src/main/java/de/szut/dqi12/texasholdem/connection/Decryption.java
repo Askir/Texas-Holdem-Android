@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -76,17 +77,21 @@ public class Decryption {
                 //String action = s.substring(0, s.indexOf(";"));
                 //updating ping info
                 Controller.getInstance().setPing(System.currentTimeMillis() - Long.parseLong(splits[0]));
+                Log.d(TAG, "action is:" + splits[1]);
+                Log.d(TAG,"first param is:"+parameters[0]);
 
                 //calling the callObjects that expect a specific action
-                for (Recallable i : callObjects) {
-                    Log.d(TAG,"checking object:" + i.getClass().getName());
+                ArrayList<Recallable> callobjectsiterabble = new ArrayList<>(callObjects);
+                for (Recallable i : callobjectsiterabble) {
+                    Log.d(TAG,"checking object:" + i.getClass().getName()+ "with action: "+i.Action()+" and params: "+i.Params());
                     if (i.Action().equals(splits[1])) {
                         if (i.Params() == null) {
                             Log.d(TAG,"informing");
                             i.inform(splits[1], parameters);
                             callObjects.remove(i);
                         }
-                        if (i.Params() == splits[2]) {
+                        else if (i.Params().equals(parameters[0])) {
+                            Log.d(TAG,"informing with params");
                             i.inform(splits[1], parameters);
                             callObjects.remove(i);
                         }

@@ -3,6 +3,7 @@ package de.szut.dqi12.texasholdem.gui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
@@ -43,6 +44,9 @@ public class Statistics extends Activity {
         highestLoss.setText(statistics[5]);
         playtime.setText(statistics[6]);
         dateOfRegistration.setText(statistics[7]);
+    }
+    public void serverTimeout(){
+        Toast.makeText(this,"Server timeout",Toast.LENGTH_SHORT);
     }
 }
 

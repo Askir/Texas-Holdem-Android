@@ -30,19 +30,23 @@ public class ChangePassword extends Activity {
             @Override
             public void onClick(View v) {
                 confirmButton.setClickable(false);
-                Options.changePassword(oldPassword.getText().toString(),newPassword.getText().toString());
+                Options.changePassword(ChangePassword.this,oldPassword.getText().toString(),newPassword.getText().toString());
             }
         });
 
     }
 
-    public void passwordChange(boolean valid){
-        if(valid){
+    public void passwordChange(String valid){
+        if(valid.equals("true")){
+            Toast.makeText(getBaseContext(),"good password please validate",Toast.LENGTH_SHORT);
             Intent verificication = new Intent(ChangePassword.this,ChangePasswordVerification.class);
             startActivity(verificication);
         }
-        else{
+        else if(valid.equals("false")){
             Toast.makeText(getBaseContext(),"unsuccesful Password Change", Toast.LENGTH_SHORT);
+        }
+        else{
+            Toast.makeText(getBaseContext(),"Server timeout",Toast.LENGTH_SHORT);
         }
         confirmButton.setClickable(true);
     }
