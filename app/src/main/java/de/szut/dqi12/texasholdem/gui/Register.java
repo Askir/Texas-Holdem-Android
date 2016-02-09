@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 
 /**
@@ -20,6 +21,7 @@ public class Register extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         register = new de.szut.dqi12.texasholdem.guibackbone.Register(this);
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.register);
 
         Button btnOk = (Button)findViewById(R.id.buttonRegisterOk);
@@ -50,16 +52,16 @@ public class Register extends Activity {
 
     }
 
-    public void inform(String result, String message){
-        if(result.equals("accpeted")){
+    public void inform(String result){
+        if(result.equals("accepted")){
             startActivity(new Intent(Register.this, RegisterVerification.class));
             Toast.makeText(getBaseContext(),"successful register attempt please verify your email", Toast.LENGTH_LONG).show();
         }
         else if(result.equals("denied")){
-            Toast.makeText(getBaseContext(),message,Toast.LENGTH_SHORT);
+            Toast.makeText(getBaseContext(),"Something is wrong with your data",Toast.LENGTH_SHORT);
         }
         else{
-            Toast.makeText(getBaseContext(),"serverside error: " + message,Toast.LENGTH_SHORT);
+            Toast.makeText(getBaseContext(),"serverside error" + result ,Toast.LENGTH_SHORT);
         }
 
     }

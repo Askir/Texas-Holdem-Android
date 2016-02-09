@@ -18,7 +18,7 @@ public class SendMessage extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... strings) {
-        if(Connection.getInstance().getConnectionStatus()) {
+        if(Controller.getInstance().getConnection().getConnectionStatus()) {
             controller.getConnection().getWriter().println(strings[0]);
             controller.getConnection().getWriter().flush();
             Log.d("send", strings[0]);

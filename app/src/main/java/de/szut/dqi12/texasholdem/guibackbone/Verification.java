@@ -51,7 +51,7 @@ public class Verification implements Recallable{
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                verificationActivity.inform(params[0],params[1]);
+                verificationActivity.inform(params);
             }
         });}
         else if(action.equals(ServerAction.NORESPONSE)){
@@ -69,7 +69,7 @@ public class Verification implements Recallable{
     }
 
     @Override
-    public String[] Params() {
+    public String Params() {
         return null;
     }
 }

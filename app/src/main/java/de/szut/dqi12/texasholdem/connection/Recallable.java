@@ -13,5 +13,5 @@ public interface Recallable {
 
     public abstract String Action(); // this method should return the Action at which inform should be called.
 
-    public abstract String[] Params(); // this method should return specific params if they are required for the inform function to be called. (return null if no params are necessary)
+    public abstract String Params(); // this method should return specific params if they are required for the inform function to be called. (return null if no params are necessary)
 }

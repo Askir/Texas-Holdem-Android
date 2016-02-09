@@ -110,7 +110,7 @@ public class Lobby implements Recallable{
     }
 
     @Override
-    public String[] Params() {
+    public String Params() {
         return null;
     }
 }

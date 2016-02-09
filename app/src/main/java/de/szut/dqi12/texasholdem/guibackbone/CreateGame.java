@@ -76,7 +76,7 @@ public class CreateGame implements Recallable{
     }
 
     @Override
-    public String[] Params() {
+    public String Params() {
         return null;
     }
 }

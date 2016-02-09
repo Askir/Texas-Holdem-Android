@@ -1,12 +1,15 @@
 package de.szut.dqi12.texasholdem;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.connection.Connection;
 import de.szut.dqi12.texasholdem.connection.Decryption;
 import de.szut.dqi12.texasholdem.connection.Receive;
 import de.szut.dqi12.texasholdem.connection.Send;
-import de.szut.dqi12.texasholdem.connection.session.Session;
 import de.szut.dqi12.texasholdem.guibackbone.Options;
 
 /**
@@ -19,8 +22,10 @@ public class Controller {
     private Receive receive;
     private Decryption decryption;
     private long ping;
-    private Session session;
     private Options options;
+    private Activity activeActivity;
+    private Handler mHandler;
+
 
     public Activity getActiveActivity() {
         return activeActivity;
@@ -30,7 +35,6 @@ public class Controller {
         this.activeActivity = activeActivity;
     }
 
-    private Activity activeActivity;
 
 
     public static Controller instance;
@@ -46,22 +50,35 @@ public class Controller {
         return instance;
     }
 
-    public void start() {
+    private void start() {
+        Log.d("controller", "start started");
         decryption = new Decryption();
-        connection = Connection.getInstance();
+        connection = new Connection();
         send = new Send();
         receive = new Receive();
-        session = new Session();
-        receive.execute();
-        decryption.startDecryption();
         options = new Options();
+        decryption.startDecryption();
+        Log.d("controller", "start finished");
+    }
+    public void connectionEstablished(){
+        receive.startReceive();
+    }
+    public void connectionClosed(){
+        receive.stopReceive();
+        mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(activeActivity, "Connection lost", Toast.LENGTH_SHORT);
+            }
+        });
 
+    }
+    public void stop(){
+        receive.stopReceive();
     }
     public Options getOptions(){
         return options;
-    }
-    public Session getCurrentSession(){
-        return this.session;
     }
 
     public boolean sendAction(String action, String[] params) {

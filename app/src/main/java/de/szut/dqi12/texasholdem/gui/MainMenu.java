@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.MainActivity;
 import de.szut.dqi12.texasholdem.R;
 
@@ -19,6 +20,7 @@ public class MainMenu extends Activity{
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
+            Controller.getInstance().setActiveActivity(this);
             setContentView(R.layout.main_menu);
 
             ImageButton btnStartGame = (ImageButton)findViewById(R.id.imageButtonMainMenueStartGame);

@@ -10,23 +10,22 @@ import de.szut.dqi12.texasholdem.Controller;
 public class Send {
 
     private String message;
-    private Controller controller;
-    private SendMessage sendMessage;
 
     public Send() {
-        controller = Controller.getInstance();
-        sendMessage = new SendMessage();
+
     }
 
 
     public boolean sendAction(String action, String params[]) {
+        SendMessage sendMessage = new SendMessage();
+        Log.d("send","sending message action: "+action);
         message = String.valueOf(System.currentTimeMillis()) + ";" + action;
         if(params != null) {
             message += ";";
             for(String param : params) {
                 message += param + ":";
             }
-            message = message.substring(0, message.length() - 2);
+            message = message.substring(0, message.length() - 1);
         }
         sendMessage.execute(message);
         return true;

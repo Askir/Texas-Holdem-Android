@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
 
 /**
@@ -15,6 +16,7 @@ public class Statistics extends Activity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.statistics);
         stats = new de.szut.dqi12.texasholdem.guibackbone.Statistics(this);
         stats.updateStatistics();
