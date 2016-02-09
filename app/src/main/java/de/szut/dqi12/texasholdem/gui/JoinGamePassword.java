@@ -21,6 +21,7 @@ public class JoinGamePassword extends Activity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Controller.getInstance().setActiveActivity(this);
+        GameList.getInstance().registerJGP(this);
         setContentView(R.layout.join_game_password);
 
         final EditText password = (EditText) findViewById(R.id.editTextJoinGamePassword);

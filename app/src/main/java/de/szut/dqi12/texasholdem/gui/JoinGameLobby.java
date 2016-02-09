@@ -3,6 +3,7 @@ package de.szut.dqi12.texasholdem.gui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,13 +22,15 @@ import de.szut.dqi12.texasholdem.guibackbone.GameList;
 public class JoinGameLobby extends Activity{
 
     GameListAdapter adapter;
-    LinkedHashMap<String, Boolean> gamesListContext = new LinkedHashMap<>();
     ListView lvJoinGame;
+    private String TAG = "Join Game Lobby";
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Controller.getInstance().setActiveActivity(this);
+        GameList.getInstance().registerJGL(this);
+        GameList.getInstance().retrieveGameList();
         setContentView(R.layout.join_game_lobby);
 
         lvJoinGame = (ListView)findViewById(R.id.listViewJoinGame);
@@ -42,30 +45,11 @@ public class JoinGameLobby extends Activity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // TODO: 17.11.2015 send which lobby was selected
-
+                Log.d(TAG,"Position selected:"+position);
                 String listPos = "" + position + "";
                 de.szut.dqi12.texasholdem.guibackbone.Game selectedGame = GameList.getInstance().getGames().get(position);
-                if(selectedGame.password == true){
-                    GameList.getInstance().selectedLobby = selectedGame;
-
-
-                }
-                else{
-                    GameList.getInstance().joinGame(selectedGame.lobbyID,null);
-                }
-
-                // query whether selected lobby requires password and open corresponding activity
-                if (gamesListContext.get(listPos).compareTo(true) == 0) {
-                    // password is required
-                    // TODO: 17.11.2015 open activity that querys the password of joining game
-                    Toast.makeText(JoinGameLobby.this, "Open Verification", Toast.LENGTH_SHORT).show();
-
-                    startActivity(new Intent(JoinGameLobby.this, Game.class));
-
-                } else {
-                    startActivity(new Intent(JoinGameLobby.this, Game.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                    finish();
-                }
+                GameList.getInstance().selectedLobby = selectedGame;
+                GameList.getInstance().joinGame(selectedGame.lobbyID, null);
 
             }
         });
@@ -78,5 +62,8 @@ public class JoinGameLobby extends Activity{
     }
     public void joinGameFailed(String params){
         Toast.makeText(getBaseContext(),params,Toast.LENGTH_SHORT).show();
+    }
+    public void reloadListView(){
+        adapter.notifyDataSetChanged();
     }
 }

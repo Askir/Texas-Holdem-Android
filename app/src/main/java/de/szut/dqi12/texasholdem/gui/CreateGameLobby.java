@@ -32,11 +32,11 @@ public class CreateGameLobby extends Activity {
         btnReady.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btnReady.getText()=="not Ready"){
+                if(btnReady.getText().equals("not Ready")){
                     Lobby.getInstance().setState(false);
                     btnReady.setText("Ready");
                 }
-                else if(btnReady.getText()=="Ready"){
+                else if(btnReady.equals("Ready")){
                     Lobby.getInstance().setState(true);
                     btnReady.setText("not Ready");
                 }
