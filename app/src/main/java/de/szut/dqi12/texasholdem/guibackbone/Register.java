@@ -3,6 +3,9 @@ package de.szut.dqi12.texasholdem.guibackbone;
 import android.os.Handler;
 import android.os.Looper;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
 import de.szut.dqi12.texasholdem.action.ServerAction;
@@ -37,7 +40,15 @@ public class Register implements Recallable {
     public boolean executeRegister(String username, String password, String repassword, String email){
 
         if(password.equals(repassword)){
-            String[] registerContent = {username,password,email};
+            MessageDigest messageDigest = null;
+            try {
+                messageDigest = MessageDigest.getInstance("SHA-256");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            messageDigest.update(password.getBytes());
+            String encryptedPassword = new String(messageDigest.digest());
+            String[] registerContent = {username,encryptedPassword,email};
             Controller.getInstance().getSend().sendAction(ClientAction.REGISTER, registerContent);
             Controller.getInstance().getDecryption().addExpectation(this);
             timestamp = System.currentTimeMillis();

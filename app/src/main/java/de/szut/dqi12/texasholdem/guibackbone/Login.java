@@ -4,6 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
 import de.szut.dqi12.texasholdem.action.ServerAction;
@@ -28,7 +31,15 @@ public class Login implements Recallable {
 
     public void sendLoginRequest(String username, String password) {
         Controller con = Controller.getInstance();
-        String[] params = {username, password};
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        messageDigest.update(password.getBytes());
+        String encryptedPassword = new String(messageDigest.digest());
+        String[] params = {username, encryptedPassword};
         timestamp = System.currentTimeMillis();
         con.getDecryption().addExpectation(this);
         con.getSend().sendAction(ClientAction.LOGIN, params);
