@@ -14,6 +14,7 @@ import java.util.List;
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ServerAction;
 import de.szut.dqi12.texasholdem.chat.ChatController;
+import de.szut.dqi12.texasholdem.guibackbone.Lobby;
 
 /**
  * Created by Jascha on 22.09.2015.
@@ -78,20 +79,19 @@ public class Decryption {
                 //updating ping info
                 Controller.getInstance().setPing(System.currentTimeMillis() - Long.parseLong(splits[0]));
                 Log.d(TAG, "action is:" + splits[1]);
-                Log.d(TAG,"first param is:"+parameters[0]);
+                Log.d(TAG, "first param is:" + parameters[0]);
 
                 //calling the callObjects that expect a specific action
                 ArrayList<Recallable> callobjectsiterabble = new ArrayList<>(callObjects);
                 for (Recallable i : callobjectsiterabble) {
-                    Log.d(TAG,"checking object:" + i.getClass().getName()+ "with action: "+i.Action()+" and params: "+i.Params());
+                    Log.d(TAG, "checking object:" + i.getClass().getName() + "with action: " + i.Action() + " and params: " + i.Params());
                     if (i.Action().equals(splits[1])) {
                         if (i.Params() == null) {
-                            Log.d(TAG,"informing");
+                            Log.d(TAG, "informing");
                             i.inform(splits[1], parameters);
                             callObjects.remove(i);
-                        }
-                        else if (i.Params().equals(parameters[0])) {
-                            Log.d(TAG,"informing with params");
+                        } else if (i.Params().equals(parameters[0])) {
+                            Log.d(TAG, "informing with params");
                             i.inform(splits[1], parameters);
                             callObjects.remove(i);
                         }
@@ -120,7 +120,7 @@ public class Decryption {
                 }
                 newMessages.remove(s);
             }
-            for(Recallable i : callObjects){
+            for (Recallable i : callObjects) {
                 if (i.getTimeStamp() + i.getMaxWaitTIme() < System.currentTimeMillis()) { //good intent but wrong implementation need to rewrite
                     i.inform(ServerAction.NORESPONSE, null);
                     callObjects.remove(i);
@@ -189,6 +189,31 @@ public class Decryption {
     }
 
     private void lobbyUpdate(String[] parameters) {
+        switch (parameters[0]) {
+            case "userstates":
+                for (int i = 1; i < parameters.length; i++) {
+                    String[] user = parameters[i].split("#");
+                    Lobby.getInstance().changeUserState(Integer.parseInt(user[0]), Boolean.parseBoolean(user[1]));
+                }
+                break;
+            case "init":
+                for (int i = 1; i < parameters.length; i++) {
+                    String[] user = parameters[i].split("#");
+                    Lobby.getInstance().changeUser(Integer.parseInt(user[0]), user[1], Boolean.parseBoolean(user[2]));
+                }
+                break;
+            case "update":
+                for (int i = 1; i < parameters.length; i++) {
+                    String[] user = parameters[i].split("#");
+                    Lobby.getInstance().changeUser(Integer.parseInt(user[0]), user[1], Boolean.parseBoolean(user[2]));
+                }
+                break;
+            case "gamestart":
+                Lobby.getInstance().gameStart();
+                break;
+            default:
+                Log.d(TAG, "something unexperienced happened with the Lobbyupdate" + parameters[0]);
+        }
 
     }
 }

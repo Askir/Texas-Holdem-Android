@@ -167,8 +167,7 @@ public class GameList implements Recallable {
 
                 }
             }
-        }
-        else if(action.equals(ServerAction.GAMELIST)){
+        } else if (action.equals(ServerAction.GAMELIST)) {
             updateList(params);
         }
     }

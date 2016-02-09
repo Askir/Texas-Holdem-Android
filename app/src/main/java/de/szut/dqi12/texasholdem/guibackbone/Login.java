@@ -81,8 +81,7 @@ public class Login implements Recallable {
                     break;
 
             }
-        }
-        else if(action.equals(ServerAction.NORESPONSE)){
+        } else if (action.equals(ServerAction.NORESPONSE)) {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {

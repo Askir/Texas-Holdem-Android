@@ -30,15 +30,15 @@ public class Connection {
     private BufferedReader reader;
     private PrintWriter writer;
     private Controller controller;
-    private boolean connectionStatus=false;
+    private boolean connectionStatus = false;
     private Handler mHandler;
     private String TAG = "connection";
 
 
-    private class openConnection extends AsyncTask<String,Integer , String>{
-        protected String doInBackground(String... stuff){
+    private class openConnection extends AsyncTask<String, Integer, String> {
+        protected String doInBackground(String... stuff) {
             try {
-                serverCon = new Socket(serverIP,serverPort);
+                serverCon = new Socket(serverIP, serverPort);
             } catch (IOException e) {
                 Log.d(TAG, "connection failed");
                 e.printStackTrace();
@@ -52,34 +52,35 @@ public class Connection {
                 e.printStackTrace();
                 //make Toast connection failed + print e. I have no Idea how to do this outside of the Main Activity tbh.
             }
-            Log.d(TAG,"connected");
+            Log.d(TAG, "connected");
             reader = new BufferedReader(input);
             writer = new PrintWriter(output);
-            connectionStatus=true;
+            connectionStatus = true;
             Controller.getInstance().connectionEstablished();
 
             return null;
         }
 
     }
-    public Connection(){
+
+    public Connection() {
         openConnection op = new openConnection();
         op.execute();
     }
 
-    public boolean connect(String ip, int port){
+    public boolean connect(String ip, int port) {
         try {
-            serverCon = new Socket(ip , port);
+            serverCon = new Socket(ip, port);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
-        serverIP=ip;
-        serverPort=port;
+        serverIP = ip;
+        serverPort = port;
         return true;
     }
 
-    public void disconnect(){
+    public void disconnect() {
         Controller.getInstance().sendAction(ClientAction.DISCONNECT, null);
         try {
             serverCon.close();
@@ -88,12 +89,14 @@ public class Connection {
         }
         input = null;
         output = null;
-        connectionStatus=false;
+        connectionStatus = false;
     }
 
-    public OutputStream getOutput(){return this.output;    }
+    public OutputStream getOutput() {
+        return this.output;
+    }
 
-    public InputStreamReader getInput(){
+    public InputStreamReader getInput() {
         return this.input;
     }
 
@@ -105,7 +108,7 @@ public class Connection {
         return this.writer;
     }
 
-    public boolean getConnectionStatus(){
+    public boolean getConnectionStatus() {
         return connectionStatus;
     }
 }

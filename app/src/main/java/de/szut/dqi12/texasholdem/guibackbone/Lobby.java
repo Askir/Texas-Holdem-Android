@@ -9,7 +9,7 @@ import de.szut.dqi12.texasholdem.gui.CreateGameLobby;
 /**
  * Created by Jascha on 15.12.2015.
  */
-public class Lobby implements Recallable{
+public class Lobby implements Recallable {
     //userstate = ready/not ready
     private int maxPlayers;
     private int ID;
@@ -22,65 +22,70 @@ public class Lobby implements Recallable{
     private static Lobby instance;
     private CreateGameLobby lobbyActivity;
 
-    public static Lobby getInstance(){
-        if (instance== null){
+    public static Lobby getInstance() {
+        if (instance == null) {
             instance = new Lobby();
         }
         return instance;
     }
-    private Lobby(){
+
+    private Lobby() {
 
     }
-    public int getMaxPlayers(){
+
+    public int getMaxPlayers() {
         return maxPlayers;
     }
-    public boolean[] getStates(){
+
+    public boolean[] getStates() {
         return states;
     }
-    public void registerActivity(CreateGameLobby lobbyActivity){
+
+    public void registerActivity(CreateGameLobby lobbyActivity) {
         this.lobbyActivity = lobbyActivity;
     }
 
-    public void newLobby(int maxPlayers, boolean userState, String lobbyName){
+    public void newLobby(int maxPlayers, boolean userState, String lobbyName) {
         //String[] params = {Integer.toString(maxPlayers),Integer.toString(ID),lobbyName, password};
         //Controller.getInstance().getSend().sendAction(ClientAction.LOBBY,params);
-        this.maxPlayers=maxPlayers;
+        this.maxPlayers = maxPlayers;
         this.ID = 0;
         this.userState = userState;
         states = new boolean[maxPlayers];
         this.userNames = new String[maxPlayers];
 
     }
-    public void setID(int ID){
+
+    public void setID(int ID) {
         this.ID = ID;
     }
 
-    public void setState(boolean userState){
-        this.userState=userState;
+    public void setState(boolean userState) {
+        this.userState = userState;
         String[] params = {Boolean.toString(userState)};
-        Controller.getInstance().getSend().sendAction(ClientAction.LOBBY,params);
+        Controller.getInstance().getSend().sendAction(ClientAction.LOBBY, params);
         lobbyActivity.playerChanged();
     }
 
-    public boolean getState(){
+    public boolean getState() {
         return userState;
     }
 
-    public String[] getPlayernames(){
+    public String[] getPlayernames() {
         return userNames;
     }
 
-    public void changeUser(int nr, String userName, boolean state){
+    public void changeUser(int nr, String userName, boolean state) {
         userNames[nr] = userName;
         states[nr] = state;
         lobbyActivity.playerChanged();
     }
 
-    public void gameStart(){
+    public void gameStart() {
         lobbyActivity.gameStart();
     }
 
-    public void changeUserState(int nr, boolean state){
+    public void changeUserState(int nr, boolean state) {
         states[nr] = state;
         lobbyActivity.playerChanged();
     }

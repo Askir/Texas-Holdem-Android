@@ -11,13 +11,14 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
 /**
  * Created by Jascha on 15.12.2015.
  */
-public class CreateGame implements Recallable{
+public class CreateGame implements Recallable {
     private de.szut.dqi12.texasholdem.gui.CreateGame createGameActivity;
     private Handler mHandler;
     private long timeout = 5000;
     private long timestamp = 0;
-    public CreateGame(de.szut.dqi12.texasholdem.gui.CreateGame createGameActivity){
-        this.mHandler=new Handler(Looper.getMainLooper());
+
+    public CreateGame(de.szut.dqi12.texasholdem.gui.CreateGame createGameActivity) {
+        this.mHandler = new Handler(Looper.getMainLooper());
         this.createGameActivity = createGameActivity;
     }
 
@@ -33,8 +34,8 @@ public class CreateGame implements Recallable{
 
     @Override
     public void inform(String action, final String[] params) {
-        if(action.equals(ServerAction.CREATEGAMEACK)){
-            switch(params[0]){
+        if (action.equals(ServerAction.CREATEGAMEACK)) {
+            switch (params[0]) {
                 case "confirmed":
                     final int lobbyID = Integer.parseInt(params[1]);
                     mHandler.post(new Runnable() {
@@ -62,14 +63,14 @@ public class CreateGame implements Recallable{
         }
     }
 
-    public void requestGameCreation(String gameName, int maxPlayers, String password){
-        String[] params = {gameName,Integer.toString(maxPlayers),password};
+    public void requestGameCreation(String gameName, int maxPlayers, String password) {
+        String[] params = {gameName, Integer.toString(maxPlayers), password};
         timestamp = System.currentTimeMillis();
         Controller.getInstance().getSend().sendAction(ClientAction.CREATEGAME, params);
         Controller.getInstance().getDecryption().addExpectation(this);
-        Lobby.getInstance().newLobby(maxPlayers,false,gameName);
-
+        Lobby.getInstance().newLobby(maxPlayers, false, gameName);
     }
+
     @Override
     public String Action() {
         return ServerAction.CREATEGAMEACK;

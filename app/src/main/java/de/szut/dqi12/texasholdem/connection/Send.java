@@ -18,15 +18,16 @@ public class Send {
 
     public boolean sendAction(String action, String params[]) {
         SendMessage sendMessage = new SendMessage();
-        Log.d("send","sending message action: "+action);
+        Log.d("send", "sending message action: " + action);
         message = String.valueOf(System.currentTimeMillis()) + ";" + action;
-        if(params != null) {
+        if (params != null) {
             message += ";";
-            for(String param : params) {
+            for (String param : params) {
                 message += param + ":";
             }
             message = message.substring(0, message.length() - 1);
         }
         sendMessage.execute(message);
         return true;
-    }}
+    }
+}

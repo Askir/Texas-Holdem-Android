@@ -11,7 +11,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 public class DatabaseConnection {
     SQLiteDatabase db;
 
-    public DatabaseConnection(){
+    public DatabaseConnection() {
         //db = openOrCreateDatabase("TexasHoldem", null);
         //db.execSQL("CREATE TABLE IF NOT EXISTS OPTIONS(volume INT, username VARCHAR(20))");
     }
