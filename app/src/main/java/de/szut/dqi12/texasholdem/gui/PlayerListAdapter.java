@@ -51,7 +51,14 @@ public class PlayerListAdapter extends BaseAdapter {
         String[] playerNames = Lobby.getInstance().getPlayernames();
         playerName.setText(playerNames[position]);
         boolean[] playerStates = Lobby.getInstance().getStates();
-        playerStatus.setText(Boolean.toString(playerStates[position]));
+        String status;
+        if(playerStates[position]){
+            status = "ready";
+        }
+        else{
+            status = "not ready";
+        }
+        playerStatus.setText(status);
 
 
         return view;

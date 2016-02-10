@@ -98,7 +98,7 @@ public class Decryption {
                     }
                 }
                 //Calling the correct function for every executed command
-                switch (splits[0]) {
+                switch (splits[1]) {
                     case "GAMEUPDATED":
                         gameupdate(parameters);
                         break;
@@ -112,6 +112,7 @@ public class Decryption {
                         gameList(parameters);
                         break;
                     case "LOBBYUPDATE":
+                        Log.d(TAG,"Lobbyupdate called");
                         lobbyUpdate(parameters);
                         break;
                     case ServerAction.CHANGE:
@@ -199,6 +200,7 @@ public class Decryption {
             case "init":
                 for (int i = 1; i < parameters.length; i++) {
                     String[] user = parameters[i].split("#");
+                    Log.d(TAG,"init called and user added");
                     Lobby.getInstance().changeUser(Integer.parseInt(user[0]), user[1], Boolean.parseBoolean(user[2]));
                 }
                 break;
@@ -212,7 +214,7 @@ public class Decryption {
                 Lobby.getInstance().gameStart();
                 break;
             default:
-                Log.d(TAG, "something unexperienced happened with the Lobbyupdate" + parameters[0]);
+                Log.d(TAG, "something unexpected happened with the Lobbyupdate" + parameters[0]);
         }
 
     }

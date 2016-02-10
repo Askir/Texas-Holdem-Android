@@ -1,5 +1,9 @@
 package de.szut.dqi12.texasholdem.guibackbone;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
 import de.szut.dqi12.texasholdem.action.ServerAction;
@@ -21,6 +25,8 @@ public class Lobby implements Recallable {
     private long timestamp = 0;
     private static Lobby instance;
     private CreateGameLobby lobbyActivity;
+    private String TAG = "Lobby";
+    private Handler mHandler;
 
     public static Lobby getInstance() {
         if (instance == null) {
@@ -30,7 +36,7 @@ public class Lobby implements Recallable {
     }
 
     private Lobby() {
-
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     public int getMaxPlayers() {
@@ -48,6 +54,7 @@ public class Lobby implements Recallable {
     public void newLobby(int maxPlayers, boolean userState, String lobbyName) {
         //String[] params = {Integer.toString(maxPlayers),Integer.toString(ID),lobbyName, password};
         //Controller.getInstance().getSend().sendAction(ClientAction.LOBBY,params);
+        Log.d(TAG,"new Lobby created with maxPlayers:"+maxPlayers);
         this.maxPlayers = maxPlayers;
         this.ID = 0;
         this.userState = userState;
@@ -64,7 +71,13 @@ public class Lobby implements Recallable {
         this.userState = userState;
         String[] params = {Boolean.toString(userState)};
         Controller.getInstance().getSend().sendAction(ClientAction.LOBBY, params);
-        lobbyActivity.playerChanged();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                lobbyActivity.playerChanged();
+            }
+        });
+
     }
 
     public boolean getState() {
@@ -76,18 +89,36 @@ public class Lobby implements Recallable {
     }
 
     public void changeUser(int nr, String userName, boolean state) {
+        Log.d(TAG, "user changed" + userName);
         userNames[nr] = userName;
         states[nr] = state;
-        lobbyActivity.playerChanged();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                lobbyActivity.playerChanged();
+            }
+        });
+
     }
 
     public void gameStart() {
-        lobbyActivity.gameStart();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                lobbyActivity.gameStart();
+            }
+        });
     }
 
     public void changeUserState(int nr, boolean state) {
         states[nr] = state;
-        lobbyActivity.playerChanged();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                lobbyActivity.playerChanged();
+            }
+        });
+
     }
 
     //the interface is probably not needed anymore since CreateGame and joinGame overtake these actions
