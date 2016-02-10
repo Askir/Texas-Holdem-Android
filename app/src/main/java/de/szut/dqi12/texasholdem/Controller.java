@@ -69,7 +69,7 @@ public class Controller {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(activeActivity, "Connection lost", Toast.LENGTH_SHORT);
+                Toast.makeText(activeActivity.getBaseContext(), "Connection lost", Toast.LENGTH_SHORT);
             }
         });
 

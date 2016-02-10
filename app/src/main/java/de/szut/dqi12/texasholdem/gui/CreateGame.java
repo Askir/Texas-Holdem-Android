@@ -25,17 +25,21 @@ public class CreateGame extends Activity {
         Button btnOk = (Button)findViewById(R.id.buttonCreateGameOK);
         final EditText etLobbyname = (EditText)findViewById(R.id.editTextCreateGameLobbyname);
         final EditText etPassword = (EditText)findViewById(R.id.editTextCreateGamePassword);
+        final EditText etSlots = (EditText)findViewById(R.id.editTextCreateGameSlots);
+        final de.szut.dqi12.texasholdem.guibackbone.CreateGame cG = new de.szut.dqi12.texasholdem.guibackbone.CreateGame(this);
 
         btnOk.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                if(Integer.parseInt(etSlots.getText().toString())<7){
 
-                // TODO: 09.11.2015 send lobbyname to server, so for game searching user can see lobbyname
-
-
-                // TODO: 09.11.2015 if pw set status, send to server
-                Toast.makeText(getBaseContext(), "Need to send lobbyname and pw status.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Requesting GameCreation...", Toast.LENGTH_SHORT).show();
+                cG.requestGameCreation(etLobbyname.getText().toString(),Integer.parseInt(etSlots.getText().toString()),etPassword.getText().toString());
+                }
+                else{
+                    Toast.makeText(getBaseContext(),"Slots must be between 2 and 6",Toast.LENGTH_SHORT);
+                }
 
             }
         });

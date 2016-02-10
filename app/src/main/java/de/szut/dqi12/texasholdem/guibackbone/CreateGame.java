@@ -36,8 +36,7 @@ public class CreateGame implements Recallable {
     public void inform(String action, final String[] params) {
         if (action.equals(ServerAction.CREATEGAMEACK)) {
             switch (params[0]) {
-                case "confirmed":
-                    final int lobbyID = Integer.parseInt(params[1]);
+                case "true":
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -47,7 +46,7 @@ public class CreateGame implements Recallable {
 
                     //inform GUI and Create Lobby
                     break;
-                case "failed":
+                case "false":
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {

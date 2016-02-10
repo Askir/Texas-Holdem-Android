@@ -9,7 +9,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
             android:background="#353535"
             android:layout_centerVertical="true"
@@ -102,6 +102,34 @@
                         android:textColor="#ffffff"
                         android:layout_weight="0.73" />
 
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tableRow122"
+                    android:layout_below="@+id/tableRow11">
+
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Slots:"
+                        android:id="@+id/textView100"
+                        android:textSize="28dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:textColor="#ffffff" />
+
+                    <EditText
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextCreateGameSlots"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#000000"
+                        android:background="#ffffff"
+                        android:textSize="30dp"
+                        android:inputType="number"/>
                 </TableRow>
 
             </RelativeLayout>
