@@ -44,12 +44,16 @@ public class JoinGameLobby extends Activity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // TODO: 17.11.2015 send which lobby was selected
+
                 Log.d(TAG,"Position selected:"+position);
-                String listPos = "" + position + "";
                 de.szut.dqi12.texasholdem.guibackbone.Game selectedGame = GameList.getInstance().getGames().get(position);
                 GameList.getInstance().selectedLobby = selectedGame;
-                GameList.getInstance().joinGame(selectedGame.lobbyID, null);
+                if(!selectedGame.password){
+                GameList.getInstance().joinGame(selectedGame.lobbyID, null);}
+                else{
+                    Intent passwordQuery = new Intent(JoinGameLobby.this,JoinGamePassword.class).putExtra("lobbyID",selectedGame.lobbyID);
+                    startActivity(passwordQuery);
+                }
 
             }
         });
