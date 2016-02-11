@@ -14,6 +14,7 @@ import java.util.List;
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ServerAction;
 import de.szut.dqi12.texasholdem.chat.ChatController;
+import de.szut.dqi12.texasholdem.game.GameController;
 import de.szut.dqi12.texasholdem.guibackbone.Lobby;
 
 /**
@@ -142,10 +143,12 @@ public class Decryption {
 
 
     private void gameupdate(String[] parameters) {
+        GameController gc = GameController.getInstance();
         switch (parameters[0]) {
             case "ALLPLAYERS":
                 break;
             case "BLINDS":
+                gc.setSmallBlind(23);
                 break;
             case "MONEYUPDATE":
                 break;

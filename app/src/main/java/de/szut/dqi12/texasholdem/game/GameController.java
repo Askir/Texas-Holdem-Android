@@ -25,8 +25,17 @@ public class GameController {
     private de.szut.dqi12.texasholdem.gui.Game game;
     private Handler mHandler;
 
+    private static GameController instance;
 
-    public GameController(){
+    public static GameController getInstance(){
+        if(instance == null){
+            instance = new GameController();
+        }
+        return instance;
+    }
+
+
+    private GameController(){
 
         mHandler = new Handler(Looper.getMainLooper());
         this.game = game;
