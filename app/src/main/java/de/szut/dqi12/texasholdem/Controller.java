@@ -22,7 +22,6 @@ public class Controller {
     private Receive receive;
     private Decryption decryption;
     private long ping;
-    private Options options;
     private Activity activeActivity;
     private Handler mHandler;
 
@@ -56,7 +55,6 @@ public class Controller {
         connection = new Connection();
         send = new Send();
         receive = new Receive();
-        options = new Options();
         decryption.startDecryption();
         Log.d("controller", "start finished");
     }
@@ -76,9 +74,6 @@ public class Controller {
     }
     public void stop(){
         receive.stopReceive();
-    }
-    public Options getOptions(){
-        return options;
     }
 
     public boolean sendAction(String action, String[] params) {

@@ -26,7 +26,6 @@ public class Settings extends Activity {
         super.onCreate(savedInstanceState);
         Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.settings);
-        options = Controller.getInstance().getOptions();
         final Switch swMusic = (Switch)findViewById(R.id.switchSettingsMusicOnOff);
         final EditText newEmail = (EditText) findViewById(R.id.editTextSettingsNewEmail);
         final EditText newUsername = (EditText) findViewById(R.id.editTextSettingsNewName);
