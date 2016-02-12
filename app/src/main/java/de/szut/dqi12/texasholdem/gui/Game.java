@@ -291,6 +291,13 @@ public class Game  extends Activity {
     }
 
 
+    /**
+     * changes the card status of the boardcards.
+     * @param boardCard which card shall be changed. 1st-5th.
+     * @param color which color the boardcard shall become. ('c' = cross, 's' = spades, 'h' = hearts, 'd' = diamonds)
+     * @param number the number or picture ('2' = 2; '3' = 3 ... '11' = Jack, \n
+     *                  '12' = Queen, '13' = King, '14' = Ace).
+     */
     public void setBoardCard(int boardCard, String color, int number){
         if(boardCard == 1)
             changeCardStatus(tc1, color, number);
@@ -306,6 +313,7 @@ public class Game  extends Activity {
 
 
     /**
+     * Changes the Status of any card.
      *
      * @param iv        delivered Imageview that should become changed
      * @param color     the "color" that the ImageView should become. letter is for the color \n
