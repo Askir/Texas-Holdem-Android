@@ -42,20 +42,6 @@ public class GameController {
 
     }
 
-    /**
-     * String username      -
-     * String usermoney     -
-     * String currentbid    -
-     *
-     * bool iscurrentplayer -
-     * bool hassmallblind   -
-     * bool hasbigblind     -
-     *
-     * String boardcard1-5  -
-     *
-     * int potmoney         -
-     */
-
     public void informGame(){
         mHandler.post(new Runnable() {
             @Override
@@ -69,6 +55,10 @@ public class GameController {
         });
     }
 
+    /**
+    Restarts the game.
+     */
+    // TODO: 12.02.2016 not sure whether it works
     public void restartGame(){
         turn = 0;
         for(Player p : player){
@@ -78,6 +68,10 @@ public class GameController {
         }
     }
 
+    /**
+     *
+     * @param player name of players
+     */
     private void setPlayers(String[] player){
         for(String i : player){
             this.player.add(new Player(i));
@@ -85,27 +79,25 @@ public class GameController {
     }
 
     /**
-     *
-     * @param boardCard 1-5
-     * @param color
-     * @param number
+     *Sets the Boardcards.
+     * @param boardCard which card shall be changed. 1st-5th.
+     * @param color which color the boardcard shall become. ('c' = cross, 's' = spades, 'h' = hearts, 'd' = diamonds)
+     * @param number the number or picture ('2' = 2; '3' = 3 ... '11' = Jack, \n
+     *                  '12' = Queen, '13' = King, '14' = Ace).
      */
     private void setBoardCard(int boardCard, String color, int number){
         boardCards.add(boardCard-1, color + "" + number + "");
         game.setBoardCard(boardCard, color, number);
     }
 
+    /**
+    Sets the Potview in Game.
+     @param pm new value for potview.
+     */
     private void setPotmoney(int pm){
         game.displayTvBudget(pm);
     }
 
-    public void setSmallBlindPlayer(int smallBlindPlayer) {
-        this.smallBlindPlayer = smallBlindPlayer;
-    }
-
-    public void update(GameAction action, String[] params){
-        // TODO: 04.02.2016 dono for what needed
-    }
 
     /**
      * sets small game view, big blind will appear automatically.
