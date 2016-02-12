@@ -26,7 +26,6 @@ public class Settings extends Activity {
         super.onCreate(savedInstanceState);
         Controller.getInstance().setActiveActivity(this);
         setContentView(R.layout.settings);
-        options = Controller.getInstance().getOptions();
         final Switch swMusic = (Switch)findViewById(R.id.switchSettingsMusicOnOff);
         final EditText newEmail = (EditText) findViewById(R.id.editTextSettingsNewEmail);
         final EditText newUsername = (EditText) findViewById(R.id.editTextSettingsNewName);
@@ -37,14 +36,14 @@ public class Settings extends Activity {
         changeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                options.changeEmail(newEmail.getText().toString());
+                options.changeEmail(Settings.this,newEmail.getText().toString());
             }
         });
 
         changeUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                options.changeUsername(newUsername.getText().toString());
+                options.changeUsername(Settings.this,newUsername.getText().toString());
             }
         });
         
@@ -72,10 +71,26 @@ public class Settings extends Activity {
         });
     }
 
-    public void emailChange(boolean correct){
-        if(correct){
+    public void emailChange(String correct){
+        if(correct.equals("true")){
+            Toast.makeText(this,"correct emailaddress please confirm",Toast.LENGTH_SHORT).show();
             Intent emailVerification = new Intent(Settings.this, ChangeEmailVerification.class);
             startActivity(emailVerification);
+        }
+        else{
+            Toast.makeText(this,"something is wrong",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void usernameChange(String param){
+        if(param.equals("true")){
+            Toast.makeText(getBaseContext(),"Successful username change to:" + Options.getUsername(),Toast.LENGTH_SHORT ).show();
+        }
+        else if(param.equals("false")){
+            Toast.makeText(getBaseContext(), "Unsuccessful change", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getBaseContext(), "Server timeout", Toast.LENGTH_SHORT).show();
         }
     }
 }

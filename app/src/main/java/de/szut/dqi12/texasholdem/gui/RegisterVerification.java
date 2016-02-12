@@ -10,7 +10,7 @@ import de.szut.dqi12.texasholdem.MainActivity;
 public class RegisterVerification extends Verification {
     @Override
     public void inform(String[] params) {
-        Toast.makeText(getBaseContext(), params[1],Toast.LENGTH_LONG);
+        Toast.makeText(this, params[0],Toast.LENGTH_LONG);
         if(params[0].equals("CORRECT")){
             Intent restart = new Intent(RegisterVerification.this, MainActivity.class);
 

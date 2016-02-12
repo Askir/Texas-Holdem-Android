@@ -25,16 +25,17 @@ public class Receive {
             public void run() {
                 while (true) {
                     String message = getMessage();
-                    if(message != null){
-                    Controller.getInstance().getDecryption().addNewMessage(message);}
+                    if (message != null) {
+                        Controller.getInstance().getDecryption().addNewMessage(message);
+                    }
                     try {
-                        Thread.sleep(100,0);
+                        Thread.sleep(100, 0);
                     } catch (InterruptedException e) {
-                        Log.d(TAG,"interrupted in sleep");
+                        Log.d(TAG, "interrupted in sleep");
                         return;
                     }
                     if (Thread.interrupted()) {
-                        Log.d(TAG,"interrupted");
+                        Log.d(TAG, "interrupted");
                         return;
                     }
                 }

@@ -1,6 +1,7 @@
 package de.szut.dqi12.texasholdem.gui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,10 +22,11 @@ public class JoinGamePassword extends Activity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Controller.getInstance().setActiveActivity(this);
+        GameList.getInstance().registerJGP(this);
         setContentView(R.layout.join_game_password);
 
-        final EditText password = (EditText) findViewById(R.id.editTextJoinGamePassword);
-        Button ok = (Button) findViewById(R.id.buttonJoinGameOk);
+        final EditText password = (EditText) findViewById(R.id.editTextGamePassword);
+        Button ok = (Button) findViewById(R.id.buttonGamePassword);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,7 +37,8 @@ public class JoinGamePassword extends Activity {
 
     }
     public void joinGameSuccessfull(){
-
+        Intent lobby = new Intent(JoinGamePassword.this,CreateGameLobby.class);
+        startActivity(lobby);
     }
     public void joinGameFailed(String params){
 

@@ -11,24 +11,25 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
 /**
  * Created by Jascha Beste on 14.12.2015.
  */
-public class Verification implements Recallable{
+public class Verification implements Recallable {
 
     //TODO: add timeout inform content
     private de.szut.dqi12.texasholdem.gui.Verification verificationActivity;
     private Handler mHandler;
-    private long timeout =  5000;
+    private long timeout = 5000;
     private long timestamp = 0;
 
-    public Verification(de.szut.dqi12.texasholdem.gui.Verification verificationActivity){
+    public Verification(de.szut.dqi12.texasholdem.gui.Verification verificationActivity) {
         this.verificationActivity = verificationActivity;
         //linking the Handler with the UI Thread
         mHandler = new Handler(Looper.getMainLooper());
 
     }
-    public void sendVerification(String verificationCode){
+
+    public void sendVerification(String verificationCode) {
         String[] params = {verificationCode};
         //sending the Validation information to the server
-        Controller.getInstance().getSend().sendAction(ClientAction.VALIDATION,params);
+        Controller.getInstance().getSend().sendAction(ClientAction.VALIDATION, params);
         //adding this object to the callback loop
         //updating the timestamp first
         timestamp = System.currentTimeMillis();
@@ -47,20 +48,21 @@ public class Verification implements Recallable{
 
     @Override
     public void inform(String action, final String[] params) {
-        if(action.equals(ServerAction.VALIDATION)){
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                verificationActivity.inform(params);
-            }
-        });}
-        else if(action.equals(ServerAction.NORESPONSE)){
+        if (action.equals(ServerAction.VALIDATION)) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    verificationActivity.inform(params);
+                }
+            });
+        } else if (action.equals(ServerAction.NORESPONSE)) {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     verificationActivity.servertimeout();
                 }
-            });}
+            });
+        }
     }
 
     @Override

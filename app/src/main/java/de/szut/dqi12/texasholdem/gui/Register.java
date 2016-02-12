@@ -37,7 +37,7 @@ public class Register extends Activity {
 
                 if(!etUsername.getText().toString().equals("") && !etEmail.getText().toString().equals("") && !etPassword.getText().toString().equals("") && etReEnterPassword.getText().toString().equals(etPassword.getText().toString())) {
 
-                    Toast.makeText(getBaseContext(), "Need to send Data to Server", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Sending register attempt", Toast.LENGTH_SHORT).show();
                     register.executeRegister(etUsername.getText().toString(),etPassword.getText().toString(),etReEnterPassword.getText().toString(),etEmail.getText().toString());
 
 
