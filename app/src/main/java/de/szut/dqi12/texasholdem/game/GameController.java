@@ -155,6 +155,8 @@ public class GameController {
         }
 
         game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
+        // invoke restart game???
+        // ed
     }
 
     /**
