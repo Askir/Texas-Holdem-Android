@@ -4,9 +4,6 @@ import android.os.Handler;
 import android.os.Looper;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
-
-import de.szut.dqi12.texasholdem.action.GameAction;
 
 /**
  * Created by Jascha, Marcel on 02.02.2016.
@@ -48,13 +45,55 @@ public class GameController {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                game.setNor(player.size()-1);
-                setPotmoney(potmoney);
+                game.setNor(player.size() - 1);
+                setPotMoney(potmoney);
 
                 setBlinds(smallBlindPlayer);
 
             }
         });
+    }
+
+    /**
+     * Initiates new game.
+     *
+     * @param player Name of participating players.
+     * @param blindDistribution Just numbers from 0 - 5 allowed. delivered number is the number of client that
+     *               gets the small blind.0 = Player, 1 = Rival 1, 2 = Rival 2 etc.
+     */
+    public void gameStart(String[] player, int blindDistribution){
+        setPlayers(player);
+        setBlinds(blindDistribution);
+    }
+
+//    New value that shows player what to bid as minimum.
+    public void nextTurn(int playerMoney, int minBid, int playerNum){
+        /**
+         * !all int!
+         * bidupdate: min bid for player
+         * currentplayer
+         */
+
+        game.displayTvBudget(playerMoney);
+        game.displayTvMinBet(minBid);
+        game.announcePlayingUser(player.get(playerNum).getName());
+    }
+
+    public void nextRound(int potMoney){
+        /**
+         * boardcards <>string cardcolor; int cardnumber</>
+         * potmoney <>int potmoney</>
+         */
+        game.displayPot(potMoney);
+
+
+    }
+
+    public void gameEnd(){
+        /**
+         * playercards <>cc1, cn1; cc2, cn2; ...</>
+         * playerleft <>user</>
+         */
     }
 
     /**
@@ -72,9 +111,11 @@ public class GameController {
 
     /**
      *
-     * @param player name of players
+     * @param player name of participating players
      */
     private void setPlayers(String[] player){
+        this.player = new ArrayList<Player>();
+
         for(String i : player){
             this.player.add(new Player(i));
         }
@@ -108,18 +149,9 @@ public class GameController {
     }
 
     /**
-    Sets the Potview in Game.
-     @param pm new value for potview.
-     */
-    private void setPotmoney(int pm){
-        game.displayTvBudget(pm);
-    }
-
-
-    /**
-     * sets small game view, big blind will appear automatically.
+     * Sets small game view, big blind will appear automatically.
      *
-     * @param player just numbers from 0 - 5 allowed. delivered number is the number of client that
+     * @param player Just numbers from 0 - 5 allowed. delivered number is the number of client that
      *               gets the small blind.0 = Player, 1 = Rival 1, 2 = Rival 2 etc.
      */
     public void setBlinds(int player){

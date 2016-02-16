@@ -112,7 +112,7 @@ public class Game  extends Activity {
     }
 
     /**
-     * Promotes readability. Searches for the clicked view via view-id and runs specified \n
+     * Promotes readability. Searches for the clicked view via view-id and runs specified
      * function for that action.
      */
     private View.OnClickListener view = new View.OnClickListener() {
@@ -174,7 +174,7 @@ public class Game  extends Activity {
     }
 
     /**
-     * Sets all cards, of whose player is not there, in gray color, to show only from player \n
+     * Sets all cards, of whose player is not there, in gray color, to show only from player
      * played cards.
      */
     private void setRivalsReady(){
@@ -295,7 +295,7 @@ public class Game  extends Activity {
      * changes the card status of the boardcards.
      * @param boardCard which card shall be changed. 1st-5th.
      * @param color which color the boardcard shall become. ('c' = cross, 's' = spades, 'h' = hearts, 'd' = diamonds)
-     * @param number the number or picture ('2' = 2; '3' = 3 ... '11' = Jack, \n
+     * @param number the number or picture ('2' = 2; '3' = 3 ... '11' = Jack,
      *                  '12' = Queen, '13' = King, '14' = Ace).
      */
     public void setBoardCard(int boardCard, String color, int number){
@@ -316,9 +316,9 @@ public class Game  extends Activity {
      * Changes the Status of any card.
      *
      * @param iv        delivered Imageview that should become changed
-     * @param color     the "color" that the ImageView should become. letter is for the color \n
+     * @param color     the "color" that the ImageView should become. letter is for the color
      *                  ('c' = cross, 's' = spades, 'h' = hearts, 'd' = diamonds)
-     * @param number    the number or picture ('2' = 2; '3' = 3 ... '11' = Jack, \n
+     * @param number    the number or picture ('2' = 2; '3' = 3 ... '11' = Jack,
      *                  '12' = Queen, '13' = King, '14' = Ace).
      */
     // TODO: 02.02.2016 maybe rewrite?
@@ -453,7 +453,6 @@ public class Game  extends Activity {
                         break;
                 }
             case "d":
-                // TODO: 12.01.2016 import diamond images
                 switch (number) {
                     case 2:
                         iv.setImageResource(R.mipmap.ic_d2);
@@ -537,7 +536,7 @@ public class Game  extends Activity {
     public Boolean getMyTurn() {return myTurn;}
 
     /**
-     * Sets the blinds. 'R' is for rival and the following number is for the explicit rival. \n
+     * Sets the blinds. 'R' is for rival and the following number is for the explicit rival.
      * 'P' is for player.
      *
      * @param sb Small blind. E.g. sb = 'R2' -> Rival 2 gets small blind and Rival 1 gets big blind.
@@ -569,6 +568,45 @@ public class Game  extends Activity {
                 ivBR4.setImageResource(R.mipmap.ic_sb);
                 break;
         }
+    }
+
+    /**
+     * announces which users turn it is.
+     *
+     * @param user the user whose turn it is.
+     */
+    public void announcePlayingUser(String user){
+        Toast.makeText(getBaseContext(), user + "'s turn.", Toast.LENGTH_SHORT).show();
+    }
+
+    public  void rivalLeft(String username, int rivalNum){
+        Toast.makeText(getBaseContext(), username + " left", Toast.LENGTH_SHORT).show();
+        if (rivalNum == 1)
+        {
+            ivP1C1.setImageResource(R.color.gray);
+            ivP1C2.setImageResource(R.color.gray);
+        }
+        else if(rivalNum == 2)
+        {
+            ivP2C1.setImageResource(R.color.gray);
+            ivP2C2.setImageResource(R.color.gray);
+        }
+        else if(rivalNum == 3)
+        {
+            ivP3C1.setImageResource(R.color.gray);
+            ivP3C2.setImageResource(R.color.gray);
+        }
+        else if(rivalNum == 4)
+        {
+            ivP4C1.setImageResource(R.color.gray);
+            ivP4C2.setImageResource(R.color.gray);
+        }
+        else if(rivalNum == 5)
+        {
+            ivP5C1.setImageResource(R.color.gray);
+            ivP5C2.setImageResource(R.color.gray);
+        }
+
     }
 
     /**
