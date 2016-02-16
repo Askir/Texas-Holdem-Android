@@ -101,8 +101,6 @@ public class GameController {
         game.displayPot(potMoney);
         changeCard("b", boardCards.size() + 1, false, bcColor, bcNumber);
 
-
-
     }
 
     public void gameEnd(){
