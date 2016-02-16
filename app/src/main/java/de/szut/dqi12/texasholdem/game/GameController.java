@@ -37,7 +37,7 @@ public class GameController {
 
     }
 
-    // TODO: 12.02.2016 required?
+    // TODO: 12.02.2016 required? to Jascha
     public void informGame(){
         mHandler.post(new Runnable() {
             @Override
@@ -61,6 +61,7 @@ public class GameController {
     public void gameStart(String[] player, int blindDistribution){
 
         boardCards = new ArrayList<>();
+//        user = new Player(); todo initialize user required? to Jascha
 
         setPlayers(player);
         setBlinds(blindDistribution);
@@ -96,6 +97,12 @@ public class GameController {
 
     }
 
+    /**
+     * Initiates next round.
+     * @param potMoney Current value of pot.
+     * @param bcColor Color of boardcard that will appear.
+     * @param bcNumber Number/Value of boardcard that will appear.
+     */
     public void nextRound(int potMoney, String bcColor, int bcNumber){
 
         game.displayPot(potMoney);
@@ -103,11 +110,51 @@ public class GameController {
 
     }
 
-    public void gameEnd(){
-        /**
-         * playercards <>cc1, cn1; cc2, cn2; ...</>
-         * playerleft <>user</>
-         */
+    /**
+     * Initiates the end of the game.
+     * @param rivalsCardsColors
+     * @param rivalsCardsNumbers
+     * @param rivalLeft
+     */
+    public void gameEnd(String[] rivalsCardsColors, int[] rivalsCardsNumbers, String rivalLeft){
+
+        // show all rival cards
+        for(int p = 0; p <= player.size(); p++){
+            if(player.get(p).getIsPlaying()){
+                switch (p){
+                    case 0:
+                        changeCard("r", 1, true, rivalsCardsColors[0],rivalsCardsNumbers[0]);
+                        changeCard("r", 1, false, rivalsCardsColors[1],rivalsCardsNumbers[1]);
+                        break;
+                    case 1:
+                        changeCard("r", 1, true, rivalsCardsColors[2],rivalsCardsNumbers[2]);
+                        changeCard("r", 1, true, rivalsCardsColors[3],rivalsCardsNumbers[3]);
+                        break;
+                    case 2:
+                        changeCard("r", 1, true, rivalsCardsColors[4],rivalsCardsNumbers[4]);
+                        changeCard("r", 1, true, rivalsCardsColors[5],rivalsCardsNumbers[5]);
+                        break;
+                    case 3:
+                        changeCard("r", 1, true, rivalsCardsColors[6],rivalsCardsNumbers[6]);
+                        changeCard("r", 1, true, rivalsCardsColors[7],rivalsCardsNumbers[7]);
+                        break;
+                    case 4:
+                        changeCard("r", 1, true, rivalsCardsColors[8],rivalsCardsNumbers[8]);
+                        changeCard("r", 1, true, rivalsCardsColors[9],rivalsCardsNumbers[9]);
+                        break;
+                    case 5:
+                        changeCard("r", 1, true, rivalsCardsColors[10],rivalsCardsNumbers[10]);
+                        changeCard("r", 1, true, rivalsCardsColors[11],rivalsCardsNumbers[11]);
+                        break;
+                }}}
+
+        //when a rival has left
+        for (int rivalPos = 0; rivalPos <= player.size(); rivalPos++){
+            if(rivalLeft.equals(player.get(rivalPos).getName()))
+                game.rivalLeft(rivalLeft, rivalPos);
+        }
+
+        game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
     }
 
     /**
@@ -123,7 +170,6 @@ public class GameController {
     }
 
     /**
-     *
      * @param player name of participating players
      */
     private void setPlayers(String[] player){
@@ -137,7 +183,7 @@ public class GameController {
     /**
      * Changes the Cards on gameboard.
      * @param type 'b' for boardcard, 'r' for card of rivals and 'p' for card of player.
-     * @param position  At which position the card is. b{1-5}, r{1-5} and pal
+     * @param position  At which position the card is. b{1-5}, r{1-5} and player(not required)
      * @param firstCard Whether the first card of the pair is meant. Not required for boardcard. ('c' = cross, 's' = spades, 'h' = hearts, 'd' = diamonds)
      * @param color Which color the meant card shall become.
      * @param number the number of card ('2' = 2; '3' = 3 ... '11' = Jack,'12' = Queen, '13' = King, '14' = Ace).

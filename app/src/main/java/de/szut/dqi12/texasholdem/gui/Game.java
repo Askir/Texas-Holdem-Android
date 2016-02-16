@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem.gui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -607,6 +608,10 @@ public class Game  extends Activity {
             ivP5C2.setImageResource(R.color.gray);
         }
 
+    }
+
+    public void endGameQuery(){
+        // TODO: 16.02.2016 implement a view-guery where the user gets asked whether he want to play anymore and then end or restart the game.
     }
 
     /**
