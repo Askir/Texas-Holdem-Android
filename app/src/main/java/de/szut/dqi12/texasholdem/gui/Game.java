@@ -579,29 +579,29 @@ public class Game  extends Activity {
         Toast.makeText(getBaseContext(), user + "'s turn.", Toast.LENGTH_SHORT).show();
     }
 
-    public  void rivalLeft(String username, int rivalNum){
+    public  void rivalLeft(String username, int rivalPos){
         Toast.makeText(getBaseContext(), username + " left", Toast.LENGTH_SHORT).show();
-        if (rivalNum == 1)
+        if (rivalPos == 1)
         {
             ivP1C1.setImageResource(R.color.gray);
             ivP1C2.setImageResource(R.color.gray);
         }
-        else if(rivalNum == 2)
+        else if(rivalPos == 2)
         {
             ivP2C1.setImageResource(R.color.gray);
             ivP2C2.setImageResource(R.color.gray);
         }
-        else if(rivalNum == 3)
+        else if(rivalPos == 3)
         {
             ivP3C1.setImageResource(R.color.gray);
             ivP3C2.setImageResource(R.color.gray);
         }
-        else if(rivalNum == 4)
+        else if(rivalPos == 4)
         {
             ivP4C1.setImageResource(R.color.gray);
             ivP4C2.setImageResource(R.color.gray);
         }
-        else if(rivalNum == 5)
+        else if(rivalPos == 5)
         {
             ivP5C1.setImageResource(R.color.gray);
             ivP5C2.setImageResource(R.color.gray);

@@ -61,18 +61,26 @@ public class GameController {
         setBlinds(blindDistribution);
     }
 
-//    New value that shows player what to bid as minimum.
-    public void nextTurn(int playerMoney, int minBid, int playerNum, String rivalLeft){
-        /**
-         * !all int!
-         * bidupdate: min bid for player
-         * currentplayer
-         */
 
+    /**
+     *
+     * @param playerMoney Available money for the player.
+     * @param minBid New value that shows player what to bid as minimum.
+     * @param turnPlayerNum Number which user has the turn. Just numbers between 1 and 5 allowed.
+     * @param rivalLeft Which rival has left.
+     */
+    public void nextTurn(int playerMoney, int minBid, int turnPlayerNum, String rivalLeft){
+
+        // displays the budget\, which is available for the player
         game.displayTvBudget(playerMoney);
-        game.displayTvMinBet(minBid);
-        game.announcePlayingUser(player.get(playerNum).getName());
 
+        //shows the minimum bid for the user
+        game.displayTvMinBet(minBid);
+
+        // announces which user has the turn
+        game.announcePlayingUser(player.get(turnPlayerNum).getName());
+
+        //when a rival has left
         for (int rivalPos = 0; rivalPos <= player.size(); rivalPos++){
             if(rivalLeft.equals(player.get(rivalPos).getName()))
                 game.rivalLeft(rivalLeft, rivalPos);
@@ -102,7 +110,6 @@ public class GameController {
      */
     // TODO: 12.02.2016 not sure whether it works
     public void restartGame(){
-        turn = 0;
         for(Player p : player){
             if(p.getMoney()<=0){
                 player.remove(p);
