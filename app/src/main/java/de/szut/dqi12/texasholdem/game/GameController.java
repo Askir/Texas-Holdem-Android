@@ -10,10 +10,6 @@ import java.util.ArrayList;
  */
 public class GameController {
 
-    private int turn;
-    private int potmoney;
-    private int smallBlindPlayer;
-
     private Player user;
     private ArrayList<Player> player;
     private ArrayList<Card> board;
@@ -31,7 +27,6 @@ public class GameController {
         return instance;
     }
 
-
     private GameController(){
 
         mHandler = new Handler(Looper.getMainLooper());
@@ -45,10 +40,10 @@ public class GameController {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                game.setNor(player.size() - 1);
-                setPotMoney(potmoney);
+//                game.setNor(player.size() - 1);
+                //setPotMoney(potmoney);
 
-                setBlinds(smallBlindPlayer);
+//                setBlinds(smallBlindPlayer);
 
             }
         });
@@ -67,7 +62,7 @@ public class GameController {
     }
 
 //    New value that shows player what to bid as minimum.
-    public void nextTurn(int playerMoney, int minBid, int playerNum){
+    public void nextTurn(int playerMoney, int minBid, int playerNum, String rivalLeft){
         /**
          * !all int!
          * bidupdate: min bid for player
@@ -77,6 +72,12 @@ public class GameController {
         game.displayTvBudget(playerMoney);
         game.displayTvMinBet(minBid);
         game.announcePlayingUser(player.get(playerNum).getName());
+
+        for (int rivalPos = 0; rivalPos <= player.size(); rivalPos++){
+            if(rivalLeft.equals(player.get(rivalPos).getName()))
+                game.rivalLeft(rivalLeft, rivalPos);
+        }
+
     }
 
     public void nextRound(int potMoney){
