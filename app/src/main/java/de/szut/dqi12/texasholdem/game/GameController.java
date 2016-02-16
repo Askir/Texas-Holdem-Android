@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.TreeMap;
 
 /**
  * Created by Jascha, Marcel on 02.02.2016.
@@ -57,10 +59,12 @@ public class GameController {
      *               gets the small blind.0 = Player, 1 = Rival 1, 2 = Rival 2 etc.
      */
     public void gameStart(String[] player, int blindDistribution){
+
+        boardCards = new ArrayList<>();
+
         setPlayers(player);
         setBlinds(blindDistribution);
     }
-
 
     /**
      *
@@ -73,12 +77,16 @@ public class GameController {
 
         // displays the budget\, which is available for the player
         game.displayTvBudget(playerMoney);
+        user.setMoney(playerMoney);
 
         //shows the minimum bid for the user
         game.displayTvMinBet(minBid);
 
         // announces which user has the turn
-        game.announcePlayingUser(player.get(turnPlayerNum).getName());
+        String playingUser = player.get(turnPlayerNum).getName();
+        game.announcePlayingUser(playingUser);
+        if(playingUser.equals(user.getName()))
+            user.setIsCurrentPlayer(true);
 
         //when a rival has left
         for (int rivalPos = 0; rivalPos <= player.size(); rivalPos++){
@@ -88,12 +96,11 @@ public class GameController {
 
     }
 
-    public void nextRound(int potMoney){
-        /**
-         * boardcards <>string cardcolor; int cardnumber</>
-         * potmoney <>int potmoney</>
-         */
+    public void nextRound(int potMoney, String bcColor, int bcNumber){
+
         game.displayPot(potMoney);
+        changeCard("b", boardCards.size() + 1, false, bcColor, bcNumber);
+
 
 
     }
