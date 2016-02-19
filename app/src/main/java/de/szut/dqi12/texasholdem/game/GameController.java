@@ -112,11 +112,13 @@ public class GameController {
 
     /**
      * Initiates the end of the game.
-     * @param rivalsCardsColors
-     * @param rivalsCardsNumbers
-     * @param rivalLeft
+     * @param rivalsCardsColors String-Array in which all card colors of the rivals are. starting at
+     *                          the first rival from top left and ending with the last rival from top right.
+     * @param rivalsCardsNumbers int-Array in which all card numbers of the rivals are. same principle
+     *                           like in rivalsVCardsColors.
+     * @param rivalLeft String-Array in which alle rivals are that left the game.
      */
-    public void gameEnd(String[] rivalsCardsColors, int[] rivalsCardsNumbers, String rivalLeft){
+    public void gameEnd(String[] rivalsCardsColors, int[] rivalsCardsNumbers, String[] rivalLeft){
 
         // show all rival cards
         for(int p = 0; p <= player.size(); p++){
@@ -128,30 +130,34 @@ public class GameController {
                         break;
                     case 1:
                         changeCard("r", 1, true, rivalsCardsColors[2],rivalsCardsNumbers[2]);
-                        changeCard("r", 1, true, rivalsCardsColors[3],rivalsCardsNumbers[3]);
+                        changeCard("r", 1, false, rivalsCardsColors[3],rivalsCardsNumbers[3]);
                         break;
                     case 2:
                         changeCard("r", 1, true, rivalsCardsColors[4],rivalsCardsNumbers[4]);
-                        changeCard("r", 1, true, rivalsCardsColors[5],rivalsCardsNumbers[5]);
+                        changeCard("r", 1, false, rivalsCardsColors[5],rivalsCardsNumbers[5]);
                         break;
                     case 3:
                         changeCard("r", 1, true, rivalsCardsColors[6],rivalsCardsNumbers[6]);
-                        changeCard("r", 1, true, rivalsCardsColors[7],rivalsCardsNumbers[7]);
+                        changeCard("r", 1, false, rivalsCardsColors[7],rivalsCardsNumbers[7]);
                         break;
                     case 4:
                         changeCard("r", 1, true, rivalsCardsColors[8],rivalsCardsNumbers[8]);
-                        changeCard("r", 1, true, rivalsCardsColors[9],rivalsCardsNumbers[9]);
+                        changeCard("r", 1, false, rivalsCardsColors[9],rivalsCardsNumbers[9]);
                         break;
                     case 5:
                         changeCard("r", 1, true, rivalsCardsColors[10],rivalsCardsNumbers[10]);
-                        changeCard("r", 1, true, rivalsCardsColors[11],rivalsCardsNumbers[11]);
+                        changeCard("r", 1, false, rivalsCardsColors[11],rivalsCardsNumbers[11]);
                         break;
                 }}}
 
         //when a rival has left
-        for (int rivalPos = 0; rivalPos <= player.size(); rivalPos++){
-            if(rivalLeft.equals(player.get(rivalPos).getName()))
-                game.rivalLeft(rivalLeft, rivalPos);
+        for(int i = 0; i <= rivalLeft.length; i++)
+        {
+            for (int rivalPos = 0; rivalPos <= player.size(); rivalPos++)
+            {
+                if(rivalLeft[i].equals(player.get(rivalPos).getName()))
+                    game.rivalLeft(rivalLeft[i], rivalPos);
+            }
         }
 
         game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
@@ -159,11 +165,11 @@ public class GameController {
         // ed
     }
 
-    /**
-    Restarts the game.
-     */
-    // TODO: 12.02.2016 not sure whether it works
+
     public void restartGame(){
+
+
+        // reset money of players
         for(Player p : player){
             if(p.getMoney()<=0){
                 player.remove(p);
