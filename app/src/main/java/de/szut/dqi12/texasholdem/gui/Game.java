@@ -39,6 +39,7 @@ public class Game  extends Activity {
     private Boolean myTurn = false;
     Boolean firstRound = false;
     Boolean exitGame = true;
+    Boolean firstClick = true;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -119,10 +120,8 @@ public class Game  extends Activity {
         ivBR5 = (ImageView)findViewById(R.id.ivGameBlindR5);
 
         // this container will be exchanged
+        queryContainer = (ViewGroup) findViewById(R.id.queryContainer);
         endQuery = (ViewGroup) findViewById(R.id.endQuery);
-
-        btnExit = (Button) findViewById(R.id.exit);
-        btnRestart = (Button) findViewById(R.id.restart);
     }
 
     /**
@@ -172,6 +171,15 @@ public class Game  extends Activity {
                     }else{
                         Toast.makeText(getBaseContext(), "It's not your turn.", Toast.LENGTH_SHORT).show();
                     }
+                    break;
+                case (R.id.exit):
+                    // TODO: 22.02.2016 go back to main menue
+                    Toast.makeText(getBaseContext(), "Exit Game", Toast.LENGTH_SHORT).show();
+                    break;
+                case (R.id.restart):
+                    setContentView(R.layout.game);
+                    // TODO: 22.02.2016 restart game
+                    Toast.makeText(getBaseContext(), "Restart Game", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -621,33 +629,19 @@ public class Game  extends Activity {
 
     }
 
-    public Boolean endGameQuery(){
-
-        Boolean firstClick = true;
+    public void endGameQuery(){
 
         // shows query whether to restart or to exit the game
         queryContainer.removeAllViews();
-        // TODO: 22.02.2016 maybe get exception, not shure wether delivering the fragment xml is right.
+        // TODO: 22.02.2016 maybe get exception, not sure wether delivering the fragment xml is right.
         View showEQ = getLayoutInflater().inflate(R.layout.fragment_end_query, null);
         queryContainer.addView(showEQ);
 
-        do{
-            btnExit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    exitGame = true;
-                }
-            });
+        btnExit = (Button) showEQ.findViewById(R.id.exit);
+        btnExit.setOnClickListener(view);
 
-            btnRestart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    exitGame = false;
-                }
-            });
-        }while(firstClick);
-
-        return exitGame;
+        btnRestart = (Button) showEQ.findViewById(R.id.restart);
+        btnRestart.setOnClickListener(view);
     }
 
 
