@@ -41,11 +41,11 @@
             android:layout_height="40dp"
             android:text="Restart"
             android:textSize="20sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:id="@+id/restart"
             android:layout_below="@+id/tvRoE"
             android:layout_toLeftOf="@+id/center"
-            android:background="#c3ffffff"
+            android:background="#ef0013"
             android:layout_marginTop="15dp"
             android:layout_marginRight="20dp" />
 
@@ -54,11 +54,11 @@
             android:layout_height="40dp"
             android:text="Exit"
             android:textSize="20sp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:id="@+id/exit"
             android:layout_below="@+id/tvRoE"
             android:layout_toRightOf="@+id/center"
-            android:background="#c3ffffff"
+            android:background="#ef0013"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp" />
     </RelativeLayout>

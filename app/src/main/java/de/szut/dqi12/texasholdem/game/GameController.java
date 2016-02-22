@@ -33,7 +33,7 @@ public class GameController {
 
         mHandler = new Handler(Looper.getMainLooper());
         // TODO: 12.02.2016 required?
-        this.game = game;
+//        this.game = game;
 
     }
 
@@ -160,7 +160,7 @@ public class GameController {
             }
         }
 
-        game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
+        Boolean endGame = game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
         // invoke restart game???
         // ed
     }

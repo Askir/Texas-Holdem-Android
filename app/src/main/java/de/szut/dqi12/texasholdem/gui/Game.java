@@ -26,7 +26,7 @@ public class Game  extends Activity {
 
     ImageView ivP1C1, ivP1C2, ivP2C1, ivP2C2, ivP3C1, ivP3C2, ivP4C1, ivP4C2, ivP5C1, ivP5C2,
             tc1, tc2, tc3, tc4, tc5, ivPC1, ivPC2, ivBR1, ivBR2, ivBR3, ivBR4, ivBR5, ivBR6, ivBP;
-    Button btnFold, btnAllIn, btnCheckCall, btnBetRaise;
+    Button btnFold, btnAllIn, btnCheckCall, btnBetRaise, btnExit, btnRestart;
     TextView tvPot, tvBudget, tvMinBet;
     EditText etBet;
 
@@ -38,6 +38,7 @@ public class Game  extends Activity {
 
     private Boolean myTurn = false;
     Boolean firstRound = false;
+    Boolean exitGame = true;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -119,6 +120,9 @@ public class Game  extends Activity {
 
         // this container will be exchanged
         endQuery = (ViewGroup) findViewById(R.id.endQuery);
+
+        btnExit = (Button) findViewById(R.id.exit);
+        btnRestart = (Button) findViewById(R.id.restart);
     }
 
     /**
@@ -181,7 +185,7 @@ public class Game  extends Activity {
      */
     public void setNor(int rivals){
         nor = rivals;
-    }
+    } // TODO: 22.02.2016 setNor required in this class?
 
     /**
      * Sets all cards, of whose player is not there, in gray color, to show only from player
@@ -300,7 +304,6 @@ public class Game  extends Activity {
         }
     }
 
-
     /**
      * changes the card status of the boardcards.
      * @param boardCard which card shall be changed. 1st-5th.
@@ -320,7 +323,6 @@ public class Game  extends Activity {
         else if(boardCard == 5)
             changeCardStatus(tc5, color, number);
     }
-
 
     /**
      * Changes the Status of any card.
@@ -619,16 +621,34 @@ public class Game  extends Activity {
 
     }
 
-    public void endGameQuery(){
-        // TODO: 16.02.2016 implement a view-guery where the user gets asked whether he want to play anymore and then end or restart the game.
-    }
+    public Boolean endGameQuery(){
 
-    private void showEndDialog(){
+        Boolean firstClick = true;
+
+        // shows query whether to restart or to exit the game
         queryContainer.removeAllViews();
-        View showEQ = getLayoutInflater().inflate(R.layout.fragment_end_query, null); // TODO: 22.02.2016 maybe get exception, not shure wether delivering the fragment xml is right.
+        // TODO: 22.02.2016 maybe get exception, not shure wether delivering the fragment xml is right.
+        View showEQ = getLayoutInflater().inflate(R.layout.fragment_end_query, null);
         queryContainer.addView(showEQ);
-    }
 
+        do{
+            btnExit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    exitGame = true;
+                }
+            });
+
+            btnRestart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    exitGame = false;
+                }
+            });
+        }while(firstClick);
+
+        return exitGame;
+    }
 
 
     /**
