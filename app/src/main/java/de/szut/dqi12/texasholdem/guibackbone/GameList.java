@@ -14,23 +14,31 @@ import de.szut.dqi12.texasholdem.gui.JoinGamePassword;
 
 /**
  * Created by Jascha on 15.12.2015.
+ * This class manages the retrieving and handling of all GameList information
  */
 public class GameList implements Recallable {
-    private JoinGameLobby JGL;
-    private JoinGamePassword JGP;
-    private ArrayList<Game> games;
-    private static GameList instance;
-    private long timeout = 5000;
-    private long timestamp = 0;
-    public Game selectedLobby;
-    private String expectedAction;
-    private Handler mHandler;
 
+    private JoinGameLobby JGL; //The reference to the current GameListActivity(JoinGameLobby)
+    private JoinGamePassword JGP; //The reference to the current PasswordActivity(JoinGamePassword)
+    private ArrayList<Game> games; //A list of all active lobbies
+    private static GameList instance; //This class is a singleton
+    private long timeout = 5000; //The maximum time in milliseconds that this class will wait for a server response
+    private long timestamp = 0; //The timestamp used for the recallable interface (always update this before you call: addExpectation())
+    public Game selectedLobby; //The currently by the user selected lobby
+    private String expectedAction; //The action this class is waiting for (always update this before you call: addExpectation())
+    private Handler mHandler; //The Handler to call functions on the UI thread
+
+    /**
+     * private function since this is a singleton
+     */
     private GameList() {
         games = new ArrayList<Game>();
-        mHandler = new Handler(Looper.getMainLooper());
+        mHandler = new Handler(Looper.getMainLooper()); //Creating a Handler linked to the UI thread
     }
 
+    /**
+     * @return The only instance of this class
+     */
     public static GameList getInstance() {
         if (instance == null) {
             instance = new GameList();
@@ -38,19 +46,34 @@ public class GameList implements Recallable {
         return instance;
     }
 
+    /**
+     * This funtion should only be called by the JoinGameLobby activity
+     * @param jgl The currently active JoinGameLobby activity
+     */
     public void registerJGL(JoinGameLobby jgl) {
         this.JGL = jgl;
     }
 
+    /**
+     * This funtion should only be called by the JoinGamePassword activity
+     * @param jgp The currently active JoinGamePassword activity
+     * */
     public void registerJGP(JoinGamePassword jgp) {
         this.JGP = jgp;
     }
 
-    //TODO: add retrieving the gamelist from the server
+    /**
+     *
+     * @return The current List of all games
+     */
     public ArrayList<Game> getGames() {
         return games;
     }
 
+    /**
+     * This method updates the currentGame List with new data
+     * @param games A list of all games in this format: host#name#passwordboolean##lobbyID#maxPlayers#currentPlayers
+     */
     public void updateList(String[] games) {
         for (String i : games) {
             Game game = new Game();
@@ -76,6 +99,9 @@ public class GameList implements Recallable {
 
     }
 
+    /**
+     * This method requests a new set of GameListData from the server
+     */
     public void retrieveGameList() {
         String[] params = {};
         expectedAction = ServerAction.GAMELIST;
@@ -84,6 +110,11 @@ public class GameList implements Recallable {
         Controller.getInstance().getSend().sendAction(ClientAction.SEARCHGAME, params);
     }
 
+    /**
+     * This method requests to joing a specific game
+     * @param gameID The LobbyID of the game
+     * @param password The password of the requested game (null if no password is needed)
+     */
     public void joinGame(int gameID, String password) {
         String[] params = {Integer.toString(gameID), password};
         timestamp = System.currentTimeMillis();
@@ -102,10 +133,6 @@ public class GameList implements Recallable {
         return timestamp;
     }
 
-    /**
-     * @param action the called Action
-     * @param params
-     */
     @Override
     public void inform(String action, final String[] params) {
         if (action.equals(ServerAction.JOINGAMEACK)) {
