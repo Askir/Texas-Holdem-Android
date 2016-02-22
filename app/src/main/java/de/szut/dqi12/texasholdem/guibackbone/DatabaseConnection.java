@@ -12,6 +12,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 /**
  * Created by Jascha on 09.10.2015.
+ * This class is not doing anything so far please ignore
  */
 public class DatabaseConnection {
     SQLiteDatabase db;

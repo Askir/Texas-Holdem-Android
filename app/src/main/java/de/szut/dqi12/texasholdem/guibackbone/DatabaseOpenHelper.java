@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by Jascha Beste on 11.02.2016.
+ * This class is not doing anythign so far please ignore
  */
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public DatabaseOpenHelper(Context context, String name) {
