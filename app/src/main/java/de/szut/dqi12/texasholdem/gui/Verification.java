@@ -18,7 +18,7 @@ import de.szut.dqi12.texasholdem.R;
 public abstract class Verification extends Activity{
 
     private de.szut.dqi12.texasholdem.guibackbone.Verification veri;
-    // TODO: 07.11.2015 implement fragment layout
+    // TODO: 07.11.2015 implement fragment layout?
     // TODO: add other Verification types for password reset etc.
     
     @Override

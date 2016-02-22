@@ -1,9 +1,13 @@
 package de.szut.dqi12.texasholdem.gui;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,17 +26,19 @@ public class Game  extends Activity {
 
     ImageView ivP1C1, ivP1C2, ivP2C1, ivP2C2, ivP3C1, ivP3C2, ivP4C1, ivP4C2, ivP5C1, ivP5C2,
             tc1, tc2, tc3, tc4, tc5, ivPC1, ivPC2, ivBR1, ivBR2, ivBR3, ivBR4, ivBR5, ivBR6, ivBP;
-    Button btnFold, btnAllIn, btnCheckCall, btnBetRaise;
+    Button btnFold, btnAllIn, btnCheckCall, btnBetRaise, btnExit, btnRestart;
     TextView tvPot, tvBudget, tvMinBet;
     EditText etBet;
 
-    // TODO: 08.01.2016 make winner rival cards bigger
+    private ViewGroup queryContainer, endQuery; // TODO: 22.02.2016 add endQuerys Button!
+
 
     // nor = number of rivals, just a default value.
-    // TODO: 06.01.2016 get real nor
-    int nor = 5;
+    int nor = 1;
 
+    private Boolean myTurn = false;
     Boolean firstRound = false;
+    Boolean exitGame = true;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -68,6 +74,9 @@ public class Game  extends Activity {
         ivP5C1 = (ImageView)findViewById(R.id.imageViewGameP5C1);
         ivP5C2 = (ImageView)findViewById(R.id.imageViewGameP5C2);
 
+        // contains all views in the middle of game field
+        queryContainer = (ViewGroup) findViewById(R.id.queryContainer);
+
         // load table cards
         tc1 = (ImageView)findViewById(R.id.imageViewGameTC1);
         tc2 = (ImageView)findViewById(R.id.imageViewGameTC2);
@@ -101,16 +110,23 @@ public class Game  extends Activity {
         tvBudget = (TextView)findViewById(R.id.textViewGameBudget);
         tvMinBet = (TextView)findViewById(R.id.textViewGameBet);
 
+        // blindviews
         ivBP = (ImageView)findViewById(R.id.ivGameBlindP);
         ivBR1 = (ImageView)findViewById(R.id.ivGameBlindR1);
         ivBR2 = (ImageView)findViewById(R.id.ivGameBlindR2);
         ivBR3 = (ImageView)findViewById(R.id.ivGameBlindR3);
         ivBR4 = (ImageView)findViewById(R.id.ivGameBlindR4);
         ivBR5 = (ImageView)findViewById(R.id.ivGameBlindR5);
+
+        // this container will be exchanged
+        endQuery = (ViewGroup) findViewById(R.id.endQuery);
+
+        btnExit = (Button) findViewById(R.id.exit);
+        btnRestart = (Button) findViewById(R.id.restart);
     }
 
     /**
-     * Promotes readability. Searches for the clicked view via view-id and runs specified \n
+     * Promotes readability. Searches for the clicked view via view-id and runs specified
      * function for that action.
      */
     private View.OnClickListener view = new View.OnClickListener() {
@@ -118,7 +134,7 @@ public class Game  extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case (R.id.buttonGameBetRaise):
-                    if(isMyTurn()) {
+                    if(getMyTurn()) {
                         Toast.makeText(getBaseContext(), "Input your new bid.", Toast.LENGTH_SHORT).show();
                         // open number keyboard and let the player input a set
                         etBet.setFocusableInTouchMode(true);
@@ -134,7 +150,7 @@ public class Game  extends Activity {
                     }
                     break;
                 case (R.id.buttonGameCheckCall):
-                    if(isMyTurn()) {
+                    if(getMyTurn()) {
                         Toast.makeText(getBaseContext(), "Check/Call", Toast.LENGTH_SHORT).show();
                         // TODO: 07.01.2016 send interaction
                     }else{
@@ -142,7 +158,7 @@ public class Game  extends Activity {
                     }
                     break;
                 case (R.id.buttonGameFold):
-                    if(isMyTurn()){
+                    if(getMyTurn()){
                         Toast.makeText(getBaseContext(), "Fold...", Toast.LENGTH_SHORT).show();
                         // TODO: 07.01.2016 send interaction
                     }else{
@@ -150,7 +166,7 @@ public class Game  extends Activity {
                     }
                     break;
                 case (R.id.buttonGameAllIn):
-                    if(isMyTurn()){
+                    if(getMyTurn()){
                         Toast.makeText(getBaseContext(), "All-In!", Toast.LENGTH_SHORT).show();
                         // TODO: 07.01.2016 send interaction
                     }else{
@@ -169,10 +185,10 @@ public class Game  extends Activity {
      */
     public void setNor(int rivals){
         nor = rivals;
-    }
+    } // TODO: 22.02.2016 setNor required in this class?
 
     /**
-     * Sets all cards, of whose player is not there, in gray color, to show only from player \n
+     * Sets all cards, of whose player is not there, in gray color, to show only from player
      * played cards.
      */
     private void setRivalsReady(){
@@ -230,14 +246,95 @@ public class Game  extends Activity {
 
     /**
      *
+     * @param firstCard whether it is players 1st or 2nd card.
+     * @param color which color meant card has.
+     * @param number which number meant card has.
+     */
+    public void setPlayerCards(Boolean firstCard, String color, int number){
+        if(firstCard)
+            changeCardStatus(ivPC1, color, number);
+        else
+            changeCardStatus(ivPC2, color, number);
+    }
+
+    /**
+     *
+     * @param rival number of rival that is meant.
+     * @param firstCard whether it is his first or his second card.
+     * @param color which color his card has.
+     * @param number which number the card has.
+     */
+    public void setRivalCards(int rival, Boolean firstCard, String color, int number){
+
+        if(rival == 0){
+            if(firstCard)
+                changeCardStatus(ivP1C1, color, number);
+            else
+                changeCardStatus(ivP1C2, color, number);
+        }
+        else if(rival == 1){
+            if(firstCard)
+                changeCardStatus(ivP1C1, color, number);
+            else
+                changeCardStatus(ivP1C2, color, number);
+        }
+        else if(rival == 2){
+            if(firstCard)
+                changeCardStatus(ivP1C1, color, number);
+            else
+                changeCardStatus(ivP1C2, color, number);
+        }
+        else if(rival == 3){
+            if(firstCard)
+                changeCardStatus(ivP1C1, color, number);
+            else
+            changeCardStatus(ivP1C2, color, number);
+        }
+        else if(rival == 4){
+            if(firstCard)
+                changeCardStatus(ivP1C1, color, number);
+            else
+                changeCardStatus(ivP1C2, color, number);
+        }
+        else if(rival == 5){
+            if(firstCard)
+                changeCardStatus(ivP1C1, color, number);
+            else
+                changeCardStatus(ivP1C2, color, number);
+        }
+    }
+
+    /**
+     * changes the card status of the boardcards.
+     * @param boardCard which card shall be changed. 1st-5th.
+     * @param color which color the boardcard shall become. ('c' = cross, 's' = spades, 'h' = hearts, 'd' = diamonds)
+     * @param number the number or picture ('2' = 2; '3' = 3 ... '11' = Jack,
+     *                  '12' = Queen, '13' = King, '14' = Ace).
+     */
+    public void setBoardCard(int boardCard, String color, int number){
+        if(boardCard == 1)
+            changeCardStatus(tc1, color, number);
+        else if(boardCard == 2)
+            changeCardStatus(tc2, color, number);
+        else if(boardCard == 3)
+            changeCardStatus(tc3, color, number);
+        else if(boardCard == 4)
+            changeCardStatus(tc4, color, number);
+        else if(boardCard == 5)
+            changeCardStatus(tc5, color, number);
+    }
+
+    /**
+     * Changes the Status of any card.
+     *
      * @param iv        delivered Imageview that should become changed
-     * @param color     the "color" that the ImageView should become. letter is for the color \n
+     * @param color     the "color" that the ImageView should become. letter is for the color
      *                  ('c' = cross, 's' = spades, 'h' = hearts, 'd' = diamonds)
-     * @param number    the number or picture ('2' = 2; '3' = 3 ... '11' = Jack, \n
+     * @param number    the number or picture ('2' = 2; '3' = 3 ... '11' = Jack,
      *                  '12' = Queen, '13' = King, '14' = Ace).
      */
     // TODO: 02.02.2016 maybe rewrite?
-    public void changeCardStatus(ImageView iv, String color, int number) {
+    private void changeCardStatus(ImageView iv, String color, int number) {
 
         switch (color) {
             case "c":
@@ -368,7 +465,6 @@ public class Game  extends Activity {
                         break;
                 }
             case "d":
-                // TODO: 12.01.2016 import diamond images
                 switch (number) {
                     case 2:
                         iv.setImageResource(R.mipmap.ic_d2);
@@ -439,31 +535,20 @@ public class Game  extends Activity {
     }
 
     /**
-     * Returns whether it is users turn or not.
      *
-     * @return true, when it is users turn; false, when it is not users turn.
+     * @param isItMyTurn Controller can set, whether it is clients turn or not
      */
-    private Boolean isMyTurn(){
-        // playing user id
-        String pid = getPlayingUserID();
-        String mid = getUserID();
-
-        if(pid.equals(mid))return true;
-        else return false;
-    }
-
-    // TODO: 12.01.2016 get real playinguserid
-    public String getPlayingUserID(){
-        return "User1";
-    }
-
-    // TODO: 12.01.2016 get real userid
-    public String getUserID(){
-        return "User1";
+    public void setIsMyTurn(Boolean isItMyTurn){
+        myTurn = isItMyTurn;
     }
 
     /**
-     * Sets the blinds. 'R' is for rival and the following number is for the explicit rival. \n
+     * @return true if asking players turn, false when not.
+     */
+    public Boolean getMyTurn() {return myTurn;}
+
+    /**
+     * Sets the blinds. 'R' is for rival and the following number is for the explicit rival.
      * 'P' is for player.
      *
      * @param sb Small blind. E.g. sb = 'R2' -> Rival 2 gets small blind and Rival 1 gets big blind.
@@ -471,31 +556,100 @@ public class Game  extends Activity {
     public void setBlinds(String sb){
         switch(sb){
             case "P":
-                ivBP.setImageResource(R.mipmap.ic_bb);
-                ivBR1.setImageResource(R.mipmap.ic_sb);
+                ivBP.setImageResource(R.mipmap.ic_sb);
+                ivBR5.setImageResource(R.mipmap.ic_bb);
                 break;
             case "R1":
                 ivBR1.setImageResource(R.mipmap.ic_bb);
-                ivBR2.setImageResource(R.mipmap.ic_sb);
+                ivBP.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R2":
                 ivBR2.setImageResource(R.mipmap.ic_bb);
-                ivBR3.setImageResource(R.mipmap.ic_sb);
+                ivBR1.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R3":
                 ivBR3.setImageResource(R.mipmap.ic_bb);
-                ivBR4.setImageResource(R.mipmap.ic_sb);
+                ivBR2.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R4":
                 ivBR4.setImageResource(R.mipmap.ic_bb);
-                ivBR5.setImageResource(R.mipmap.ic_sb);
+                ivBR3.setImageResource(R.mipmap.ic_sb);
                 break;
             case "R5":
                 ivBR5.setImageResource(R.mipmap.ic_bb);
-                ivBR6.setImageResource(R.mipmap.ic_sb);
+                ivBR4.setImageResource(R.mipmap.ic_sb);
                 break;
         }
     }
+
+    /**
+     * announces which users turn it is.
+     *
+     * @param user the user whose turn it is.
+     */
+    public void announcePlayingUser(String user){
+        Toast.makeText(getBaseContext(), user + "'s turn.", Toast.LENGTH_SHORT).show();
+    }
+
+    public  void rivalLeft(String username, int rivalPos){
+        Toast.makeText(getBaseContext(), username + " left", Toast.LENGTH_SHORT).show();
+        if (rivalPos == 1)
+        {
+            ivP1C1.setImageResource(R.color.gray);
+            ivP1C2.setImageResource(R.color.gray);
+        }
+        else if(rivalPos == 2)
+        {
+            ivP2C1.setImageResource(R.color.gray);
+            ivP2C2.setImageResource(R.color.gray);
+        }
+        else if(rivalPos == 3)
+        {
+            ivP3C1.setImageResource(R.color.gray);
+            ivP3C2.setImageResource(R.color.gray);
+        }
+        else if(rivalPos == 4)
+        {
+            ivP4C1.setImageResource(R.color.gray);
+            ivP4C2.setImageResource(R.color.gray);
+        }
+        else if(rivalPos == 5)
+        {
+            ivP5C1.setImageResource(R.color.gray);
+            ivP5C2.setImageResource(R.color.gray);
+        }
+
+    }
+
+    public Boolean endGameQuery(){
+
+        Boolean firstClick = true;
+
+        // shows query whether to restart or to exit the game
+        queryContainer.removeAllViews();
+        // TODO: 22.02.2016 maybe get exception, not shure wether delivering the fragment xml is right.
+        View showEQ = getLayoutInflater().inflate(R.layout.fragment_end_query, null);
+        queryContainer.addView(showEQ);
+
+        do{
+            btnExit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    exitGame = true;
+                }
+            });
+
+            btnRestart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    exitGame = false;
+                }
+            });
+        }while(firstClick);
+
+        return exitGame;
+    }
+
 
     /**
      * Do nothing on pressing the physical back button to not quit the game.

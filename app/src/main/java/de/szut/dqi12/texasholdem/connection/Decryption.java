@@ -148,7 +148,10 @@ public class Decryption {
             case "ALLPLAYERS":
                 break;
             case "BLINDS":
-                gc.setSmallBlind(23);
+                // TODO: 12.02.2016 23 out of range, have to deliver the player number which is getting the small blind.
+                // todo just numbers from 0 - 5 allowed. delivered number is the number of client thatgets the small blind.0 = Player, 1 = Rival 1, 2 = Rival 2 etc.
+//                gc.setBlinds(23);
+                gc.setBlinds(3); // TODO: 12.02.2016 <- change
                 break;
             case "MONEYUPDATE":
                 break;

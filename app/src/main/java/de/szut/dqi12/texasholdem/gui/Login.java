@@ -58,7 +58,6 @@ public class Login extends Activity {
     public void loginresult(int i){
         switch(i){
             case 0: //userdata correct
-                // TODO: 01.12.2015 look for a better solution, better with no addflags() and finish()
                 Intent login = new Intent(Login.this, MainMenu.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK).putExtra("username", etUsername.getText().toString());
                 startActivity(login);
                 finish();

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/endQuery"
+    >
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="#353535"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you want to restart or to exit the game?"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/tvRoE"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/center"
+            android:visibility="invisible"
+            android:layout_below="@+id/tvRoE"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Restart"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:id="@+id/restart"
+            android:layout_below="@+id/tvRoE"
+            android:layout_toLeftOf="@+id/center"
+            android:background="#ef0013"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Exit"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:id="@+id/exit"
+            android:layout_below="@+id/tvRoE"
+            android:layout_toRightOf="@+id/center"
+            android:background="#ef0013"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp" />
+    </RelativeLayout>
+</FrameLayout>

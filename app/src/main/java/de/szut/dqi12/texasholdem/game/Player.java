@@ -12,6 +12,7 @@ public class Player {
     private Boolean smallB = false;
     private Boolean bigB = false;
     private Boolean isCurrentPlayer = false;
+    private Boolean isPlaying = true;
 
     Player(String name){
         this.name = name;
@@ -38,6 +39,10 @@ public class Player {
         this.isCurrentPlayer = isCurrentPlayer;
     }
 
+    public void hasLeft(){
+        this.isPlaying = false;
+    }
+
     public String getName() {
         return name;
     }
@@ -57,4 +62,6 @@ public class Player {
     public Boolean getIsCurrentPlayer() {
         return isCurrentPlayer;
     }
+
+    public Boolean getIsPlaying(){return isPlaying;}
 }
