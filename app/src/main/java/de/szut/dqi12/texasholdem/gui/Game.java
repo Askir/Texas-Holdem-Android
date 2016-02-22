@@ -1,11 +1,13 @@
 package de.szut.dqi12.texasholdem.gui;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +30,8 @@ public class Game  extends Activity {
     TextView tvPot, tvBudget, tvMinBet;
     EditText etBet;
 
-    // TODO: 08.01.2016 make winner rival cards bigger
+    private ViewGroup queryContainer, endQuery; // TODO: 22.02.2016 add endQuerys Button!
+
 
     // nor = number of rivals, just a default value.
     int nor = 1;
@@ -70,6 +73,9 @@ public class Game  extends Activity {
         ivP5C1 = (ImageView)findViewById(R.id.imageViewGameP5C1);
         ivP5C2 = (ImageView)findViewById(R.id.imageViewGameP5C2);
 
+        // contains all views in the middle of game field
+        queryContainer = (ViewGroup) findViewById(R.id.queryContainer);
+
         // load table cards
         tc1 = (ImageView)findViewById(R.id.imageViewGameTC1);
         tc2 = (ImageView)findViewById(R.id.imageViewGameTC2);
@@ -110,6 +116,9 @@ public class Game  extends Activity {
         ivBR3 = (ImageView)findViewById(R.id.ivGameBlindR3);
         ivBR4 = (ImageView)findViewById(R.id.ivGameBlindR4);
         ivBR5 = (ImageView)findViewById(R.id.ivGameBlindR5);
+
+        // this container will be exchanged
+        endQuery = (ViewGroup) findViewById(R.id.endQuery);
     }
 
     /**
@@ -613,6 +622,14 @@ public class Game  extends Activity {
     public void endGameQuery(){
         // TODO: 16.02.2016 implement a view-guery where the user gets asked whether he want to play anymore and then end or restart the game.
     }
+
+    private void showEndDialog(){
+        queryContainer.removeAllViews();
+        View showEQ = getLayoutInflater().inflate(R.layout.fragment_end_query, null); // TODO: 22.02.2016 maybe get exception, not shure wether delivering the fragment xml is right.
+        queryContainer.addView(showEQ);
+    }
+
+
 
     /**
      * Do nothing on pressing the physical back button to not quit the game.

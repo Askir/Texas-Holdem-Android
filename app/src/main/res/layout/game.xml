@@ -222,119 +222,126 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/TableRowMid">
 
-        <RelativeLayout
+        <FrameLayout
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:id="@+id/queryContainer">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/imageViewGameTC1"
-                android:background="@drawable/money_field"
-                android:layout_marginRight="5dp"
-                android:padding="2dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/imageViewGameTC1"
+                    android:background="@drawable/money_field"
+                    android:layout_marginRight="5dp"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Your Cupy&apos;s:\n"
+                        android:id="@+id/textViewGameBudget"
+                        android:layout_alignParentStart="true"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Minimum bet:\n"
+                        android:id="@+id/textViewGameBet"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textViewGameBudget"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="#000000" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imageViewGameTC1"
+                    android:src="@mipmap/ic_cb"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/imageViewGameTC2"
+                    android:padding="4dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imageViewGameTC2"
+                    android:layout_marginLeft="0dp"
+                    android:src="@mipmap/ic_cb"
+                    android:layout_toLeftOf="@+id/imageViewGameTC3"
+                    android:layout_marginRight="5dp"
+                    android:padding="4dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imageViewGameTC3"
+                    android:src="@mipmap/ic_cb"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/imageViewGameTC4"
+                    android:padding="4dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imageViewGameTC4"
+                    android:src="@mipmap/ic_cb"
+                    android:layout_toLeftOf="@+id/imageViewGameTC5"
+                    android:layout_marginRight="5dp"
+                    android:padding="4dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imageViewGameTC5"
+                    android:layout_marginLeft="0dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_cb"
+                    android:padding="4dp"
+                    android:layout_centerHorizontal="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Your Cupy&apos;s:\n"
-                    android:id="@+id/textViewGameBudget"
-                    android:layout_alignParentStart="true"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Pot: "
+                    android:id="@+id/textView13"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageViewGameTC5"
+                    android:textSize="40sp"
+                    android:layout_marginLeft="20dp"
+                    android:elegantTextHeight="false" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Minimum bet:\n"
-                    android:id="@+id/textViewGameBet"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textViewGameBudget"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#000000" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textViewGamePot"
+                    android:textSize="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/textView13"
+                    android:layout_toEndOf="@+id/textView13" />
+
             </RelativeLayout>
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:id="@+id/imageViewGameTC1"
-                android:src="@mipmap/ic_cb"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/imageViewGameTC2"
-                android:padding="4dp"
-                android:scaleType="centerCrop"
-                android:layout_centerHorizontal="true" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:id="@+id/imageViewGameTC2"
-                android:layout_marginLeft="0dp"
-                android:src="@mipmap/ic_cb"
-                android:layout_toLeftOf="@+id/imageViewGameTC3"
-                android:layout_marginRight="5dp"
-                android:padding="4dp"
-                android:scaleType="centerCrop"
-                android:layout_centerHorizontal="true" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:id="@+id/imageViewGameTC3"
-                android:src="@mipmap/ic_cb"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/imageViewGameTC4"
-                android:padding="4dp"
-                android:scaleType="centerCrop"
-                android:layout_centerHorizontal="true" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:id="@+id/imageViewGameTC4"
-                android:src="@mipmap/ic_cb"
-                android:layout_toLeftOf="@+id/imageViewGameTC5"
-                android:layout_marginRight="5dp"
-                android:padding="4dp"
-                android:scaleType="centerCrop"
-                android:layout_centerHorizontal="true" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:id="@+id/imageViewGameTC5"
-                android:layout_marginLeft="0dp"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/ic_cb"
-                android:padding="4dp"
-                android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Pot: "
-                android:id="@+id/textView13"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/imageViewGameTC5"
-                android:textSize="40sp"
-                android:layout_marginLeft="20dp"
-                android:elegantTextHeight="false" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textViewGamePot"
-                android:textSize="40dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/textView13"
-                android:layout_toEndOf="@+id/textView13" />
-
-        </RelativeLayout>
+        </FrameLayout>
 
     </TableRow>
 
