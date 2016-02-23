@@ -160,7 +160,7 @@ public class GameController {
             }
         }
 
-        Boolean endGame = game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
+        game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
         // invoke restart game???
         // ed
     }
