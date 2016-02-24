@@ -58,10 +58,13 @@ public class Register extends Activity {
             Toast.makeText(getBaseContext(),"successful register attempt please verify your email", Toast.LENGTH_LONG).show();
         }
         else if(result.equals("denied")){
-            Toast.makeText(getBaseContext(),"Something is wrong with your data",Toast.LENGTH_SHORT);
+            Toast.makeText(getBaseContext(),"Something is wrong with your data",Toast.LENGTH_SHORT).show();
+        }
+        else if(result.equals("timeout")){
+            Toast.makeText(getBaseContext(),"Server timeout",Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(getBaseContext(),"serverside error" + result ,Toast.LENGTH_SHORT);
+            Toast.makeText(getBaseContext(),"serverside error" + result ,Toast.LENGTH_SHORT).show();
         }
 
     }

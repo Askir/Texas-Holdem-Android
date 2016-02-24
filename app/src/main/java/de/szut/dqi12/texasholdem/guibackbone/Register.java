@@ -16,14 +16,17 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
  */
 public class Register implements Recallable {
 
-    //TODO: add to inform() what happens if you don't get any server response (timeout)
     //Handler to call functions in the register activity on the UI thread
-    private Handler mHandler;
+    private Handler mHandler; //The handler used to execute tasks on the ui thread
     //reference to the register activity to callback the function through the Handler thread after the Registration has been completed
-    private de.szut.dqi12.texasholdem.gui.Register registerActivity;
-    private long timeout = 5000;
-    private long timestamp = 0;
+    private de.szut.dqi12.texasholdem.gui.Register registerActivity; //the currently activer register activity
+    private long timeout = 5000; //The maximum time in milliseconds that this class will wait for a server response
+    private long timestamp = 0;  //The timestamp used for the recallable interface (always update this before you call: addExpectation())
 
+    /**
+     * creates a new Register object
+     * @param registerActivity the currently active register activity
+     */
     public Register(de.szut.dqi12.texasholdem.gui.Register registerActivity) {
         //linking the Handler with the UI Thread
         mHandler = new Handler(Looper.getMainLooper());
@@ -37,6 +40,15 @@ public class Register implements Recallable {
     email = email Address
     return value is true if the request has been executed; false if the passwords do not match
 
+     */
+
+    /**
+     * executes a register attempt with the given values
+     * @param username the requested username
+     * @param password the requested password (will be hashed with SHA-256)
+     * @param repassword the requested password for confirmation
+     * @param email the email to be registered with
+     * @return returns if the passwords match
      */
     public boolean executeRegister(String username, String password, String repassword, String email) {
 
@@ -78,6 +90,14 @@ public class Register implements Recallable {
                 @Override
                 public void run() {
                     registerActivity.inform(params[0]);
+                }
+            });
+        }
+        else{
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    registerActivity.inform("timeout");
                 }
             });
         }

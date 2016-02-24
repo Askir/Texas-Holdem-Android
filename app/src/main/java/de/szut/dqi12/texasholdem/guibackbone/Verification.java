@@ -14,11 +14,15 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
 public class Verification implements Recallable {
 
     //TODO: add timeout inform content
-    private de.szut.dqi12.texasholdem.gui.Verification verificationActivity;
-    private Handler mHandler;
-    private long timeout = 5000;
-    private long timestamp = 0;
+    private de.szut.dqi12.texasholdem.gui.Verification verificationActivity; //The currently active verification activity
+    private Handler mHandler; //The handler used to execute tasks on the ui thread
+    private long timeout = 5000; //The maximum time in milliseconds that this class will wait for a server response
+    private long timestamp = 0;  //The timestamp used for the recallable interface (always update this before you call: addExpectation())
 
+    /**
+     * creates a new Verification object
+     * @param verificationActivity the currently active verification activity
+     */
     public Verification(de.szut.dqi12.texasholdem.gui.Verification verificationActivity) {
         this.verificationActivity = verificationActivity;
         //linking the Handler with the UI Thread
@@ -26,6 +30,10 @@ public class Verification implements Recallable {
 
     }
 
+    /**
+     * Sending a verification
+     * @param verificationCode the verification code (4 Symbols)
+     */
     public void sendVerification(String verificationCode) {
         String[] params = {verificationCode};
         //sending the Validation information to the server
@@ -49,6 +57,7 @@ public class Verification implements Recallable {
     @Override
     public void inform(String action, final String[] params) {
         if (action.equals(ServerAction.VALIDATION)) {
+            //validation content parsed to the depending activity
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -56,6 +65,7 @@ public class Verification implements Recallable {
                 }
             });
         } else if (action.equals(ServerAction.NORESPONSE)) {
+            //no reponse calls the servertimeout function
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
