@@ -1,11 +1,8 @@
 package de.szut.dqi12.texasholdem.gui;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -30,7 +27,7 @@ public class Game  extends Activity {
     TextView tvPot, tvBudget, tvMinBet;
     EditText etBet;
 
-    private ViewGroup queryContainer, endQuery; // TODO: 22.02.2016 add endQuerys Button!
+    private ViewGroup queryContainer, endQuery;
 
 
     // nor = number of rivals, just a default value.
@@ -38,8 +35,6 @@ public class Game  extends Activity {
 
     private Boolean myTurn = false;
     Boolean firstRound = false;
-    Boolean exitGame = true;
-    Boolean firstClick = true;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -231,10 +226,7 @@ public class Game  extends Activity {
      * Changes the status of the Boolean 'firstRound'.
      */
     public void setFirstRoundStatus(){
-        if(firstRound)
-            firstRound = false;
-        else
-            firstRound = true;
+        firstRound = !firstRound;
     }
 
     /**
@@ -629,6 +621,10 @@ public class Game  extends Activity {
 
     }
 
+    /**
+     * Displays a new field in the middle of the game field. the new field queries whether the user
+     * want to exit or to restart the game. The new field is integrated as fragment and will disappear,
+     */
     public void endGameQuery(){
 
         // shows query whether to restart or to exit the game
