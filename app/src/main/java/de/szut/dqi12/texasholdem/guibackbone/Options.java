@@ -12,26 +12,33 @@ import de.szut.dqi12.texasholdem.gui.Settings;
 
 /**
  * Created by Jascha on 09.10.2015.
+ * This class handles everything in regards to settings and options in the game
  */
 public class Options {
 
-    private static int volume = 0; //Database
-    private static String email; // Serverside only
-    private static String username; // Database and Serverside (update on programm start)7
-    private static DatabaseConnection dbCon;
+    private static int volume = 0; // The current volume level
+    private static String email; // The current active email (unused atm)
+    private static String username; // The currently active username (should be safed in a database for the next login)  TODO: implement this comment
+    private static DatabaseConnection dbCon; //The databse connection to safe our data between appstarts
 
+    //just a static codeblock for initialization of variables
     static {
         dbCon = new DatabaseConnection();
 
         volume = dbCon.getVolume();
         username = dbCon.getUsername();
-
     }
 
     public static void onLogin(String email) {
         Options.email = email;
     }
 
+    /**
+     * Issueing a password change request
+     * @param changePasswordActivity the currently active changePassword activity
+     * @param oldPassword The old password
+     * @param newPassword The new password
+     */
     public static void changePassword(final ChangePassword changePasswordActivity, String oldPassword, String newPassword) {
         String[] params = {oldPassword, newPassword};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEPASSWORD, params);
@@ -71,19 +78,35 @@ public class Options {
         return;
     }
 
-    public static boolean forgotPassword() {
+    /**
+     * This function requests a new password from the server
+     */
+    public static void forgotPassword() {
         //TODO fill function
-        return true;
+        return;
     }
 
+    /**
+     * Set the volume
+     * @param value the new volume value
+     */
     public static void setVolume(int value) {
         Options.volume = value;
     }
 
+    /**
+     *
+     * @return the active username
+     */
     public static String getUsername() {
         return username;
     }
 
+    /**
+     * This funtion issues a changeusername request
+     * @param settingsActivity the currently active settings activity
+     * @param username the new username
+     */
     public static void changeUsername(final Settings settingsActivity, String username) {
 
         String[] params = {username};
@@ -141,6 +164,11 @@ public class Options {
         return;
     }
 
+    /**
+     * This function issues a changeEmail request
+     * @param settingsActivity the currently active settings activity
+     * @param email the new email address
+     */
     public static void changeEmail(final Settings settingsActivity, String email) {
         String[] params = {email};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEEMAILADDRESS, params);
@@ -192,6 +220,9 @@ public class Options {
         return;
     }
 
+    /**
+     * This method should be called if the app closes to safe all data in the database
+     */
     public static void onClose() {
         dbCon.setVolume(volume);
         dbCon.setUsername(username);
