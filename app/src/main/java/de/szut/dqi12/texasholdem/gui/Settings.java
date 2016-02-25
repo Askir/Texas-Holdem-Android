@@ -17,6 +17,7 @@ import de.szut.dqi12.texasholdem.guibackbone.Options;
 
 /**
  * Created by Marcel on 06.11.2015.
+ * /F0070/ Einstellungen
  */
 public class Settings extends Activity {
     private Options options;

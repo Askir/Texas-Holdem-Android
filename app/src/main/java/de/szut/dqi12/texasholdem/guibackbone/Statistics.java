@@ -11,6 +11,7 @@ import de.szut.dqi12.texasholdem.gui.StartGame;
 
 /**
  * Created by Jascha on 11.12.2015.
+ * /F0060/ Statistik
  */
 public class Statistics implements Recallable {
 

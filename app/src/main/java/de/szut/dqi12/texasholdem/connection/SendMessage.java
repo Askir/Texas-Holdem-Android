@@ -7,6 +7,7 @@ import de.szut.dqi12.texasholdem.Controller;
 
 /**
  * Created by Alex on 02.10.2015.
+ * A Asynctask for asynchrone message sending
  */
 public class SendMessage extends AsyncTask<String, Void, Void> {
 

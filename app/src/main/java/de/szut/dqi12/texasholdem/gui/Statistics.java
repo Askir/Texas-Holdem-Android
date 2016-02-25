@@ -10,6 +10,7 @@ import de.szut.dqi12.texasholdem.R;
 
 /**
  * Created by Marcel on 06.11.2015.
+ * /F0060/ Statistik
  */
 public class Statistics extends Activity {
     private de.szut.dqi12.texasholdem.guibackbone.Statistics stats;

@@ -13,12 +13,16 @@ import de.szut.dqi12.texasholdem.Controller;
 
 /**
  * Created by Jascha on 22.09.2015.
+ * This class manages receiving messages from the server
  */
 public class Receive {
 
-    private Thread receiveThread;
-    private String TAG = "Receive";
+    private Thread receiveThread; //The thread that manages the receiving itself
+    private String TAG = "Receive"; //The TAG for Log output of this class (mainly debug information)
 
+    /**
+     * creates a Receive object
+     */
     public Receive() {
         receiveThread = new Thread(new Runnable() {
             @Override
@@ -43,18 +47,26 @@ public class Receive {
         });
     }
 
+    /**
+     * starts the receiving process
+     */
     public void startReceive() {
         receiveThread.start();
     }
 
+    /**
+     * stops the receiving process
+     */
     public void stopReceive() {
         receiveThread.interrupt();
     }
 
-
+    /**
+     * Waits for the next server message and returns it as a string
+     * @return The received Server message
+     */
     public String getMessage() {
         BufferedReader reader = Controller.getInstance().getConnection().getReader();
-        InputStreamReader input = Controller.getInstance().getConnection().getInput();
         String message = null;
         try {
             message = reader.readLine();

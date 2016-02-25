@@ -13,6 +13,7 @@ import de.szut.dqi12.texasholdem.gui.Settings;
 /**
  * Created by Jascha on 09.10.2015.
  * This class handles everything in regards to settings and options in the game
+ * /F0070/ Einstellungen
  */
 public class Options {
 
@@ -39,6 +40,7 @@ public class Options {
      * @param oldPassword The old password
      * @param newPassword The new password
      */
+    // /F0220/ Passwort
     public static void changePassword(final ChangePassword changePasswordActivity, String oldPassword, String newPassword) {
         String[] params = {oldPassword, newPassword};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEPASSWORD, params);
@@ -90,6 +92,7 @@ public class Options {
      * Set the volume
      * @param value the new volume value
      */
+    // /F0240/ Spielmusik
     public static void setVolume(int value) {
         Options.volume = value;
     }
@@ -107,6 +110,7 @@ public class Options {
      * @param settingsActivity the currently active settings activity
      * @param username the new username
      */
+    // /F0210/ Benutzername
     public static void changeUsername(final Settings settingsActivity, String username) {
 
         String[] params = {username};
@@ -169,6 +173,7 @@ public class Options {
      * @param settingsActivity the currently active settings activity
      * @param email the new email address
      */
+    // /F0230/ Email
     public static void changeEmail(final Settings settingsActivity, String email) {
         String[] params = {email};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEEMAILADDRESS, params);
