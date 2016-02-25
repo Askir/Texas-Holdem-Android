@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem.action;
 
 /**
  * Created by Jascha on 22.09.2015.
+ * all possible game actions
  */
 public class GameAction {
     public static final String FOLD= "FOLD";

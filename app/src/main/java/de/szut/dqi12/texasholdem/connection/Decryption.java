@@ -22,23 +22,29 @@ import de.szut.dqi12.texasholdem.guibackbone.Lobby;
  */
 public class Decryption {
 
-    private boolean stop = false;
-    private List<String> newMessages;
-    private List<Recallable> callObjects;
-    private Handler mHandler;
-    private String TAG = "decryption";
+    private boolean stop = false; //private variable to stop the decryption process
+    private List<String> newMessages; //List of new messages from the server
+    private List<Recallable> callObjects; //List of all objects that want to be notified if specific server actions occur
+    private Handler mHandler; //The handler to execute tasks on the ui thread
+    private String TAG = "decryption"; //The TAG used in LOG outputs (mainly debug)
 
     public Decryption() {
+        //synchronized lists because these need to be threadsafe
         newMessages = Collections.synchronizedList(new ArrayList<String>());
         callObjects = Collections.synchronizedList(new ArrayList<Recallable>());
         mHandler = new Handler(Looper.getMainLooper());
     }
 
-    //complex threading stuff probably will clean this up later on
+    /**
+     * stops the decryption progress
+     */
     public void stopDecryption() {
         stop = true;
     }
 
+    /**
+     * starts the "decryption" progress
+     */
     public void startDecryption() {
         stop = false;
         Thread decryptionThread = new Thread() {
@@ -48,35 +54,22 @@ public class Decryption {
             }
         };
         decryptionThread.start();
-        /**final Decrypt dec = new Decrypt();
-         Thread decryptionThread = new Thread () {
-        @Override public void run(){
-        while(true){
-        if(dec.getStatus() == AsyncTask.Status.FINISHED){
-        dec.execute();}
-        try {
-        Thread.sleep(10);
-        } catch (InterruptedException e) {
-        e.printStackTrace();
-        }
-        }
-        }
-        };
-         decryptionThread.start();
-         **/
-
 
     }
 
+    /**
+     * The decryption progress itself
+     */
     public void decryptProgress() {
+        //keeps running until manually stopped
         while (!stop) {
+            //analyzing each message for itself
             for (String s : newMessages) {
                 Log.d(TAG, "analyzing message: " + s);
 
                 //splitting the messages into useful information
                 String[] splits = s.split(";");
                 String[] parameters = splits[2].split(":");
-                //String action = s.substring(0, s.indexOf(";"));
                 //updating ping info
                 Controller.getInstance().setPing(System.currentTimeMillis() - Long.parseLong(splits[0]));
                 Log.d(TAG, "action is:" + splits[1]);
@@ -106,22 +99,20 @@ public class Decryption {
                     case "CHAT":
                         chat(parameters);
                         break;
-                    case "NEEDVALIDATION":
-                        needValidation(parameters);
-                        break;
-                    case "GAMELIST":
-                        gameList(parameters);
-                        break;
                     case "LOBBYUPDATE":
                         Log.d(TAG,"Lobbyupdate called");
                         lobbyUpdate(parameters);
                         break;
                     case ServerAction.CHANGE:
+                        break;
+                    default:
+                        break;
 
 
                 }
                 newMessages.remove(s);
             }
+            //checking if any of the callObjects timed out
             for (Recallable i : callObjects) {
                 if (i.getTimeStamp() + i.getMaxWaitTIme() < System.currentTimeMillis()) { //good intent but wrong implementation need to rewrite
                     i.inform(ServerAction.NORESPONSE, null);
@@ -132,16 +123,26 @@ public class Decryption {
         return;
     }
 
+    /**
+     * adds an object to the callObject list which gets notified when specific server action occur
+     * @param callObj the object to be called (see the Recallable interface for further information)
+     */
     public void addExpectation(Recallable callObj) {
         callObjects.add(callObj);
     }
 
-
+    /**
+     * adds a new server message to the message list
+     * @param newMessage the new server message
+     */
     public void addNewMessage(String newMessage) {
         newMessages.add(newMessage);
     }
 
-
+    /**
+     * any gameupdate should be handled via this method
+     * @param parameters the parameters of the server message
+     */
     private void gameupdate(String[] parameters) {
         GameController gc = GameController.getInstance();
         switch (parameters[0]) {
@@ -183,26 +184,28 @@ public class Decryption {
 
     }
 
+    /**
+     * any chat update should be handled via this method (not implemented)
+     * @param parameters the server parameters
+     */
     private void chat(String[] parameters) {
         ChatController.getInstance().newMessageReceived(parameters[0], Integer.parseInt(parameters[1]), parameters[2]);
     }
 
-    private void needValidation(String[] parameters) {
-
-    }
-
-    private void gameList(String[] parameters) {
-
-    }
-
+    /**
+     * any lobby updated should be handled via this method
+     * @param parameters the parameters of the lobby updated
+     */
     private void lobbyUpdate(String[] parameters) {
         switch (parameters[0]) {
+            //a userstate update -> parsing everything to the Lobby
             case "userstates":
                 for (int i = 1; i < parameters.length; i++) {
                     String[] user = parameters[i].split("#");
                     Lobby.getInstance().changeUserState(Integer.parseInt(user[0]), Boolean.parseBoolean(user[1]));
                 }
                 break;
+            //A initial update -> parsing everything to the lobby
             case "init":
                 for (int i = 1; i < parameters.length; i++) {
                     String[] user = parameters[i].split("#");
@@ -210,17 +213,21 @@ public class Decryption {
                     Lobby.getInstance().changeUser(Integer.parseInt(user[0]), user[1], Boolean.parseBoolean(user[2]));
                 }
                 break;
+            //A general update -> parsing everything to the Lobby
             case "update":
                 for (int i = 1; i < parameters.length; i++) {
                     String[] user = parameters[i].split("#");
                     Lobby.getInstance().changeUser(Integer.parseInt(user[0]), user[1], Boolean.parseBoolean(user[2]));
                 }
                 break;
+            //The game starts -> executing the correct function
             case "gamestart":
                 Lobby.getInstance().gameStart();
                 break;
+            //unexpected server parameters:
             default:
                 Log.d(TAG, "something unexpected happened with the Lobbyupdate" + parameters[0]);
+                break;
         }
 
     }

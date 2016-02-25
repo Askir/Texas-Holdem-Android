@@ -11,7 +11,7 @@ import de.szut.dqi12.texasholdem.action.GameAction;
 /**
  * Created by Jascha Beste on 06.10.2015.
  * This class is supposed to be used for all chat operations
- * It needs to work with the Send and Decryption class in de.szut.dqi12.texasholdem.connection
+ * Not implemented at the moment
  */
 public class ChatController {
     private ArrayList<String> messages;
@@ -40,7 +40,6 @@ public class ChatController {
         Controller.getInstance().getSend().sendAction(ClientAction.CHAT,params);
         //IF MODE == INGAME
         Controller.getInstance().getSend().sendAction(ClientAction.CHAT,params);
-        //TODO where do we safe information like username etc.? should I just put that in the Controller class aswell?
 
     }
 

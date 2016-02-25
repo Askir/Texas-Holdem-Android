@@ -18,23 +18,22 @@ import de.szut.dqi12.texasholdem.action.ClientAction;
 
 /**
  * Created by Jascha on 22.09.2015.
+ * This class manages the connection to the server
  */
 //This class is supposed to be used for the general Server connection. Exchange of data should be handled by send and receive.
 public class Connection {
 
-    public static String serverIP = "192.168.178.54";
-    public static int serverPort = 12346;
-    private Socket serverCon;
-    private InputStreamReader input;
-    private OutputStream output;
-    private BufferedReader reader;
-    private PrintWriter writer;
-    private Controller controller;
-    private boolean connectionStatus = false;
-    private Handler mHandler;
-    private String TAG = "connection";
+    public static String serverIP = "192.168.178.54"; //The ip of the server
+    public static int serverPort = 12346; //The port of the Server
+    private Socket serverCon; //The connected socket
+    private InputStreamReader input; //The inputstream of the socketconnection
+    private OutputStream output; //The outputstream of the socketconnection
+    private BufferedReader reader; //The connected reader
+    private PrintWriter writer; //The connected writer
+    private boolean connectionStatus = false; //The status of the connection (default: not connected)
+    private String TAG = "connection"; //The TAG for log outputs (mostly debug)
 
-
+    //open connection class that connects to the server in a second thread (connecting sockets in the ui thread is not possible in android)
     private class openConnection extends AsyncTask<String, Integer, String> {
         protected String doInBackground(String... stuff) {
             try {
@@ -42,7 +41,6 @@ public class Connection {
             } catch (IOException e) {
                 Log.d(TAG, "connection failed");
                 e.printStackTrace();
-                //make Toast connection failed + print e. I have no Idea how to do this outside of the Main Activity tbh.
                 return null;
             }
             try {
@@ -50,7 +48,7 @@ public class Connection {
                 output = serverCon.getOutputStream();
             } catch (IOException e) {
                 e.printStackTrace();
-                //make Toast connection failed + print e. I have no Idea how to do this outside of the Main Activity tbh.
+                return null;
             }
             Log.d(TAG, "connected");
             reader = new BufferedReader(input);
@@ -68,6 +66,12 @@ public class Connection {
         op.execute();
     }
 
+    /**
+     * connects the client to another server
+     * @param ip the new ip address
+     * @param port the new port
+     * @return if the connection was successful or not
+     */
     public boolean connect(String ip, int port) {
         try {
             serverCon = new Socket(ip, port);
@@ -80,6 +84,9 @@ public class Connection {
         return true;
     }
 
+    /**
+     * disconnects the client
+     */
     public void disconnect() {
         Controller.getInstance().sendAction(ClientAction.DISCONNECT, null);
         try {
