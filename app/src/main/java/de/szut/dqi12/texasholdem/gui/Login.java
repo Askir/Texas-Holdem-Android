@@ -13,6 +13,7 @@ import de.szut.dqi12.texasholdem.R;
 
 /**
  * Created by Marcel on 03.11.2015.
+ * /F0020/ Anmeldung
  */
 public class Login extends Activity {
 

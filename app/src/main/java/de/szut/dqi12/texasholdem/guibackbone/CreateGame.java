@@ -11,6 +11,7 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
 /**
  * Created by Jascha on 15.12.2015.
  * This Class manages the Creation of games and opening the Lobby after the Server has confirmed the creation
+ * /F0040/ Spiel erstellen
  */
 public class CreateGame implements Recallable {
 

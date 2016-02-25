@@ -15,6 +15,7 @@ import de.szut.dqi12.texasholdem.gui.JoinGamePassword;
 /**
  * Created by Jascha on 15.12.2015.
  * This class manages the retrieving and handling of all GameList information
+ * /F0050/ Spiel beitreten
  */
 public class GameList implements Recallable {
 

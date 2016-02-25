@@ -18,6 +18,7 @@ import de.szut.dqi12.texasholdem.guibackbone.GameList;
 
 /**
  * Created by Marcel on 09.11.2015.
+ * /F0050/ Spiel beitreten
  */
 public class JoinGameLobby extends Activity{
 

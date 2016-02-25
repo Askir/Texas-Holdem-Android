@@ -13,6 +13,7 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
 
 /**
  * Created by Jascha Beste on 11.11.2015.
+ * /F0010/ Registrierung
  */
 public class Register implements Recallable {
 

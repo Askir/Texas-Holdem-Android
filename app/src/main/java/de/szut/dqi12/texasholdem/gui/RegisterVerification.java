@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem.gui;
 
 /**
  * Created by Jascha Beste on 05.01.2016.
+ * /F0010/ Registrierung
  */
 import android.widget.Toast;
 import android.content.Intent;

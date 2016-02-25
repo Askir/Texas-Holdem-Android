@@ -15,6 +15,8 @@ import de.szut.dqi12.texasholdem.connection.Recallable;
 /**
  * Created by Jascha Beste on 07.02.2016.
  * This class manages login in with your account
+ * /F0020/ Anmeldung
+ * /F0030/ Abmeldung
  */
 public class Login implements Recallable {
 

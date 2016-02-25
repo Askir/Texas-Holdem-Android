@@ -15,6 +15,7 @@ import de.szut.dqi12.texasholdem.guibackbone.*;
 
 /**
  * Created by Jascha on 09.01.2016.
+ * /F0050/ Spiel beitreten
  */
 public class GameListAdapter extends BaseAdapter {
     private final LayoutInflater mLayoutInflator;

@@ -13,6 +13,7 @@ import de.szut.dqi12.texasholdem.guibackbone.GameList;
 
 /**
  * Created by Jascha Beste on 12.01.2016.
+ * /F0050/ Spiel beitreten
  */
 public class JoinGamePassword extends Activity {
 
