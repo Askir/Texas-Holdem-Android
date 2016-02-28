@@ -37,14 +37,14 @@ public class Settings extends Activity {
         changeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                options.changeEmail(Settings.this,newEmail.getText().toString());
+                options.getInstance().changeEmail(Settings.this,newEmail.getText().toString());
             }
         });
 
         changeUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                options.changeUsername(Settings.this,newUsername.getText().toString());
+                options.getInstance().changeUsername(Settings.this,newUsername.getText().toString());
             }
         });
         
@@ -85,7 +85,7 @@ public class Settings extends Activity {
 
     public void usernameChange(String param){
         if(param.equals("true")){
-            Toast.makeText(getBaseContext(),"Successful username change to:" + Options.getUsername(),Toast.LENGTH_SHORT ).show();
+            Toast.makeText(getBaseContext(),"Successful username change to:" + Options.getInstance().getUsername(),Toast.LENGTH_SHORT ).show();
         }
         else if(param.equals("false")){
             Toast.makeText(getBaseContext(), "Unsuccessful change", Toast.LENGTH_SHORT).show();

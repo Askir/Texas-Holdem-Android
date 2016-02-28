@@ -47,6 +47,13 @@
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
                     android:scaleType="centerCrop" />
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:id= "@+id/textViewMoney1"
+                    android:layout_below="@+id/imageViewGameP5C2"
+                    android:text="Bid:10000"
+                    />
 
                 <ImageView
                     android:layout_width="25dp"
@@ -85,6 +92,13 @@
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
                     android:scaleType="centerCrop" />
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:id= "@+id/textViewMoney2"
+                    android:layout_below="@+id/imageViewGameP4C2"
+                    android:text="Bid:10000"
+                    />
 
                 <ImageView
                     android:layout_width="25dp"
@@ -125,7 +139,13 @@
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
                     android:scaleType="centerCrop" />
-
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:id= "@+id/textViewMoney3"
+                    android:layout_below="@+id/imageViewGameP3C2"
+                    android:text="Bid:10000"
+                    />
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
@@ -153,7 +173,13 @@
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
                     android:scaleType="centerCrop" />
-
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:id= "@+id/textViewMoney4"
+                    android:layout_below="@+id/imageViewGameP2C2"
+                    android:text="Bid:10000"
+                    />
                 <ImageView
                     android:layout_width="42dp"
                     android:layout_height="42dp"
@@ -191,6 +217,13 @@
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
                     android:scaleType="centerCrop" />
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:id= "@+id/textViewMoney5"
+                    android:layout_below="@+id/imageViewGameP1C2"
+                    android:text="Bid:10000"
+                    />
 
                 <ImageView
                     android:layout_width="42dp"

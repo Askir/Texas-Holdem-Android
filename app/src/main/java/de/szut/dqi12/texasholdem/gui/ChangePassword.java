@@ -30,7 +30,7 @@ public class ChangePassword extends Activity {
             @Override
             public void onClick(View v) {
                 confirmButton.setClickable(false);
-                Options.changePassword(ChangePassword.this,oldPassword.getText().toString(),newPassword.getText().toString());
+                Options.getInstance().changePassword(ChangePassword.this,oldPassword.getText().toString(),newPassword.getText().toString());
             }
         });
 

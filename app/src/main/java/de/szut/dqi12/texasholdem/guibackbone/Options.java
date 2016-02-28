@@ -2,6 +2,7 @@ package de.szut.dqi12.texasholdem.guibackbone;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.action.ClientAction;
@@ -17,21 +18,190 @@ import de.szut.dqi12.texasholdem.gui.Settings;
  */
 public class Options {
 
-    private static int volume = 0; // The current volume level
-    private static String email; // The current active email (unused atm)
-    private static String username; // The currently active username (should be safed in a database for the next login)  TODO: implement this comment
-    private static DatabaseConnection dbCon; //The databse connection to safe our data between appstarts
+    private int volume = 0; // The current volume level
+    private String email; // The current active email (unused atm)
+    private String username; // The currently active username (should be safed in a database for the next login)  TODO: implement this comment
+    private DatabaseConnection dbCon; //The databse connection to safe our data between appstarts
+    private static String TAG = "Options";
+    private static Options instance;
 
     //just a static codeblock for initialization of variables
-    static {
+    public static Options getInstance(){
+        if(instance == null){
+            instance = new Options();
+        }
+        return instance;
+    }
+    private Options(){
         dbCon = new DatabaseConnection();
 
         volume = dbCon.getVolume();
         username = dbCon.getUsername();
+
     }
 
-    public static void onLogin(String email) {
-        Options.email = email;
+    private class PasswordChange implements Recallable{
+        ChangePassword changePasswordActivty;
+        private long timestamp;
+        public PasswordChange(ChangePassword cp) {
+            changePasswordActivty = cp;
+            timestamp = System.currentTimeMillis();
+        }
+
+        @Override
+        public long getMaxWaitTIme() {
+            return 5000;
+        }
+
+        @Override
+        public long getTimeStamp() {
+            return timestamp;
+        }
+
+        @Override
+        public void inform(String action, final String[] params) {
+            Log.d(TAG,"password change"+params[0]);
+            Handler mHandler = new Handler(Looper.getMainLooper());
+            if (action.equals(ServerAction.CHANGE)) {mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    changePasswordActivty.passwordChange(params[1]);
+                }
+            });
+            } else {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        changePasswordActivty.passwordChange("Server timeout");
+                    }
+                });
+
+            }
+        }
+
+        @Override
+        public String Action() {
+            return ServerAction.CHANGE;
+        }
+
+        @Override
+        public String Params() {
+            return "password";
+        }
+
+
+    }
+    private class UsernameChange implements Recallable{
+        private long timestamp;
+        private Settings settingsActivity;
+        public UsernameChange(Settings settingsActivity){
+            this.settingsActivity = settingsActivity;
+            timestamp = System.currentTimeMillis();
+        }
+
+        @Override
+        public long getMaxWaitTIme() {
+            return 5000;
+        }
+
+        @Override
+        public long getTimeStamp() {
+            return timestamp;
+        }
+
+        @Override
+        public void inform(String action, final String[] params) {
+            Handler mHandler = new Handler(Looper.getMainLooper());
+            if (action.equals(ServerAction.CHANGE)) {
+                Log.d(TAG,"username change"+params[2]);
+                if (params[1].equals("true")) {
+                    username = params[2];
+                }
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        settingsActivity.usernameChange(params[1]);
+
+                    }
+                });
+
+            } else {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        settingsActivity.usernameChange("Server timeout");
+                    }
+                });
+
+            }
+
+        }
+
+        @Override
+        public String Action() {
+            return ServerAction.CHANGE;
+        }
+
+        @Override
+        public String Params() {
+            return "username";
+        }
+
+    }
+    private class EmailChange implements Recallable{
+        private long timestamp;
+        private Settings settingsActivity;
+        public EmailChange(Settings settingsActivity){
+            this.settingsActivity=settingsActivity;
+            timestamp = System.currentTimeMillis();
+        }
+
+        @Override
+        public long getMaxWaitTIme() {
+            return 5000;
+        }
+
+        @Override
+        public long getTimeStamp() {
+            return timestamp;
+        }
+
+        @Override
+        public void inform(String action, final String[] params) {
+            Log.d(TAG,"email change"+params[0]);
+            Handler mHandler = new Handler(Looper.getMainLooper());
+            if (action.equals(ServerAction.CHANGE))
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        settingsActivity.emailChange(params[1]);
+                    }
+                });
+            else {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        settingsActivity.emailChange("Server timeout");
+                    }
+                });
+            }
+
+        }
+
+        @Override
+        public String Action() {
+            return ServerAction.CHANGE;
+        }
+
+        @Override
+        public String Params() {
+            return "email";
+        }
+
+    }
+
+    public void onLogin(String email) {
+        email = email;
     }
 
     /**
@@ -41,49 +211,17 @@ public class Options {
      * @param newPassword The new password
      */
     // /F0220/ Passwort
-    public static void changePassword(final ChangePassword changePasswordActivity, String oldPassword, String newPassword) {
+    public void changePassword(final ChangePassword changePasswordActivity, String oldPassword, String newPassword) {
         String[] params = {oldPassword, newPassword};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEPASSWORD, params);
-        Controller.getInstance().getDecryption().addExpectation(new Recallable() {
-            long timestamp = System.currentTimeMillis();
-
-            @Override
-            public long getMaxWaitTIme() {
-                return 5000;
-            }
-
-            @Override
-            public long getTimeStamp() {
-                return timestamp;
-            }
-
-            @Override
-            public void inform(String action, String[] params) {
-                Handler mHandler = new Handler(Looper.getMainLooper());
-                if (action.equals(ServerAction.CHANGE)) {
-                    changePasswordActivity.passwordChange(params[1]);
-                } else {
-                    changePasswordActivity.passwordChange("Server timeout");
-                }
-            }
-
-            @Override
-            public String Action() {
-                return ServerAction.CHANGE;
-            }
-
-            @Override
-            public String Params() {
-                return "password";
-            }
-        });
+        Controller.getInstance().getDecryption().addExpectation(new PasswordChange(changePasswordActivity));
         return;
     }
 
     /**
      * This function requests a new password from the server
      */
-    public static void forgotPassword() {
+    public void forgotPassword() {
         //TODO fill function
         return;
     }
@@ -93,15 +231,14 @@ public class Options {
      * @param value the new volume value
      */
     // /F0240/ Spielmusik
-    public static void setVolume(int value) {
-        Options.volume = value;
+    public void setVolume(int value) {volume = value;
     }
 
     /**
      *
      * @return the active username
      */
-    public static String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -111,60 +248,11 @@ public class Options {
      * @param username the new username
      */
     // /F0210/ Benutzername
-    public static void changeUsername(final Settings settingsActivity, String username) {
+    public void changeUsername(final Settings settingsActivity, String username) {
 
         String[] params = {username};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEUSERNAME, params);
-        Controller.getInstance().getDecryption().addExpectation(new Recallable() {
-            long timestamp = System.currentTimeMillis();
-
-            @Override
-            public long getMaxWaitTIme() {
-                return 5000;
-            }
-
-            @Override
-            public long getTimeStamp() {
-                return timestamp;
-            }
-
-            @Override
-            public void inform(String action, final String[] params) {
-                Handler mHandler = new Handler(Looper.getMainLooper());
-                if (action.equals(ServerAction.CHANGE)) {
-                    if (params[1].equals("true")) {
-                        Options.username = params[2];
-                    }
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            settingsActivity.usernameChange(params[1]);
-
-                        }
-                    });
-
-                } else {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            settingsActivity.usernameChange("Server timeout");
-                        }
-                    });
-
-                }
-
-            }
-
-            @Override
-            public String Action() {
-                return ServerAction.CHANGE;
-            }
-
-            @Override
-            public String Params() {
-                return "username";
-            }
-        });
+        Controller.getInstance().getDecryption().addExpectation(new UsernameChange(settingsActivity));
         return;
     }
 
@@ -174,61 +262,17 @@ public class Options {
      * @param email the new email address
      */
     // /F0230/ Email
-    public static void changeEmail(final Settings settingsActivity, String email) {
+    public void changeEmail(final Settings settingsActivity, String email) {
         String[] params = {email};
         Controller.getInstance().getSend().sendAction(ClientAction.CHANGEEMAILADDRESS, params);
-        Controller.getInstance().getDecryption().addExpectation(new Recallable() {
-
-            long timestamp = System.currentTimeMillis();
-
-            @Override
-            public long getMaxWaitTIme() {
-                return 5000;
-            }
-
-            @Override
-            public long getTimeStamp() {
-                return timestamp;
-            }
-
-            @Override
-            public void inform(String action, final String[] params) {
-                Handler mHandler = new Handler(Looper.getMainLooper());
-                if (action.equals(ServerAction.CHANGE))
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            settingsActivity.emailChange(params[1]);
-                        }
-                    });
-                else {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            settingsActivity.emailChange("Server timeout");
-                        }
-                    });
-                }
-
-            }
-
-            @Override
-            public String Action() {
-                return ServerAction.CHANGE;
-            }
-
-            @Override
-            public String Params() {
-                return "email";
-            }
-        });
+        Controller.getInstance().getDecryption().addExpectation(new EmailChange(settingsActivity));
         return;
     }
 
     /**
      * This method should be called if the app closes to safe all data in the database
      */
-    public static void onClose() {
+    public void onClose() {
         dbCon.setVolume(volume);
         dbCon.setUsername(username);
     }

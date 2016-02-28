@@ -37,20 +37,6 @@ public class GameController {
 
     }
 
-    // TODO: 12.02.2016 required? to Jascha
-    public void informGame(){
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-//                game.setNor(player.size() - 1);
-                //setPotMoney(potmoney);
-
-//                setBlinds(smallBlindPlayer);
-
-            }
-        });
-    }
-
     /**
      * Initiates new game.
      *
@@ -58,13 +44,18 @@ public class GameController {
      * @param blindDistribution Just numbers from 0 - 5 allowed. delivered number is the number of client that
      *               gets the small blind.0 = Player, 1 = Rival 1, 2 = Rival 2 etc.
      */
-    public void gameStart(String[] player, int blindDistribution){
+    public void gameStart(final String[] player,final int blindDistribution){
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                boardCards = new ArrayList<>();
 
-        boardCards = new ArrayList<>();
-//        user = new Player(); todo initialize user required? to Jascha
+                setPlayers(player);
+                setBlinds(blindDistribution);
+            }
+        });
 
-        setPlayers(player);
-        setBlinds(blindDistribution);
+
     }
 
     /**
@@ -72,97 +63,96 @@ public class GameController {
      * @param playerMoney Available money for the player.
      * @param minBid New value that shows player what to bid as minimum.
      * @param turnPlayerNum Number which user has the turn. Just numbers between 1 and 5 allowed.
-     * @param rivalLeft Which rival has left.
+     * @param fold whethter the player folded or not
+     * @param bet the amount the player bid (if he did)
      */
-    public void nextTurn(int playerMoney, int minBid, int turnPlayerNum, String rivalLeft){
+    public void nextTurn(final int playerMoney,final int minBid,final int turnPlayerNum,final boolean fold,final int bet){
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                // displays the budget\, which is available for the player
+                game.displayTvBudget(playerMoney);
+                user.setMoney(playerMoney);
 
-        // displays the budget\, which is available for the player
-        game.displayTvBudget(playerMoney);
-        user.setMoney(playerMoney);
+                //shows the minimum bid for the user
+                game.displayTvMinBet(minBid);
 
-        //shows the minimum bid for the user
-        game.displayTvMinBet(minBid);
+                // announces which user has the turn
+                String playingUser = player.get(turnPlayerNum+2).getName();
+                game.announcePlayingUser(playingUser);
+                if(playingUser.equals(user.getName())){
+                    user.setIsCurrentPlayer(true);}
 
-        // announces which user has the turn
-        String playingUser = player.get(turnPlayerNum).getName();
-        game.announcePlayingUser(playingUser);
-        if(playingUser.equals(user.getName()))
-            user.setIsCurrentPlayer(true);
+                if(fold){
+                    game.setLabelText(turnPlayerNum+1,"FOLD");
+                }
+                else{
+                    game.setLabelText(turnPlayerNum+1,"Bid: "+bet+"©");
+                }
 
-        //when a rival has left
-        for (int rivalPos = 0; rivalPos <= player.size(); rivalPos++){
-            if(rivalLeft.equals(player.get(rivalPos).getName()))
-                game.rivalLeft(rivalLeft, rivalPos);
-        }
+            }
+        });
+
 
     }
 
     /**
      * Initiates next round.
      * @param potMoney Current value of pot.
-     * @param bcColor Color of boardcard that will appear.
-     * @param bcNumber Number/Value of boardcard that will appear.
+     * @param cards The board cards
      */
-    public void nextRound(int potMoney, String bcColor, int bcNumber){
+    public void nextRound(final int potMoney,final String[]cards){
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                game.displayPot(potMoney);
+                for(int i=0;i<cards.length;i+=2){
+                    game.setBoardCard(i, Character.toString(cards[i].toLowerCase().charAt(0)),Integer.parseInt(cards[i+1]));
+                }
+            }
+        });
 
-        game.displayPot(potMoney);
-        changeCard("b", boardCards.size() + 1, false, bcColor, bcNumber);
+
 
     }
 
     /**
-     * Initiates the end of the game.
-     * @param rivalsCardsColors String-Array in which all card colors of the rivals are. starting at
-     *                          the first rival from top left and ending with the last rival from top right.
-     * @param rivalsCardsNumbers int-Array in which all card numbers of the rivals are. same principle
-     *                           like in rivalsVCardsColors.
-     * @param rivalLeft String-Array in which alle rivals are that left the game.
+     * ends a gmae
+     * @param cardColors all card colors
+     * @param cardNumbers all card numbers
      */
-    public void gameEnd(String[] rivalsCardsColors, int[] rivalsCardsNumbers, String[] rivalLeft){
+    public void gameEnd(final String[] cardColors,final int[] cardNumbers){
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
 
-        // show all rival cards
-        for(int p = 0; p <= player.size(); p++){
-            if(player.get(p).getIsPlaying()){
-                switch (p){
-                    case 0:
-                        changeCard("r", 1, true, rivalsCardsColors[0],rivalsCardsNumbers[0]);
-                        changeCard("r", 1, false, rivalsCardsColors[1],rivalsCardsNumbers[1]);
-                        break;
-                    case 1:
-                        changeCard("r", 1, true, rivalsCardsColors[2],rivalsCardsNumbers[2]);
-                        changeCard("r", 1, false, rivalsCardsColors[3],rivalsCardsNumbers[3]);
-                        break;
-                    case 2:
-                        changeCard("r", 1, true, rivalsCardsColors[4],rivalsCardsNumbers[4]);
-                        changeCard("r", 1, false, rivalsCardsColors[5],rivalsCardsNumbers[5]);
-                        break;
-                    case 3:
-                        changeCard("r", 1, true, rivalsCardsColors[6],rivalsCardsNumbers[6]);
-                        changeCard("r", 1, false, rivalsCardsColors[7],rivalsCardsNumbers[7]);
-                        break;
-                    case 4:
-                        changeCard("r", 1, true, rivalsCardsColors[8],rivalsCardsNumbers[8]);
-                        changeCard("r", 1, false, rivalsCardsColors[9],rivalsCardsNumbers[9]);
-                        break;
-                    case 5:
-                        changeCard("r", 1, true, rivalsCardsColors[10],rivalsCardsNumbers[10]);
-                        changeCard("r", 1, false, rivalsCardsColors[11],rivalsCardsNumbers[11]);
-                        break;
-                }}}
+                int thisPlayer = 0;
+                for(int i = 0; i < cardColors.length; i++){
+                    if(cardColors[i].toLowerCase().charAt(0) == user.getHand()[0].color.charAt(0)){
+                        thisPlayer = i;
+                    }
+                }
+                int i = 0;
+                if(thisPlayer + 2 == cardColors.length){
+                    i = 0;
+                }
+                else
+                    i = thisPlayer + 2;
 
-        //when a rival has left
-        for(int i = 0; i <= rivalLeft.length; i++)
-        {
-            for (int rivalPos = 0; rivalPos <= player.size(); rivalPos++)
-            {
-                if(rivalLeft[i].equals(player.get(rivalPos).getName()))
-                    game.rivalLeft(rivalLeft[i], rivalPos);
+                while(i != thisPlayer){
+                    changeCard("r", 1, true, cardColors[i], cardNumbers[i]);
+                    changeCard("r", 1, false, cardColors[i+1], cardNumbers[i+1]);
+                    if(i+2 == player.size())
+                        i = 0;
+                    else
+                        i += 2;
+                }
+
+                game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
+                // invoke restart game???
+                // ed
             }
-        }
-
-        game.endGameQuery(); // TODO: 16.02.2016 end game or not???!?!??
-        // invoke restart game???
-        // ed
+        });
     }
 
 
@@ -210,8 +200,15 @@ public class GameController {
         }
         else if(type.equals("p"))
         {
-                game.setPlayerCards(firstCard, color, number);
-                game.setPlayerCards(firstCard, color, number);
+            Card c = new Card();
+            c.color = color;
+            c.value = number;
+            if(firstCard)
+                user.getHand()[0] = c;
+            else
+                user.getHand()[1] = c;
+            game.setPlayerCards(firstCard, color, number);
+            game.setPlayerCards(firstCard, color, number);
         }
     }
 

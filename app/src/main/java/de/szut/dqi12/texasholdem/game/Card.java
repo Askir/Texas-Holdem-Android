@@ -5,7 +5,7 @@ package de.szut.dqi12.texasholdem.game;
  */
 public class Card {
 
-    // TODO: 16.02.2016 will this class get implemented, jascha?
-    public CardColor color;
+    public String color;
+    public int value;
 
 }

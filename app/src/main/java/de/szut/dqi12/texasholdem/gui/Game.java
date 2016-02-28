@@ -508,6 +508,34 @@ public class Game  extends Activity {
                 }
         }
     }
+    public void setLabelText(int nr,String text){
+        TextView tw1 = (TextView)findViewById(R.id.textViewMoney1);
+        TextView tw2 = (TextView)findViewById(R.id.textViewMoney2);
+        TextView tw3 = (TextView)findViewById(R.id.textViewMoney3);
+        TextView tw4 = (TextView)findViewById(R.id.textViewMoney4);
+        TextView tw5 = (TextView)findViewById(R.id.textViewMoney5);
+        switch(nr){
+            case 1:
+                tw1.setText(text);
+                break;
+            case 2:
+                tw2.setText(text);
+                break;
+            case 3:
+                tw3.setText(text);
+                break;
+            case 4:
+                tw4.setText(text);
+                break;
+            case 5:
+                tw5.setText(text);
+                break;
+            default:
+                Toast.makeText(getBaseContext(),"FICK DICH MARCEL",Toast.LENGTH_LONG);
+
+        }
+
+    }
 
     /**
      * Displays the actual pot size on the gameboard.

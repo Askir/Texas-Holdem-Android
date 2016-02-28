@@ -69,7 +69,8 @@ public class Decryption {
 
                 //splitting the messages into useful information
                 String[] splits = s.split(";");
-                String[] parameters = splits[2].split(":");
+                String[] parameters = {null,null};
+                if(splits.length>2){parameters = splits[2].split(":");}
                 //updating ping info
                 Controller.getInstance().setPing(System.currentTimeMillis() - Long.parseLong(splits[0]));
                 Log.d(TAG, "action is:" + splits[1]);
@@ -146,31 +147,30 @@ public class Decryption {
     private void gameupdate(String[] parameters) {
         GameController gc = GameController.getInstance();
         switch (parameters[0]) {
-            case "ALLPLAYERS":
+            case "GAMETURN":
+                Log.d(TAG,"gameturn");
+                String[] moneyupdates =  parameters[1].split("#");
+                gc.nextTurn(Integer.parseInt(moneyupdates[0]),Integer.parseInt(parameters[2]),Integer.parseInt(parameters[3]),Boolean.parseBoolean(parameters[4]),Integer.parseInt(parameters[5]));
                 break;
-            case "BLINDS":
-                // TODO: 12.02.2016 23 out of range, have to deliver the player number which is getting the small blind.
-                // todo just numbers from 0 - 5 allowed. delivered number is the number of client thatgets the small blind.0 = Player, 1 = Rival 1, 2 = Rival 2 etc.
-//                gc.setBlinds(23);
-                gc.setBlinds(3); // TODO: 12.02.2016 <- change
+            case "GAMEROUND":
+                Log.d(TAG,"gameround");
+                String[] cards = parameters[1].split("#");
+                gc.nextRound(Integer.parseInt(parameters[2]),cards);
                 break;
-            case "MONEYUPDATE":
+            case "GAMESTART":
+                Log.d(TAG,"gamestart");
+                String[] usernames = parameters[1].split("#");
+                gc.gameStart(usernames,Integer.parseInt(parameters[2]));
                 break;
-            case "BIDUPDATE":
-                break;
-            case "CURRENTPLAYER":
-                break;
-            case "BOARDCARDS":
-                break;
-            case "POTMONEY":
-                break;
-            case "PLAYERCARDS":
-                break;
-            case "PLAYERLEFT":
-                break;
-            case "HANDCARDS":
-                break;
-            case "WINNNER":
+            case "GAMEEND":
+                Log.d(TAG,"gameend");
+                String[] card = parameters[2].split("#");
+                int[] cardsint = new int[card.length];
+                for(int i = 0; i <card.length; i++){
+                    cardsint[i] = Integer.parseInt(card[i]);
+                }
+                String[] colors = parameters[3].split("#");
+                gc.gameEnd(colors,cardsint);
                 break;
             default:
                 mHandler.post(new Runnable() {

@@ -35,6 +35,7 @@ public class Receive {
                     try {
                         Thread.sleep(100, 0);
                     } catch (InterruptedException e) {
+                        e.printStackTrace();
                         Log.d(TAG, "interrupted in sleep");
                         return;
                     }

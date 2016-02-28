@@ -8,7 +8,7 @@ import android.widget.Toast;
 public class ChangeEmailVerification extends Verification {
     @Override
     public void inform(String[] params) {
-        if(params[0].equals("CORRECT")){
+        if(params[0].equals("true")){
             Toast.makeText(this, "EmailChange confimed", Toast.LENGTH_SHORT).show();
         }
         else{

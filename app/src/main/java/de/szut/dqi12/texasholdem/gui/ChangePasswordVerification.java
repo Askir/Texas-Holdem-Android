@@ -10,7 +10,7 @@ import de.szut.dqi12.texasholdem.Controller;
 public class ChangePasswordVerification extends Verification{
     @Override
     public void inform(String[] params) {
-        if(params[0].equals("CORRECT")){
+        if(params[0].equals("true")){
             Toast.makeText(this,"correct verification",Toast.LENGTH_SHORT);
             return;
         }

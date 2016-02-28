@@ -13,10 +13,15 @@ public class Player {
     private Boolean bigB = false;
     private Boolean isCurrentPlayer = false;
     private Boolean isPlaying = true;
+    private Card[] hand;
 
     Player(String name){
         this.name = name;
         this.money = 5000;
+    }
+
+    public Card[] getHand(){
+        return hand;
     }
 
     public void setName(String name) {

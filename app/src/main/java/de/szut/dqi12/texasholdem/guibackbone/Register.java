@@ -62,7 +62,7 @@ public class Register implements Recallable {
             }
             messageDigest.update(password.getBytes());
             String encryptedPassword = new String(messageDigest.digest());
-            String[] registerContent = {username, encryptedPassword, email};
+            String[] registerContent = {username, password, email};
             Controller.getInstance().getSend().sendAction(ClientAction.REGISTER, registerContent);
             Controller.getInstance().getDecryption().addExpectation(this);
             timestamp = System.currentTimeMillis();

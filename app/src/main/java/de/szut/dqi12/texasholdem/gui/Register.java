@@ -54,11 +54,11 @@ public class Register extends Activity {
     }
 
     public void inform(String result){
-        if(result.equals("accepted")){
+        if(result.equals("true")){
             startActivity(new Intent(Register.this, RegisterVerification.class));
             Toast.makeText(getBaseContext(),"successful register attempt please verify your email", Toast.LENGTH_LONG).show();
         }
-        else if(result.equals("denied")){
+        else if(result.equals("false")){
             Toast.makeText(getBaseContext(),"Something is wrong with your data",Toast.LENGTH_SHORT).show();
         }
         else if(result.equals("timeout")){

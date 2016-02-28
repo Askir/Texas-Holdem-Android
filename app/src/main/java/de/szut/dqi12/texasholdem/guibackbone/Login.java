@@ -51,7 +51,7 @@ public class Login implements Recallable {
         }
         messageDigest.update(password.getBytes());
         String encryptedPassword = new String(messageDigest.digest());
-        String[] params = {username, encryptedPassword};
+        String[] params = {username, password};
         timestamp = System.currentTimeMillis();
         con.getDecryption().addExpectation(this);
         con.getSend().sendAction(ClientAction.LOGIN, params);
@@ -71,7 +71,7 @@ public class Login implements Recallable {
     public void inform(String action, String[] params) {
         if (action.equals(ServerAction.SESSION)) {
             switch (params[0]) {
-                case "LOGGEDIN":
+                case "LOGIN":
                     //successful login infroming GUI
                     Log.d(TAG, "Logged in");
                     mHandler.post(new Runnable() {
@@ -81,7 +81,7 @@ public class Login implements Recallable {
                         }
                     });
                     break;
-                case "LOGGINFAILED":
+                case "FAILEDLOGIN":
                     //login has been denied (incrorrect password or username) informing GUI
                     Log.d(TAG, "Login failed");
                     mHandler.post(new Runnable() {
@@ -91,7 +91,7 @@ public class Login implements Recallable {
                         }
                     });
                     break;
-                case "LOGGEDOUT":
+                case "LOGOUT":
                     //Logout successful
                     //TODO: implement logout and inform GUI afterwards
                     break;

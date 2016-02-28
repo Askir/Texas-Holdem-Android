@@ -12,7 +12,8 @@ public class RegisterVerification extends Verification {
     @Override
     public void inform(String[] params) {
         Toast.makeText(this, params[0],Toast.LENGTH_LONG);
-        if(params[0].equals("CORRECT")){
+        if(params[0].equals("true")){
+            Toast.makeText(getBaseContext(),"correct code, registration verified",Toast.LENGTH_SHORT);
             Intent restart = new Intent(RegisterVerification.this, MainActivity.class);
 
             restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -20,8 +21,8 @@ public class RegisterVerification extends Verification {
             startActivity(restart);
             finish();
         }
-        else if(params[0].equals("WRONG")){
-
+        else if(params[0].equals("false")){
+            Toast.makeText(getBaseContext(),"wrong verification code",Toast.LENGTH_SHORT);
         }
         return;
     }
