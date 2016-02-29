@@ -10,29 +10,37 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="20dp"
             android:id="@+id/gameListItemName"
             android:textColor="#000000"
             android:textSize="20dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="20dp"
             android:id="@+id/gameListItemHostName"
             android:textColor="#000000"
             android:textSize="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="20dp"
             android:id="@+id/gameListItemPassword"
             android:textColor="#000000"
             android:textSize="20dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            />
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="20dp"
             android:id="@+id/gameListItemSlots"
             android:textColor="#000000"

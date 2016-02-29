@@ -11,6 +11,9 @@ import android.widget.Toast;
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.MainActivity;
 import de.szut.dqi12.texasholdem.R;
+import de.szut.dqi12.texasholdem.action.ClientAction;
+import de.szut.dqi12.texasholdem.guibackbone.*;
+import de.szut.dqi12.texasholdem.guibackbone.Login;
 
 /**
  * Created by Marcel on 04.11.2015.
@@ -54,7 +57,6 @@ public class MainMenu extends Activity{
                 @Override
                 public void onClick(View v) {
 
-                    // TODO: 27.11.2015 userinformation handover not completely implemented
                     startActivity(new Intent(MainMenu.this, Settings.class).putExtra("Username", iUsername.getExtras().getString("username")));
 
                 }
@@ -66,6 +68,7 @@ public class MainMenu extends Activity{
 
                     startActivity(new Intent(MainMenu.this, MainActivity.class));
                     Toast.makeText(getBaseContext(), "Logging out.", Toast.LENGTH_SHORT).show();
+                    Controller.getInstance().getSend().sendAction(ClientAction.LOGOUT,null);
                     finish();
 
                 }
