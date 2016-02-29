@@ -77,6 +77,7 @@ public class GameList implements Recallable {
      */
     public void updateList(String[] games) {
         for (String i : games) {
+            if(i!=null){
             Game game = new Game();
             String[] params = i.split("#");
             game.host = params[0];
@@ -89,7 +90,7 @@ public class GameList implements Recallable {
             game.lobbyID = Integer.parseInt(params[3]);
             game.maxPlayers = Integer.parseInt(params[4]);
             game.currentPlayers = Integer.parseInt(params[5]);
-            this.games.add(game);
+            this.games.add(game);}
         }
         mHandler.post(new Runnable() {
             @Override

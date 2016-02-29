@@ -19,6 +19,7 @@ import de.szut.dqi12.texasholdem.guibackbone.Lobby;
 
 /**
  * Created by Jascha on 22.09.2015.
+ * This class analyzes all server messages and calls the correct functions
  */
 public class Decryption {
 
@@ -36,7 +37,7 @@ public class Decryption {
     }
 
     /**
-     * stops the decryption progress
+     * stops the "decryption" progress
      */
     public void stopDecryption() {
         stop = true;
