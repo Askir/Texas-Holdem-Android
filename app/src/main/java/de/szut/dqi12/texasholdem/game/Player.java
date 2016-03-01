@@ -1,31 +1,40 @@
 package de.szut.dqi12.texasholdem.game;
 
-import java.security.BasicPermission;
-
 /**
  * Created by Jascha on 02.02.2016.
+ * manages a single player
  */
 public class Player {
 
     private String name;
     private int money;
+    private int currentBet;
     private Boolean smallB = false;
     private Boolean bigB = false;
     private Boolean isCurrentPlayer = false;
     private Boolean isPlaying = true;
-    private Card[] hand;
+    private Card[] handCards;
 
-    Player(String name){
+    Player(String name) {
         this.name = name;
         this.money = 5000;
+        handCards = new Card[2];
     }
 
-    public Card[] getHand(){
-        return hand;
+    public Card[] getHand() {
+        return handCards;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setBet(int bet) {
+        currentBet = bet;
+    }
+
+    public int getBet() {
+        return currentBet;
     }
 
     public void setMoney(int money) {
@@ -44,7 +53,7 @@ public class Player {
         this.isCurrentPlayer = isCurrentPlayer;
     }
 
-    public void hasLeft(){
+    public void hasLeft() {
         this.isPlaying = false;
     }
 
@@ -61,6 +70,7 @@ public class Player {
     }
 
     public Boolean getSmallB() {
+
         return smallB;
     }
 
@@ -68,5 +78,7 @@ public class Player {
         return isCurrentPlayer;
     }
 
-    public Boolean getIsPlaying(){return isPlaying;}
+    public Boolean getIsPlaying() {
+        return isPlaying;
+    }
 }

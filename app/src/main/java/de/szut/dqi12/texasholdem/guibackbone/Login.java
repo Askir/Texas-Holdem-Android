@@ -43,13 +43,16 @@ public class Login implements Recallable {
      */
     public void sendLoginRequest(String username, String password) {
         Controller con = Controller.getInstance();
+        con.setUsername("username");
         MessageDigest messageDigest = null;
         try {
             messageDigest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        messageDigest.update(password.getBytes());
+        if (messageDigest != null) {
+            messageDigest.update(password.getBytes());
+        }
         String encryptedPassword = new String(messageDigest.digest());
         String[] params = {username, password};
         timestamp = System.currentTimeMillis();

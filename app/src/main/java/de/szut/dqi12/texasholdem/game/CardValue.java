@@ -2,19 +2,21 @@ package de.szut.dqi12.texasholdem.game;
 
 /**
  * Created by Jascha on 02.02.2016.
+ * All possible CardValues as ints + UNKOWN in case the card is hidden
  */
 public class CardValue {
-    public final int TWO = 2;
-    public final int THREE = 3;
-    public final int FOUR = 4;
-    public final int FIVE = 5;
-    public final int SIX = 6;
-    public final int SEVEN = 7;
-    public final int EIGHT = 8;
-    public final int NINE = 9;
-    public final int TEN = 10;
-    public final int JACK = 11;
-    public final int QUEEN = 12;
-    public final int KING = 13;
-    public final int ACE = 14;
+    public static final int UNKNOWN = 0;
+    public static final int TWO = 2;
+    public static final int THREE = 3;
+    public static final int FOUR = 4;
+    public static final int FIVE = 5;
+    public static final int SIX = 6;
+    public static final int SEVEN = 7;
+    public static final int EIGHT = 8;
+    public static final int NINE = 9;
+    public static final int TEN = 10;
+    public static final int JACK = 11;
+    public static final int QUEEN = 12;
+    public static final int KING = 13;
+    public static final int ACE = 14;
 }

@@ -14,6 +14,7 @@ import de.szut.dqi12.texasholdem.guibackbone.Options;
 
 /**
  * Created by Alex on 28.09.2015.
+ * Singelton that manages the whole application
  */
 public class Controller {
 
@@ -24,6 +25,7 @@ public class Controller {
     private long ping;
     private Activity activeActivity;
     private Handler mHandler;
+    private String username;
 
 
     public Activity getActiveActivity() {
@@ -35,7 +37,12 @@ public class Controller {
     }
 
 
-
+    public void setUsername(String username){
+        this.username = username;
+    }
+    public String getUsername(){
+        return this.username;
+    }
     public static Controller instance;
 
 
