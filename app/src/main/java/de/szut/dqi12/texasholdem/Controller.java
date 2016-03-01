@@ -10,6 +10,7 @@ import de.szut.dqi12.texasholdem.connection.Connection;
 import de.szut.dqi12.texasholdem.connection.Decryption;
 import de.szut.dqi12.texasholdem.connection.Receive;
 import de.szut.dqi12.texasholdem.connection.Send;
+import de.szut.dqi12.texasholdem.game.GameController;
 import de.szut.dqi12.texasholdem.guibackbone.Options;
 
 /**
@@ -26,6 +27,15 @@ public class Controller {
     private Activity activeActivity;
     private Handler mHandler;
     private String username;
+    private GameController activeGame;
+
+    public void setActiveGame(GameController activeGame){
+        this.activeGame = activeGame;
+    }
+
+    public GameController getActiveGame(){
+        return activeGame;
+    }
 
 
     public Activity getActiveActivity() {

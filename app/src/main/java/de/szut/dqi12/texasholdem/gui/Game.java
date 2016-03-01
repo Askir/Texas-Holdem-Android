@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import de.szut.dqi12.texasholdem.Controller;
 import de.szut.dqi12.texasholdem.R;
+import de.szut.dqi12.texasholdem.game.GameController;
 
 
 /**
@@ -35,11 +36,13 @@ public class Game  extends Activity {
 
     private Boolean myTurn = false;
     Boolean firstRound = false;
+    private GameController gameController;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Controller.getInstance().setActiveActivity(this);
+        gameController = Controller.getInstance().getActiveGame();
         setContentView(R.layout.game);
 
         initializeViews();
@@ -256,6 +259,11 @@ public class Game  extends Activity {
         else
             changeCardStatus(ivPC2, color, number);
     }
+
+    public void refresh(){
+
+    }
+
 
     /**
      *

@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 import de.szut.dqi12.texasholdem.Controller;
+import de.szut.dqi12.texasholdem.gui.Game;
 
 /**
  * Created by Jascha, Marcel on 02.02.2016.
@@ -21,10 +22,13 @@ public class GameController {
     private int user;
     private ArrayList<Card> boardcards;
     private final static String TAG = "GameController";
+    private Game gameActivity;
+    private Handler mHandler;
 
     public GameController(){
         turn = 1;
         boardcards = new ArrayList<Card>();
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     public boolean isUserTurn(){
@@ -75,6 +79,18 @@ public class GameController {
         }
     }
 
+    public void refreshGUI(){
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                gameActivity.refresh();
+            }
+        });
+    }
+
+    public void registerGUI(Game gameActivity){
+        this.gameActivity = gameActivity;
+    }
 
 
 
