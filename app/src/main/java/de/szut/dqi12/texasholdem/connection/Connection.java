@@ -23,7 +23,7 @@ import de.szut.dqi12.texasholdem.action.ClientAction;
 //This class is supposed to be used for the general Server connection. Exchange of data should be handled by send and receive.
 public class Connection {
 
-    public static String serverIP = "192.168.178.54"; //The ip of the server
+    public static String serverIP = "95.90.202.228"; //The ip of the server
     public static int serverPort = 8888; //The port of the Server
     private Socket serverCon; //The connected socket
     private InputStreamReader input; //The inputstream of the socketconnection
