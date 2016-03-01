@@ -32,7 +32,7 @@ public class CreateGame extends Activity {
 
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(etSlots.getText().toString())<7){
+                if(2<Integer.parseInt(etSlots.getText().toString()) && Integer.parseInt(etSlots.getText().toString())<7){
 
                 Toast.makeText(getBaseContext(), "Requesting GameCreation...", Toast.LENGTH_SHORT).show();
                 cG.requestGameCreation(etLobbyname.getText().toString(),Integer.parseInt(etSlots.getText().toString()),etPassword.getText().toString());

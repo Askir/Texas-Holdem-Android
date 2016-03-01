@@ -14,7 +14,7 @@ import de.szut.dqi12.texasholdem.gui.CreateGameLobby;
  * Created by Jascha on 15.12.2015.
  * This class manages everything related to the lobby before the game starts
  */
-public class Lobby implements Recallable {
+public class Lobby{
     //userstate = ready/not ready
     private int maxPlayers; //The maximum amout of players in the lobby
     private int ID; //The ID of this lobby (not needed atm but saved for the future)
@@ -22,8 +22,6 @@ public class Lobby implements Recallable {
     private String[] userNames; //All usernames in the displayed order
     private boolean[] states; //All states of these users in the displayed order
     private String lobbyName; //The name of this lobby (not needed atm but saved for the future)
-    private long timeout = 5000; //The maximum time in milliseconds that this class will wait for a server response
-    private long timestamp = 0; //The timestamp used for the recallable interface (always update this before you call: addExpectation())
     private static Lobby instance; //This class is a singleton
     private CreateGameLobby lobbyActivity; //The currently active Lobby activity (CreateGame Activity)
     private String TAG = "Lobby"; //The TAG for Log outputs (mostly debug)
@@ -173,34 +171,5 @@ public class Lobby implements Recallable {
             }
         });
 
-    }
-
-    //the interface is probably not needed anymore since CreateGame and joinGame overtake these actions
-    //code stays here for clarity but will be removed once the gui is finalized TODO: remove this code once done with the GUI
-    @Override
-    public long getMaxWaitTIme() {
-        return timeout;
-    }
-
-    @Override
-    public long getTimeStamp() {
-        return timestamp;
-    }
-
-    @Override
-    public void inform(String action, String[] params) {
-        //inform GUI
-        //finalize Lobby with ID etc.
-        return;
-    }
-
-    @Override
-    public String Action() {
-        return ServerAction.LOBBYACK;
-    }
-
-    @Override
-    public String Params() {
-        return null;
     }
 }
